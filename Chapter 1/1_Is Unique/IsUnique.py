@@ -14,6 +14,9 @@ def unique(string):
     else:
         return False
 
+def unique2(_string):
+    return (len(_string)==len(set(_string)))
+    
 class Test(unittest.TestCase):
     dataT = [('abcd'), ('s4fad'), ('')]
     dataF = [('23ds2'), ('hb 627jh=j ()')]

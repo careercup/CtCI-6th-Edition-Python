@@ -1,18 +1,22 @@
 # O(N)
 import unittest
 
+
 def unique(string):
-    # function to check if all characters in string are unique
-    count = 0
-    hash_table = {}
-    for character in string:
-        count += 1
-        if character not in hash_table.values():
-            hash_table[count] = character
-    if len(hash_table) == count:
-        return True
-    else:
+    # Assuming character set is ASCII (128 characters)
+    if len(string) > 128:
         return False
+
+    char_set = [False for _ in range(128)]
+    for char in string:
+        val = ord(char)
+        if char_set[val]:
+            # Char already found in string
+            return False
+        char_set[val] = True
+
+    return True
+
 
 class Test(unittest.TestCase):
     dataT = [('abcd'), ('s4fad'), ('')]

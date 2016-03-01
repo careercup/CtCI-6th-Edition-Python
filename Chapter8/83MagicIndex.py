@@ -1,5 +1,5 @@
 def MagicIndex(array, min, max):
-    mid = (max + min)/2
+    mid = (max + min) / 2
     if array[mid] == mid:
         return mid
     if array[mid] < mid:
@@ -7,8 +7,9 @@ def MagicIndex(array, min, max):
     if array[mid] > mid:
         return MagicIndex(array, min, mid - 1)
 
+
 def FillArray():
-    array = [0]*10
+    array = [0] * 10
     array[0] = -14
     array[1] = -12
     array[2] = 0
@@ -20,6 +21,6 @@ def FillArray():
     array[8] = 23
     array[9] = 25
     return array
-    
+
 array = FillArray()
 print MagicIndex(array, 0, len(array) - 1)

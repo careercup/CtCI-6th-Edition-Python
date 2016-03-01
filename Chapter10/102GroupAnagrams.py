@@ -15,8 +15,9 @@ def GroupAnagrams():
             index += 1
     print strings
 
+
 def initialise_anagrams():
-    strings = [0]*8
+    strings = [0] * 8
     strings[0] = "abed"
     strings[1] = "later"
     strings[2] = "bead"
@@ -28,8 +29,3 @@ def initialise_anagrams():
     return strings
 
 GroupAnagrams()
-
-
-
-
-

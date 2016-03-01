@@ -36,7 +36,7 @@ def sum_lists_followup(ll_a, ll_b):
     n1, n2 = ll_a.head, ll_b.head
     result = 0
     while n1 and n2:
-        result = (result*10) + n1.value + n2.value
+        result = (result * 10) + n1.value + n2.value
         n1 = n1.next
         n2 = n2.next
 

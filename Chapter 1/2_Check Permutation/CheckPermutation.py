@@ -1,6 +1,7 @@
 # O(NlogN)
 import unittest
 
+
 def check_permutation(string):
     # function checks if a string is permutation of another
     str1, str2 = string[0], string[1]
@@ -19,8 +20,10 @@ def check_permutation(string):
     else:
         return False
 
+
 class Test(unittest.TestCase):
-    dataT = [(['abcd', 'bacd']), (['3563476', '7334566']), (['wef34f', 'wffe34'])]
+    dataT = [(['abcd', 'bacd']), (['3563476', '7334566']),
+             (['wef34f', 'wffe34'])]
     dataF = [(['abcd', 'd2cba']), (['2354', '1234']), (['dcw4f', 'dcw5f'])]
 
     def test_cp(self):

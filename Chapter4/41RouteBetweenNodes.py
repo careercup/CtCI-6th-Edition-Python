@@ -1,24 +1,28 @@
 import Queue
 
+
 class Graph():
+
     def __init__(self):
         self.max_vertices = 6
-        self.vertices = [0]*self.max_vertices
+        self.vertices = [0] * self.max_vertices
         self.count = 0
-    
+
     def addNode(self, x):
         if self.count < self.max_vertices:
             self.vertices[self.count] = x
             self.count += 1
         else:
             print "Graph full"
-    
+
     def getNodes(self):
         return self.vertices
 
+
 class Node():
+
     def __init__(self, vertex, adjacentLength):
-        self.adjacent = [0]*adjacentLength
+        self.adjacent = [0] * adjacentLength
         self.vertex = vertex
         self.adjacentCount = 0
         self.visited = False
@@ -35,6 +39,7 @@ class Node():
 
     def getVertex(self):
         return self.vertex
+
 
 def depthfirstsearch(g, start, end):
     if start == end:
@@ -55,10 +60,11 @@ def depthfirstsearch(g, start, end):
                     adjacent[i].visited = True
     return False
 
+
 def createNewGraph():
     g = Graph()
     sizegraph = 6
-    temp = [0]*sizegraph
+    temp = [0] * sizegraph
 
     temp[0] = Node("a", 3)
     temp[1] = Node("b", 0)
@@ -77,10 +83,11 @@ def createNewGraph():
         g.addNode(temp[i])
     return g
 
+
 def createNewGraphWithLoop():
     g = Graph()
     sizegraph = 6
-    temp = [0]*sizegraph
+    temp = [0] * sizegraph
 
     temp[0] = Node("a", 1)
     temp[1] = Node("b", 1)
@@ -95,7 +102,7 @@ def createNewGraphWithLoop():
     temp[3].addAdjacent(temp[4])
     temp[4].addAdjacent(temp[1])
     temp[4].addAdjacent(temp[5])
-    
+
     for i in range(sizegraph):
         g.addNode(temp[i])
     return g

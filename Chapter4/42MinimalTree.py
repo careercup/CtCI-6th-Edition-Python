@@ -6,7 +6,7 @@ class Node:
         self.val = item
 
     def __str__(self):
-        return '('+str(self.left)+':left ' + "content:" + str(self.val) + " right:" + str(self.right)+')'
+        return '('+str(self.left)+':L ' + "V:" + str(self.val) + " R:" + str(self.right)+')'
 
 
 def initiateArrayToBinary(array):
@@ -15,7 +15,7 @@ def initiateArrayToBinary(array):
 
 def arrayToBinary(array, start, end):
     if start > end:
-        return None
+        return ''
     mid = (start + end) / 2
     root = Node(array[mid])
     root.left = arrayToBinary(array, start, mid - 1)

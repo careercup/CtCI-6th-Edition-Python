@@ -5,12 +5,8 @@ class Node:
         self.left = None
         self.val = item
 
-
-def inorder(root):
-    if root:
-        inorder(root.left)
-        print root.val
-        inorder(root.right)
+    def __str__(self):
+        return '('+str(self.left)+':L ' + "V:" + str(self.val) + " R:" + str(self.right)+')'
 
 
 def initiateArrayToBinary(array):
@@ -19,7 +15,7 @@ def initiateArrayToBinary(array):
 
 def arrayToBinary(array, start, end):
     if start > end:
-        return None
+        return ''
     mid = (start + end) / 2
     root = Node(array[mid])
     root.left = arrayToBinary(array, start, mid - 1)
@@ -27,5 +23,4 @@ def arrayToBinary(array, start, end):
     return root
 
 testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 22, 43, 144, 515, 4123]
-r = initiateArrayToBinary(testArray)
-inorder(r)
+print(initiateArrayToBinary(testArray))

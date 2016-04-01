@@ -13,6 +13,7 @@ def pal_perm(string):
         for index in range(len(array)):
             if char_count(array[index], array) % 2 != 0:
                 return False
+        return True
 
     # odd number of elements
     elif len(array) % 2 != 0:
@@ -43,7 +44,8 @@ class Test(unittest.TestCase):
         ('Able was I ere I saw Elba', True),
         ('So patient a nurse to nurse a patient so', False),
         ('Random Words', False),
-        ('Not a Palindrome', False)]
+        ('Not a Palindrome', False),
+        ('no x in nixon', True)]
 
     def test_pal_perm(self):
         for [test_string, expected] in self.data:

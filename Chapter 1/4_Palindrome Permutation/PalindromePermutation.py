@@ -2,38 +2,33 @@
 import unittest
 
 
-def pal_perm(string):
+def pal_perm(phrase):
     '''function checks if a string is a permutation of a palindrome or not'''
-    array = []
-    for char in string:
-        if char != ' ':
-            array.append(char.lower())
-    # even number of elements
-    if len(array) % 2 == 0:
-        for index in range(len(array)):
-            if char_count(array[index], array) % 2 != 0:
-                return False
-        return True
+    table = [0 for _ in range(ord('z') - ord('a') + 1)]
+    countodd = 0
+    for c in phrase:
+        x = char_number(c)
+        if x != -1:
+            table[x] += 1
+            if table[x] % 2:
+                countodd += 1
+            else:
+                countodd -= 1
 
-    # odd number of elements
-    elif len(array) % 2 != 0:
-        mid_alph_occur_count = 0
-        for index in range(len(array)):
-            if char_count(array[index], array) % 2 != 0:
-                mid_alph_occur_count += 1
-        if mid_alph_occur_count == 1:
-            return True
-        else:
-            return False
+    return countodd <= 1
 
+def char_number(c):
+    a = ord('a')
+    z = ord('z')
+    A = ord('A')
+    Z = ord('Z')
+    val = ord(c)
 
-def char_count(char, array):
-    '''Counts the number of times an alphabet occurs in the string'''
-    count = 0
-    for chars in array:
-        if char == chars:
-            count += 1
-    return count
+    if a <= val <= z:
+        return val - a
+    elif A <= val <= Z:
+        return val - A
+    return -1
 
 
 class Test(unittest.TestCase):
@@ -45,7 +40,8 @@ class Test(unittest.TestCase):
         ('So patient a nurse to nurse a patient so', False),
         ('Random Words', False),
         ('Not a Palindrome', False),
-        ('no x in nixon', True)]
+        ('no x in nixon', True),
+        ('azAZ', True)]
 
     def test_pal_perm(self):
         for [test_string, expected] in self.data:

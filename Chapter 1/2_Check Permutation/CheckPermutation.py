@@ -1,6 +1,6 @@
 # O(NlogN)
 import unittest
-
+from hashlib import md5
 
 def check_permutation(string):
     # function checks if a string is permutation of another
@@ -21,20 +21,28 @@ def check_permutation(string):
         return False
 
 
+def check_permutation_md5(string):
+    return md5(''.join(sorted(string[0]))).hexdigest() == md5(''.join(sorted(string[1]))).hexdigest()
+
+
 class Test(unittest.TestCase):
     dataT = [(['abcd', 'bacd']), (['3563476', '7334566']),
-             (['wef34f', 'wffe34'])]
-    dataF = [(['abcd', 'd2cba']), (['2354', '1234']), (['dcw4f', 'dcw5f'])]
+             (['wef34f', 'wffe34']), (['  '], ['  '])]
+    dataF = [(['abcd', 'd2cba']), (['2354', '1234']), (['dcw4f', 'dcw5f']),
+             ([''], ['  '])]
 
     def test_cp(self):
         # true check
         for test_string in self.dataT:
             actual = check_permutation(test_string)
             self.assertTrue(actual)
+            self.assertTrue(check_permutation_md5(test_string))
+
         # false check
         for test_string in self.dataF:
             actual = check_permutation(test_string)
             self.assertFalse(actual)
+            self.assertFalse(check_permutation_md5(test_string))
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import os
+import ast
+import sys
+from argparse import ArgumentParser
+
+
+def get_options():
+    parser = ArgumentParser()
+    parser.add_argument('question', help='question file path')
+    parser.add_argument('-i', '--input', help='input file name')
+    parser.add_argument('-o', '--output', help='output file name')
+
+    options = parser.parse_args()
+    return options
+
+
+def get_files(options):
+    py_module = os.path.join(os.path.dirname(__file__), options.question)
+    input_file = options.input or os.path.join(os.path.dirname(py_module), 'input')
+    output_file = options.output or os.path.join(os.path.dirname(py_module), 'output')
+
+    return py_module, input_file, output_file
+
+
+def load_runner(py_module):
+    if not os.path.isfile(py_module):
+        raise ImportError('Python file `{0}` not found.'.format(py_module))
+
+    sys.path.append(os.path.join(os.path.dirname(py_module)))
+    mod = __import__(os.path.basename(py_module)[:-3])
+
+    func = getattr(mod, 'run', None)
+    if not func:
+        raise AttributeError('Python module does not contain a runner function.')
+
+    return func
+
+
+def parse_vars(filename):
+    if not os.path.isfile(filename):
+        raise ImportError('Input/output file `{0}` not found.'.format(filename))
+
+    values = []
+    with open(filename) as f:
+        for line in f:
+            values.append(ast.literal_eval(line))
+
+    if not values:
+        raise ValueError('Input/output file `{0}` is empty.'.format(filename))
+
+    return tuple(values)
+
+
+def test(py_func, input_vars, output_vars):
+    result = py_func(*input_vars)
+
+    input_text = '\n'.join([repr(x) for x in input_vars])
+    invalid_msg = """Invalid answer.
+
+Input:
+{0}
+
+Your output:
+{1}
+
+Expected output:
+{2}""".format(input_text, result, output_vars)
+    assert result == output_vars, invalid_msg
+
+    valid_msg = """Correct answer!
+
+Input:
+{0}
+
+Your output:
+{1}""".format(input_text, result)
+    print(valid_msg)
+
+
+def main():
+    options = get_options()
+    py_module, input_file, output_file = get_files(options)
+
+    py_func = load_runner(py_module)
+    input_vars = parse_vars(input_file)
+    output_vars = parse_vars(output_file)[0]
+
+    test(py_func, input_vars, output_vars)
+
+
+if __name__ == '__main__':
+    main()

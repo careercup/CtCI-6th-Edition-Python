@@ -17,6 +17,10 @@ def subsets(arr):
     return result
 
 
+def run(*args):
+    return sorted(subsets(*args))
+
+
 if __name__ == '__main__':
     q = [1, 2, 3]
     a = subsets(q)

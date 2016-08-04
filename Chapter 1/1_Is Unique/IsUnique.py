@@ -1,13 +1,23 @@
 # O(N)
 import unittest
-
+import numpy as np
+import sys
 
 def unique(string):
     # Assuming character set is ASCII (128 characters)
-    if len(string) > 128:
+    #max_len = 128
+    
+    # Assuming all unicode set
+    max_len = sys.maxunicode
+    
+    if len(string) > max_len:
         return False
-
-    char_set = [False for _ in range(128)]
+        
+        
+    # np.ones or zeros is much faster than list comprehension 
+    #especially for unicode set
+    char_set = np.zeros((1, max_len), dtype=bool)
+    #char_set = [False for _ in range(128)]
     for char in string:
         val = ord(char)
         if char_set[val]:

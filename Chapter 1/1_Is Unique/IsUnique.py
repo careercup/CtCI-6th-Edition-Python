@@ -16,7 +16,7 @@ def unique(string):
         
     # np.ones or zeros is much faster than list comprehension 
     #especially for unicode set
-    char_set = np.zeros((1, max_len), dtype=bool)
+    char_set = np.zeros((max_len), dtype=bool)
     #char_set = [False for _ in range(128)]
     for char in string:
         val = ord(char)

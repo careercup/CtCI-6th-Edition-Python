@@ -6,11 +6,9 @@ def check_permutation(string):
     # function checks if a string is permutation of another
     str1, str2 = string[0], string[1]
     if len(str1) == len(str2):
-        arr1, arr2 = [], []
-        for char in str1:
-            arr1.append(char)
-        for char in str2:
-            arr2.append(char)
+        
+        arr1 = [char for char in str1]
+        arr2 = [char for char in str2]
         arr1.sort()
         arr2.sort()
         for index in range(len(arr1)):

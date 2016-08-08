@@ -1,7 +1,7 @@
 # O(N)
 import unittest
 
-
+"""
 def pal_perm(phrase):
     '''function checks if a string is a permutation of a palindrome or not'''
     table = [0 for _ in range(ord('z') - ord('a') + 1)]
@@ -16,7 +16,7 @@ def pal_perm(phrase):
                 countodd -= 1
 
     return countodd <= 1
-
+"""
 def char_number(c):
     a = ord('a')
     z = ord('z')
@@ -29,6 +29,46 @@ def char_number(c):
     elif A <= val <= Z:
         return val - A
     return -1
+
+
+#use dict and string.lower() can simplify the code a lot. and these are all build in function or primitive type. if you use python, you should accept this. 
+def check_odd(string):
+    ch_count = {}
+    odd_count = 0
+    
+    string =  string.lower()
+    for c in string:
+        if c in ch_count:
+            ch_count[c]+=1
+        else:
+            ch_count[c] = 1
+   
+    for k in ch_count:
+        if ch_count[k]%2 != 0 :
+            odd_count+=1
+    return odd_count
+        
+
+
+
+def pal_perm(string):
+    string = string.replace(' ','')
+    length = len(string)
+    
+    odd_count = check_odd(string)
+
+    re = False
+    if length % 2 == 0:
+     
+       if odd_count == 0:
+           re = True
+    else:
+       if odd_count == 1:
+        
+           re = True
+    return re
+
+
 
 
 class Test(unittest.TestCase):

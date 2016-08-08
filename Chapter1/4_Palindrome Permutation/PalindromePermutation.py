@@ -58,14 +58,9 @@ def pal_perm(string):
     odd_count = check_odd(string)
 
     re = False
-    if length % 2 == 0:
-     
-       if odd_count == 0:
-           re = True
-    else:
-       if odd_count == 1:
+    if odd_count <= 1:
         
-           re = True
+       re = True
     return re
 
 

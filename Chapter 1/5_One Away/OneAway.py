@@ -31,7 +31,8 @@ def one_edit_insert(s1, s2):
             if edited:
                 return False
             edited = True
-            i += 1
+            j += 1
+            continue
         i += 1
         j += 1
     return True
@@ -43,6 +44,7 @@ class Test(unittest.TestCase):
         ('pale', 'ple', True),
         ('pales', 'pale', True),
         ('pale', 'bale', True),
+        ('paleabc', 'pleabc', True),
         ('pale', 'ble', False)
     ]
 

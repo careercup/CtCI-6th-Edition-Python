@@ -32,9 +32,9 @@ def one_edit_insert(s1, s2):
                 return False
             edited = True
             j += 1
-            continue
-        i += 1
-        j += 1
+        else:
+            i += 1
+            j += 1
     return True
 
 
@@ -45,7 +45,23 @@ class Test(unittest.TestCase):
         ('pales', 'pale', True),
         ('pale', 'bale', True),
         ('paleabc', 'pleabc', True),
-        ('pale', 'ble', False)
+        ('pale', 'ble', False),
+        ('a', 'b', True),
+        ('', 'd', True),
+        ('d', 'de', True),
+        ('pale', 'pale', True),
+        ('pale', 'ple', True),
+        ('ple', 'pale', True),
+        ('pale', 'bale', True),
+        ('pale', 'bake', False),
+        ('pale', 'pse', False),
+        ('ples', 'pales', True),
+        ('pale', 'pas', False),
+        ('pas', 'pale', False),
+        ('pale', 'pkle', True),
+        ('pkle', 'pable', False),
+        ('pal', 'palks', False),
+        ('palks', 'pal', False)
     ]
 
     def test_one_away(self):

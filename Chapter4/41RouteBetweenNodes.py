@@ -41,7 +41,7 @@ class Node():
         return self.vertex
 
 
-def depthfirstsearch(g, start, end):
+def breadthfirstsearch(g, start, end):
     if start == end:
         return True
     q = Queue.Queue(len(g.getNodes()))
@@ -112,4 +112,4 @@ n = g.getNodes()
 start = n[0]
 end = n[5]
 print "Start at:", start.getVertex(), "End at: ", end.getVertex()
-print depthfirstsearch(g, start, end)
+print breadthfirstsearch(g, start, end)

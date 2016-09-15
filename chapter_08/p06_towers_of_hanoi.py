@@ -53,7 +53,7 @@ class MultiStack:
 
 def f(N, start, end, buff, stack):
     if N == 1:
-        stack.Push(stack.Pop(start), end)
+        stack.push(stack.pop(start), end)
     else:
         f(N - 1, start, buff, end, stack)
         f(1, start, end, buff, stack)
@@ -61,15 +61,15 @@ def f(N, start, end, buff, stack):
 
 
 def printTower(newstack):
-    # while not newstack.IsEmpty(0):
-    # print(newstack.Pop(0))
+    # while not newstack.is_empty(0):
+    # print(newstack.pop(0))
     # print("".join("-" for i in range(newstack.Pop(0))))
-    # while not newstack.IsEmpty(1):
-    # print(newstack.Pop(1))
-    # print("".join("-" for i in range(newstack.Pop(1))))
-    while not newstack.IsEmpty(2):
-        # print(newstack.Pop(2))
-        print("".join("-" for i in range(newstack.Pop(2))))
+    # while not newstack.is_empty(1):
+    # print(newstack.pop(1))
+    # print("".join("-" for i in range(newstack.pop(1))))
+    while not newstack.is_empty(2):
+        # print(newstack.pop(2))
+        print("".join("-" for i in range(newstack.pop(2))))
 
 
 def FillTower(N):

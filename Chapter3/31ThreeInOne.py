@@ -6,46 +6,46 @@ class MultiStack:
         self.sizes = [0] * self.numstacks
         self.stacksize = stacksize
 
-    def Push(self, item, stacknum):
-        if self.IsFull(stacknum):
+    def push(self, item, stacknum):
+        if self.is_full(stacknum):
             raise Exception('Stack is full')
         self.sizes[stacknum] += 1
-        self.array[self.IndexOfTop(stacknum)] = item
+        self.array[self.index_of_top(stacknum)] = item
 
-    def Pop(self, stacknum):
-        if self.IsEmpty(stacknum):
+    def pop(self, stacknum):
+        if self.is_empty(stacknum):
             raise Exception('Stack is empty')
-        value = self.array[self.IndexOfTop(stacknum)]
-        self.array[self.IndexOfTop(stacknum)] = 0
+        value = self.array[self.index_of_top(stacknum)]
+        self.array[self.index_of_top(stacknum)] = 0
         self.sizes[stacknum] -= 1
         return value
 
-    def Peek(self, stacknum):
-        if self.IsEmpty(stacknum):
+    def peek(self, stacknum):
+        if self.is_empty(stacknum):
             raise Exception('Stack is empty')
-        return self.array[self.IndexOfTop(stacknum)]
+        return self.array[self.index_of_top(stacknum)]
 
-    def IsEmpty(self, stacknum):
+    def is_empty(self, stacknum):
         return self.sizes[stacknum] == 0
 
-    def IsFull(self, stacknum):
+    def is_full(self, stacknum):
         return self.sizes[stacknum] == self.stacksize
 
-    def IndexOfTop(self, stacknum):
+    def index_of_top(self, stacknum):
         offset = stacknum * self.stacksize
         return offset + self.sizes[stacknum] - 1
 
 
 def ThreeInOne():
     newstack = MultiStack(2)
-    print newstack.IsEmpty(1)
-    newstack.Push(3, 1)
-    print newstack.Peek(1)
-    print newstack.IsEmpty(1)
-    newstack.Push(2, 1)
-    print newstack.Peek(1)
-    print newstack.Pop(1)
-    print newstack.Peek(1)
-    newstack.Push(3, 1)
+    print newstack.is_empty(1)
+    newstack.push(3, 1)
+    print newstack.peek(1)
+    print newstack.is_empty(1)
+    newstack.push(2, 1)
+    print newstack.peek(1)
+    print newstack.pop(1)
+    print newstack.peek(1)
+    newstack.push(3, 1)
 
 ThreeInOne()

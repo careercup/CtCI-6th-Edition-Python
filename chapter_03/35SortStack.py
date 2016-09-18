@@ -50,6 +50,9 @@ class SortedStack:
             return self.stack[len(self.stack) - 1]
         return None
 
+    def size(self):
+        return self.stack.size()
+
 
 class Tests(unittest.TestCase):
     def test_push_one(self):

@@ -3,10 +3,9 @@ from random import randint
 
 class LinkedListNode:
 
-    def __init__(self, value, nextNode=None, prevNode=None):
+    def __init__(self, value, nextNode=None):
         self.value = value
         self.next = nextNode
-        self.prev = prevNode
 
     def __str__(self):
         return str(self.value)
@@ -65,6 +64,10 @@ class LinkedList:
 
 
 class DoublyLinkedList(LinkedList):
+
+    def __init__(self, value, nextNode=None, prevNode=None):
+        super(DoublyLinkedList, self).__init__(value, nextNode)
+        self.prev = prevNode
 
     def add(self, value):
         if self.head is None:

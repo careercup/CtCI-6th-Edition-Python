@@ -14,6 +14,10 @@ def partition(ll, x):
             ll.tail.next = current
             ll.tail = current
         current = nextNode
+        
+    # Error check in case all nodes are less than x
+    if ll.tail.next is not None:
+        ll.tail.next = None
 
 
 ll = LinkedList()

@@ -30,7 +30,27 @@ def char_number(c):
         return val - A
     return -1
 
-
+# secondary solution without modularizing char_number function. presumably the same efficiancy
+def pal_perm2(str):
+    c = Counter()
+    odd_count = 0
+    cont = 0
+    for char in str:
+        if ord('a') <= ord(char) <= ord('z'):
+            x = ord(char) - ord('a')
+            cont = 1
+        if ord('A') <= ord(char) <= ord('Z'):
+            x = ord(char) - ord('A')
+            cont = 1
+        if cont == 1:
+            c[x] += 1
+            if c[x] % 2:
+                odd_count+=1
+            else:
+                odd_count-=1
+            cont = 0
+    return odd_count <= 1    
+    
 class Test(unittest.TestCase):
     '''Test Cases'''
     data = [

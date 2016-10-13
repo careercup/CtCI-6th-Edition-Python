@@ -30,7 +30,7 @@ def char_number(c):
         return val - A
     return -1
 
-# secondary solution without modularizing char_number function. presumably the same efficiancy
+# Created a secondary solution without modularizing char_number function. Presumably the same efficiency.
 def pal_perm2(str):
     c = Counter()
     odd_count = 0

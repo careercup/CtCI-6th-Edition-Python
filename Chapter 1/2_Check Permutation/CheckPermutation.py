@@ -7,14 +7,8 @@ def check_permutation(string):
     str2 = string[1]
     if len(str1) != len(str2):
         return False
-    counter = Counter()
-    for c in str1:
-        counter[c] += 1
-    for c in str2:
-        if counter[c] == 0:
-            return False
-        counter[c] -= 1
-    return True
+    
+    return Counter(str1) == Counter(str2)
 
 class Test(unittest.TestCase):
     dataT = [(['abcd', 'bacd']), (['3563476', '7334566']),

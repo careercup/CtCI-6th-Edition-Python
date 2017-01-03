@@ -3,7 +3,17 @@ import unittest
 from collections import Counter
 
 
-def check_permutation(str1, str2):
+def check_permutation_by_sort(s1, s2):
+    if len(s1) != len(s2):
+        return False
+    s1, s2 = sorted(s1), sorted(s2)
+    for i in range(len(s1)-1):
+        if s1[i] != s2[i]:
+            return False
+    return True
+
+
+def check_permutation_by_count(str1, str2):
     if len(str1) != len(str2):
         return False
     counter = Counter()
@@ -38,11 +48,11 @@ class Test(unittest.TestCase):
     def test_cp(self):
         # true check
         for test_strings in self.dataT:
-            result = check_permutation(*test_strings)
+            result = check_permutation_by_count(*test_strings)
             self.assertTrue(result)
         # false check
         for test_strings in self.dataF:
-            result = check_permutation(*test_strings)
+            result = check_permutation_by_count(*test_strings)
             self.assertFalse(result)
 
 

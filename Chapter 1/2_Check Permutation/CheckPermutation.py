@@ -1,19 +1,13 @@
 # O(N)
 import unittest
-from collections import Counter
 
 def check_permutation(string):
-    str1 = string[0]
-    str2 = string[1]
-    if len(str1) != len(str2):
+    s1, s2 = sorted(string[0]), sorted(string[1])
+    if len(s1) != len(s2):
         return False
-    counter = Counter()
-    for c in str1:
-        counter[c] += 1
-    for c in str2:
-        if counter[c] == 0:
+    for i in range(len(s1)-1):
+        if s1[i] != s2[i]:
             return False
-        counter[c] -= 1
     return True
 
 class Test(unittest.TestCase):

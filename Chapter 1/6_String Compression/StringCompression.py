@@ -2,21 +2,21 @@
 import unittest
 
 
-def string_compression(string):
-    compressed = []
-    counter = 0
-
-    for i in range(len(string)):
-        if i != 0 and string[i] != string[i - 1]:
-            compressed.append(string[i - 1] + str(counter))
-            counter = 0
-        counter += 1
-
-    # add last repeated character
-    compressed.append(string[-1] + str(counter))
-
-    # returns original string if compressed string isn't smaller
-    return min(string, ''.join(compressed), key=len)
+def string_compression(INPUT):
+    strings = [] #ordered list of INPUT divided into identical sequences
+    char = INPUT[0]
+    for i in range(1, len(INPUT)+1): #iterate through length of INPUT
+        if i == len(INPUT): #if last sequence in string
+            strings = strings + [char]
+        elif INPUT[i] == INPUT[i-1]: #if current character is same as previous
+            char = char + INPUT[i]
+        else:
+            strings = strings + [char]
+            char = INPUT[i]
+    result = ''.join([x[0]+str(len(x)) for x in strings]) #first item of substring + len of substring, joined into a string
+    if len(result) < len(INPUT):
+        return result
+    return INPUT
 
 
 class Test(unittest.TestCase):

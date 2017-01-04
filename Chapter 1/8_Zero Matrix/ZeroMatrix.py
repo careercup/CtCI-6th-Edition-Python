@@ -3,34 +3,15 @@ import unittest
 
 
 def zero_matrix(matrix):
-    m = len(matrix)
-    n = len(matrix[0])
-    rows = []
-    cols = []
-
-    for x in range(m):
-        for y in range(n):
-            if matrix[x][y] == 0:
-                rows.append(x)
-                cols.append(y)
-
-    for row in rows:
-        nullify_row(matrix, row)
-
-    for col in cols:
-        nullify_col(matrix, col)
-
+    matrix = [['X' if x == 0 else x for x in row] for row in matrix]
+    indices = []
+    for idx, row in enumerate(matrix):
+        if 'X' in row:
+            indices =  indices + [i for i, j in enumerate(row) if j == 'X']
+            matrix[idx] = [0]*len(matrix[0])
+    matrix = [[0 if row.index(i) in indices else i for i in row] for row in matrix]
     return matrix
 
-
-def nullify_row(matrix, row):
-    for i in range(len(matrix[0])):
-        matrix[row][i] = 0
-
-
-def nullify_col(matrix, col):
-    for i in range(len(matrix)):
-        matrix[i][col] = 0
 
 
 class Test(unittest.TestCase):

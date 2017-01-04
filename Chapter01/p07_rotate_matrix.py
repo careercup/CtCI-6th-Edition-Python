@@ -25,9 +25,20 @@ def rotate_matrix(matrix):
     return matrix
 
 
+def rotate_matrix_pythonic(matrix):
+    """rotates a matrix 90 degrees clockwise"""
+    n = len(matrix)
+    result = [[0] * n for i in range(n)]  # empty list of 0s
+    for i, j in zip(range(n), range(n - 1, -1, -1)):  # i counts up, j counts down
+        for k in range(n):
+            result[k][i] = matrix[j][k]
+    return result
+
+
 class Test(unittest.TestCase):
 
     test_cases = [
+        ([[1, 2, 3], [4, 5, 6], [7, 8, 9]], [[7, 4, 1], [8, 5, 2], [9, 6, 3]]),
         (
             [
                 [1, 2, 3, 4, 5],
@@ -43,7 +54,7 @@ class Test(unittest.TestCase):
                 [24, 19, 14, 9, 4],
                 [25, 20, 15, 10, 5],
             ],
-        )
+        ),
     ]
 
     def test_rotate_matrix(self):

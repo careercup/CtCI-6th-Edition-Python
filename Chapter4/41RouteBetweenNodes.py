@@ -83,31 +83,7 @@ def createNewGraph():
         g.addNode(temp[i])
     return g
 
-
-def createNewGraphWithLoop():
-    g = Graph()
-    sizegraph = 6
-    temp = [0] * sizegraph
-
-    temp[0] = Node("a", 1)
-    temp[1] = Node("b", 1)
-    temp[2] = Node("c", 1)
-    temp[3] = Node("d", 1)
-    temp[4] = Node("e", 2)
-    temp[5] = Node("f", 0)
-
-    temp[0].addAdjacent(temp[1])
-    temp[1].addAdjacent(temp[2])
-    temp[2].addAdjacent(temp[3])
-    temp[3].addAdjacent(temp[4])
-    temp[4].addAdjacent(temp[1])
-    temp[4].addAdjacent(temp[5])
-
-    for i in range(sizegraph):
-        g.addNode(temp[i])
-    return g
-
-g = createNewGraphWithLoop()
+g = createNewGraph()
 n = g.getNodes()
 start = n[0]
 end = n[5]

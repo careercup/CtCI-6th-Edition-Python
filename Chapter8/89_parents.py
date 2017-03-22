@@ -31,8 +31,8 @@ def checkPR(ray):
 
 ar = ['(','(','(',')',')',')']
 
-if checkPR(ar): print (ar)
+if checkPR(ar): print ("".join(ar))
 
 while next_permutation(ar):
-    if checkPR(ar): print (ar)
+    if checkPR(ar): print ("".join(ar))
 

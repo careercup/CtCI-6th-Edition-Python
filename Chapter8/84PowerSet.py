@@ -15,7 +15,7 @@ def getSubsets(setz, index):
             [newSubset.append(value) for value in subset if value not in newSubset]
             newSubset.append(item)
             moreSubsets.append(newSubset)
-        [allSubsets.append(value) for value in moreSubsets if value not in newSubset]
+        [allSubsets.append(value) for value in moreSubsets]
     return allSubsets
 
 # Combinatorics Solution

@@ -20,8 +20,7 @@ def get_subsets(setz, index):
             new_subset.append(item)
             more_subsets.append(new_subset)
         for value in more_subsets:
-            if value not in new_subset:
-                all_subsets.append(value)
+            all_subsets.append(value)
 
     return all_subsets
 

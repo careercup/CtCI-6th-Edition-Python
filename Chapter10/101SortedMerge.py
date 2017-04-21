@@ -4,13 +4,14 @@ def SortedMerge(A, B):
     indexA = len(A) - len(B) - 1
 
     while indexB >= 0:
-        if indexA > 0 and A[indexA] > B[indexB]:
+        if indexA >= 0 and A[indexA] > B[indexB]:
             A[index] = A[indexA]
             indexA -= 1
         else:
             A[index] = B[indexB]
             indexB -= 1
-        index -= 1
+        if index > 0:
+            index -= 1
     return A
 
 

@@ -1,11 +1,10 @@
 from LinkedList import LinkedList
 
-
 def kth_to_last(ll, k):
     runner = current = ll.head
     for _ in range(k):
-        if runner is None:
-            return None
+        if not runner:
+            return
         runner = runner.next
 
     while runner:

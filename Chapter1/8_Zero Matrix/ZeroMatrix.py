@@ -3,34 +3,22 @@ import unittest
 
 
 def zero_matrix(matrix):
-    m = len(matrix)
-    n = len(matrix[0])
-    rows = []
-    cols = []
-
-    for x in range(m):
-        for y in range(n):
-            if matrix[x][y] == 0:
-                rows.append(x)
-                cols.append(y)
-
-    for row in rows:
-        nullify_row(matrix, row)
-
-    for col in cols:
-        nullify_col(matrix, col)
-
+    """ fill rows and columns with zeros if they contain a zero"""
+    i_0s = []
+    j_0s = []
+    for i_index, i in enumerate(matrix):
+        for j_index, j in enumerate(i):
+            if j == 0:
+                i_0s.append(i_index)
+                j_0s.append(j_index)
+    for i_index, i in enumerate(matrix):
+        if i_index in i_0s:
+            matrix[i_index] = [0 for pos in i]
+        else:
+            for j_index in range(0, len(i)):
+                if j_index in j_0s:
+                    matrix[i_index][j_index] = 0
     return matrix
-
-
-def nullify_row(matrix, row):
-    for i in range(len(matrix[0])):
-        matrix[row][i] = 0
-
-
-def nullify_col(matrix, col):
-    for i in range(len(matrix)):
-        matrix[i][col] = 0
 
 
 class Test(unittest.TestCase):

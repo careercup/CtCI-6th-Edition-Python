@@ -52,7 +52,7 @@ test_run.find_path(3,1)
 
 
 class bigraph(graph):
-	""" search in a bidirectional manner """
+	"""" search an adjacency list in a bidirectional breadth first pattern"""
 	def set_bi_search(self, nodeA, nodeB):
 		""" make the two starting path objects """
 		self.visited_nodesA = [nodeA]

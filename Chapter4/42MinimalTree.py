@@ -17,7 +17,7 @@ def arrayToBinary(array, start, end):
     if start > end:
         return ''
     mid = (start + end) / 2
-    root = Node(array[mid])
+    root = Node(array[int(mid)])
     root.left = arrayToBinary(array, start, mid - 1)
     root.right = arrayToBinary(array, mid + 1, end)
     return root

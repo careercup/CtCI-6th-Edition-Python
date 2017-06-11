@@ -16,7 +16,7 @@ class tree_build:
 			right = self.binary_tree(right)
 		if len(left) > 1:
 			left = self.binary_tree(left)
-		output = (left, ':L', node, 'R:', right)
+		output = (left, ':L', middle, 'R:', right)
 		""" trim the dead ends"""
 		if (len(right) == 0)  or (str(right) == middle):
 			output = output[:-2]
@@ -45,16 +45,43 @@ class Node:
 		self.left = left
 	def add_right(self, right):
 		self.right = right
-
-def tree_build_nodes(llist, start, end):
-	if start > end:
-		return ''
-	middle = int((start + end) // 2)
-	root = Node(middle)
-	root.add_left(tree_build_nodes(left, start, middle - 1))
-	root.add_right(tree_build_nodes(right, middle + 1, end))
-	return root
+	def __str__(self):
+		return '('+str(self.left)+':L ' + "V:" + str(self.val) + " R:" + str(self.right)+')'
 
 
-x = tree_build_nodes(testArray, 0, len(testArray))
 
+""" below variant you can walk through"""
+class tree_build:
+	def __init__(self, l_list):
+		self.in_list = l_list
+	def binary_tree(self, list_of_nodes,call_no):
+		root = int((len(list_of_nodes) // 2))
+		middle = list_of_nodes[root]
+		left = list_of_nodes[:(root-1)]
+		right = list_of_nodes[root+1:]
+		node = Node(middle)
+		if call_no == 0:
+			self.root = node
+			call_no += 1
+		if len(right) > 1:
+			right = self.binary_tree(right,call_no)
+			node.add_right(right)
+		if len(left) > 1:
+			left = self.binary_tree(left,call_no)
+			node.add_left(left)
+		output = (left, ':L', middle, 'R:', right)
+		""" trim the dead ends"""
+		if (len(right) == 0)  or (str(right) == middle):
+			output = output[:-2]
+		if len(left) == 0 or (left == middle):
+			output = output[2:]
+		return output
+	def tree(self):
+		list_of_nodes = self.in_list
+		result = self.binary_tree(list_of_nodes,0)
+		return result
+
+
+x = tree_build(testArray)
+
+print(x.tree())

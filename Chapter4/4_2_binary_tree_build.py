@@ -46,7 +46,7 @@ class Node:
 	def add_right(self, right):
 		self.right = right
 	def __str__(self):
-		return '('+str(self.left)+':L ' + "V:" + str(self.val) + " R:" + str(self.right)+')'
+		return '('+str(self.left)+':L ' + "V:" + str(self.node) + " R:" + str(self.right)+')'
 
 
 
@@ -54,6 +54,7 @@ class Node:
 class tree_build:
 	def __init__(self, l_list):
 		self.in_list = l_list
+		self.tree()
 	def binary_tree(self, list_of_nodes,call_no):
 		root = int((len(list_of_nodes) // 2))
 		middle = list_of_nodes[root]
@@ -78,4 +79,5 @@ class tree_build:
 
 x = tree_build(testArray)
 
-print(x.tree())
+print(x.root)
+

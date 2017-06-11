@@ -69,13 +69,7 @@ class tree_build:
 		if len(left) > 1:
 			left = self.binary_tree(left,call_no)
 			node.add_left(left)
-		output = (left, ':L', middle, 'R:', right)
-		""" trim the dead ends"""
-		if (len(right) == 0)  or (str(right) == middle):
-			output = output[:-2]
-		if len(left) == 0 or (left == middle):
-			output = output[2:]
-		return output
+		return node
 	def tree(self):
 		list_of_nodes = self.in_list
 		result = self.binary_tree(list_of_nodes,0)

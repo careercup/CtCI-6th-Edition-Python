@@ -29,18 +29,6 @@ class queue:
 #with dogs in queue1 and cats in queue1
 #enter a 2 if you wish for any old species to be returned
 
-def scan_queue(in_queue, position):
-    tempqueue = queue(in_queue.pop())
-    match = 0
-    while in_queue.isEmpty() == False:
-        if (in_queue.peek()[1] == position) and match == 0:
-            in_queue.pop()
-            match +=1
-        else:
-          tempqueue.add(in_queue.pop())   
-    return = tempqueue
-
-
 class animalshelter(stack):
     def __init__(self):
         self.queuecat = queue()
@@ -52,20 +40,12 @@ class animalshelter(stack):
         self.array.queuetotal.add((position, value))
     def pop(self, position):
         if position == 2:
-        	output = self.queuetotal.pop()
+        	output = self.queuetotal(pop)
         	if output[0] == 0:
         		self.queuecat.pop()
         	elif output[0] == 1:
         		self.queuedog.pop()
         	return output[1]
-        else:
-            output = self.array[position].pop()
-            current_up == self.queuetotal.peek()
-            if current_up[0] == position:
-                self.queuetotal.pop()
-            else:
-                self.queuetotal = scan_queue(self.queuetotal, position)
-            return output
         return self.array[position].pop()
     def peek(self, position):
         return self.array[position].peek()

@@ -65,8 +65,8 @@ class LinkedList:
 class DoublyLinkedList(LinkedList):
     def add(self, value):
         if self.head is None:
-            self.tail = self.head = LinkedListNode(value, None, self.tail)
+            self.tail = self.head = LinkedListNode(value)
         else:
-            self.tail.next = LinkedListNode(value)
+            self.tail.next = LinkedListNode(value, None, self.tail)
             self.tail = self.tail.next
         return self

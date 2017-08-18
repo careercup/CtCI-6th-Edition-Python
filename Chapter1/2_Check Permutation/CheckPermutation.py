@@ -1,18 +1,25 @@
 # O(N)
 import unittest
-from collections import Counter
 
 
-def check_permutation(str1, str2):
-    if len(str1) != len(str2):
+def check_permutation(s1, s2):
+    if(len(s1) != len(s2)):
         return False
-    counter = Counter()
-    for c in str1:
-        counter[c] += 1
-    for c in str2:
-        if counter[c] == 0:
+
+    char_set = [0] * 256
+
+    for letter in s1:
+        ascii_val = ord(letter)
+        char_set[ascii_val] += 1
+
+    for letter in s2:
+        ascii_val = ord(letter)
+        char_set[ascii_val] -= 1
+
+    for value in char_set:
+        if(value != 0):
             return False
-        counter[c] -= 1
+
     return True
 
 

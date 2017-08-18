@@ -16,13 +16,13 @@ def check_permutation_by_sort(s1, s2):
 def check_permutation_by_count(str1, str2):
     if len(str1) != len(str2):
         return False
-    counter = Counter()
+    counter = [0] * 256
     for c in str1:
-        counter[c] += 1
+        counter[ord(c)] += 1
     for c in str2:
-        if counter[c] == 0:
+        if counter[ord(c)] == 0:
             return False
-        counter[c] -= 1
+        counter[ord(c)] -= 1
     return True
 
 

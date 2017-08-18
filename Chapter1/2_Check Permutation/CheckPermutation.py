@@ -1,4 +1,4 @@
-# O(N)
+# O(max(s1, s2))
 import unittest
 
 

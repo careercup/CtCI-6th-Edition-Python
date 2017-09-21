@@ -8,7 +8,7 @@ def kth_to_last(ll, k):
             return None
         runner = runner.next
 
-    while runner:
+    while runner.next:
         current = current.next
         runner = runner.next
 

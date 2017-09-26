@@ -2,7 +2,7 @@
 import unittest
 
 
-def rotate(mat, dir):
+def rotate(mat, dir='clockwise'):
     """ rotate a matrix 90 degrees clockwise or counter clockwise"""
     new = [[] for i in range(0,len(mat))]
     if dir == 'clockwise':

@@ -1,7 +1,8 @@
 # O(NxN)
 import unittest
+import numpy
 
-
+"""
 def rotate_matrix(matrix):
     '''rotates a matrix 90 degrees clockwise'''
     n = len(matrix)
@@ -23,6 +24,11 @@ def rotate_matrix(matrix):
             # top -> right
             matrix[i][- layer - 1] = top
     return matrix
+"""
+#use numpy array rot90 
+def rotate_matrix(matrix):
+    this_matrix = numpy.array(matrix)
+    return numpy.rot90(this_matrix,k=3).tolist()  
 
 
 class Test(unittest.TestCase):

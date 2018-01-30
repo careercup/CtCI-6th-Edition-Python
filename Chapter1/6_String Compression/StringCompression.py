@@ -1,22 +1,26 @@
 # O(N)
 import unittest
 
-
 def string_compression(string):
-    compressed = []
-    counter = 0
 
-    for i in range(len(string)):
-        if i != 0 and string[i] != string[i - 1]:
-            compressed.append(string[i - 1] + str(counter))
-            counter = 0
-        counter += 1
+    # Optimized space complexity using just a string instead of an array
+    output = ""
+    char_counter = 1
+    pointer = string[0]
 
-    # add last repeated character
-    compressed.append(string[-1] + str(counter))
+    for index in range(1,len(string)):
+        # Continue adding to the counter if the letter is the same
+        if string[index] == pointer:
+            char_counter +=1
 
-    # returns original string if compressed string isn't smaller
-    return min(string, ''.join(compressed), key=len)
+        # Otherwise append to the string and reset the counter back to 1
+        else:
+            output += pointer
+            output += str(char_counter)
+            pointer = string[index]
+            char_counter = 1
+
+    return min(output + str(pointer) +str(char_counter), string, key = len)
 
 
 class Test(unittest.TestCase):

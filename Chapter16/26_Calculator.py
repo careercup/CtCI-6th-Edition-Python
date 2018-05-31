@@ -1,7 +1,6 @@
 """
 Exercise: 16.26 Calculator
-Given a matrix representation of plot of land, find the sizes of all the ponds in the matrix.
-0 indicates the water. Pond is the regionof water connected vertically, horizontally or diagonally.
+Given an arithmetic equation consisting of positive integers, compute the result.
 """
 
  

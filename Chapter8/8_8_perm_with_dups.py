@@ -6,7 +6,7 @@ def Permutations(s):
 
 	perms = [s]
 
-	if len(s) == 1:
+	if len(s) <s= 1:
 		return perms
 
 	for pos, i in enumerate(s):
@@ -16,7 +16,7 @@ def Permutations(s):
 		sub_perms = Permutations(rest_of_string)
 
 		for sub in sub_perms:
-			if sub not in perms:
+			if i+sub not in perms:
 				perms.append(i+sub)
 
 	return perms

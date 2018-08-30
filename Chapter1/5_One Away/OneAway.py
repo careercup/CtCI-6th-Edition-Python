@@ -1,42 +1,48 @@
-# O(N)
 import unittest
 
+def one_away(a, b):
 
-def one_away(s1, s2):
-    '''Check if a string can converted to another string with a single edit'''
-    if len(s1) == len(s2):
-        return one_edit_replace(s1, s2)
-    elif len(s1) + 1 == len(s2):
-        return one_edit_insert(s1, s2)
-    elif len(s1) - 1 == len(s2):
-        return one_edit_insert(s2, s1)
-    return False
+	# Case 1 : The two strings have the same length.
+	if(len(a) == len(b)):
 
+		# Case 1.1 : No edits away, i.e the strings are identical.
+		if(a==b):
+			return True
 
-def one_edit_replace(s1, s2):
-    edited = False
-    for c1, c2 in zip(s1, s2):
-        if c1 != c2:
-            if edited:
-                return False
-            edited = True
-    return True
+		# Case 1.2 : The string is just 1 edit away,
+		#            which in this case would just be
+		#            one character replaced.
+		elif(len(set(a)&set(b)) == len(a)-1):
+			return True
 
+		# Case 1.3 : The string is not 1 or 0 edits away,
+		#            in which case the function should return
+		#            False.
+		else:
+		    return False
+	    
+	
+	# Case 2 : The two strings are of different lengths
+	elif(abs(len(a)-len(b)) == 1):
 
-def one_edit_insert(s1, s2):
-    edited = False
-    i, j = 0, 0
-    while i < len(s1) and j < len(s2):
-        if s1[i] != s2[j]:
-            if edited:
-                return False
-            edited = True
-            j += 1
-        else:
-            i += 1
-            j += 1
-    return True
+		smaller_strlen = min(len(a), len(b))
+		
+		# Case 2.1 : The only scenario where this should return True
+		#            is when the strings are 1 removal or insertion 
+		#            away. So, the length of the intersection of the
+		#            2 strings in sets should be equal to the length
+		#            of the smaller string.
+		if(len(set(a)&set(b)) == smaller_strlen):
+			return True
 
+		# Case 2.2 : No 1 or 0 edits away.
+		else:
+		    return False
+	    
+
+	# Case 3 : The two strings are not 1 or 0 edits away
+	else:
+	    return False
 
 class Test(unittest.TestCase):
     '''Test Cases'''
@@ -70,4 +76,4 @@ class Test(unittest.TestCase):
             self.assertEqual(actual, expected)
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main()	

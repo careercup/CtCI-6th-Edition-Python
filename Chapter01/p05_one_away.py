@@ -39,6 +39,38 @@ def one_edit_insert(s1, s2):
     return True
 
 
+def are_one_edit_different_sets(a, b):
+    """Implementation using sets"""
+    # Case 1 : The two strings have the same length.
+    if len(a) == len(b):
+
+        # Case 1.1 : No edits away, i.e the strings are identical.
+        if a == b:
+            return True
+
+        # Case 1.2 : The string is just 1 edit away,
+        #            which in this case would just be
+        #            one character replaced.
+        if len(set(a) & set(b)) == len(a) - 1:
+            return True
+
+    # Case 2 : The two strings are of different lengths
+    elif abs(len(a) - len(b)) == 1:
+
+        smaller_strlen = min(len(a), len(b))
+
+        # Case 2.1 : The only scenario where this should return True
+        #            is when the strings are 1 removal or insertion
+        #            away. So, the length of the intersection of the
+        #            2 strings in sets should be equal to the length
+        #            of the smaller string.
+        if len(set(a) & set(b)) == smaller_strlen:
+            return True
+
+    # Case 3 : The two strings are not 1 or 0 edits away
+    return False
+
+
 class Test(unittest.TestCase):
     test_cases = [
         # no changes
@@ -68,9 +100,7 @@ class Test(unittest.TestCase):
         ("palks", "pal", False),
     ]
 
-    testable_functions = [
-        are_one_edit_different,
-    ]
+    testable_functions = [are_one_edit_different, are_one_edit_different_sets]
 
     def test_one_away(self):
 

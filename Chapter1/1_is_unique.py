@@ -33,4 +33,4 @@ class Test(unittest.TestCase):
             self.assertFalse(actual)
 
 if __name__ == "__main__":
-unittest.main()
+    unittest.main()

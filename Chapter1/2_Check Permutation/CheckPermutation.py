@@ -15,6 +15,10 @@ def check_permutation(str1, str2):
         counter[c] -= 1
     return True
 
+# Not in the book, but pythonic and clean
+# O(N)
+def check_permutation_alternative(str1, str2)
+    return len(str1) == len(str2) and set(str1) == set(str2)
 
 class Test(unittest.TestCase):
     dataT = (
@@ -38,6 +42,15 @@ class Test(unittest.TestCase):
             result = check_permutation(*test_strings)
             self.assertFalse(result)
 
+    def test_alt_cp(self):
+        # true check
+        for test_strings in self.dataT:
+            result = check_permutation_alternative(*test_strings)
+            self.assertTrue(result)
+        # false check
+        for test_strings in self.dataF:
+            result = check_permutation_alternative(*test_strings)
+            self.assertFalse(result)
 
 if __name__ == "__main__":
     unittest.main()

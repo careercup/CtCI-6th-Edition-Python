@@ -7,11 +7,13 @@ class Node:
 
 
 class BinaryTree:
+    NodeCls = Node
+
     def __init__(self):
         self.root = None
 
     def insert(self, key, parent):
-        new = Node(key)
+        new = self.NodeCls(key)
         if parent == None:
             if self.root is None:
                 self.root = new

@@ -15,16 +15,37 @@ def add_without_plus(a, b):
     return a
 
 
+def add_without_plus_recursive(addend_a, addend_b):
+    if addend_b == 0:
+        return addend_a
+
+    _sum = addend_a ^ addend_b
+    carry = (addend_a & addend_b) << 1
+
+    return add_without_plus_recursive(_sum, carry)
+
+
+testable_functions = [add_without_plus_recursive, add_without_plus]
+
+test_cases = [
+    # a, b, expected
+    (1, 1, 2),
+    (1, 2, 3),
+    (1001, 234, 1235),
+    (123456789, 123456789, 123456789 * 2),
+]
+
+
 class Test(unittest.TestCase):
     def test_add_without_plus(self):
-        self.assertEqual(add_without_plus(1, 1), 2)
-        self.assertEqual(add_without_plus(1, 2), 3)
-        self.assertEqual(add_without_plus(1001, 234), 1235)
-        # does not work with negatives :(
-        # self.assertEqual(add_without_plus(5, -1), 4)
-        # self.assertEqual(add_without_plus(7,-5), 2)
-        # self.assertEqual(add_without_plus(7,-29), -22)
-        # self.assertEqual(add_without_plus(-2,10), 8)
+        for f in testable_functions:
+            for a, b, expected in test_cases:
+                assert f(a, b) == expected
+            # does not work with negatives :(
+            # self.assertEqual(f(5, -1), 4)
+            # self.assertEqual(f(7,-5), 2)
+            # self.assertEqual(f(7,-29), -22)
+            # self.assertEqual(f(-2,10), 8)
 
 
 if __name__ == "__main__":

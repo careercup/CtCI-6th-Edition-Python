@@ -1,22 +1,26 @@
 #Solution using recursion
 
-def getSubsets(setz, index):
-    allSubsets = []
-    if len(setz) == index:
-        #base case - add empty set
-        if [] not in allSubsets:
-            allSubsets.append([])
-    else:
-        allSubsets = getSubsets(setz, index+1)
+import copy
+
+def getSubsets(setz):
+
+    def _getSubsets(setz, index):
+        if index == -1:
+            return [[]]
+
+        old_subs = _getSubsets(setz,index-1)
+        new_subs = []
         item = setz[index]
-        moreSubsets = []
-        for subset in allSubsets:
-            newSubset = []
-            [newSubset.append(value) for value in subset if value not in newSubset]
-            newSubset.append(item)
-            moreSubsets.append(newSubset)
-        [allSubsets.append(value) for value in moreSubsets if value not in newSubset]
-    return allSubsets
+        for val in old_subs:
+            new_subs.append(val)
+            # new_subs.append(val.append(item)) ## List is mutable
+            entry = copy.deepcopy(val)
+            entry.append(item)
+            new_subs.append(entry)
+            
+        return new_subs
+
+    return _getSubsets(setz,len(setz)-1)
 
 # Combinatorics Solution
 def getSubsets2(aset):
@@ -41,6 +45,6 @@ def convertIntToSet(x, aset):
 
 
 
-print(getSubsets([1,2,3],0))
+print(getSubsets([1,2,3])
 print("\n")
 print(getSubsets2([1,2,3]))

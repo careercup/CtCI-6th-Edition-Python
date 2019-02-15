@@ -1,28 +1,24 @@
+import copy
+
+
 # Solution using recursion
+def get_subsets(setz, index=None):
+    if index is None:
+        index = len(setz) - 1
+    if index == -1:
+        return [[]]
 
+    old_subs = get_subsets(setz, index - 1)
+    new_subs = []
+    item = setz[index]
+    for val in old_subs:
+        new_subs.append(val)
+        # List is mutable
+        entry = copy.deepcopy(val)
+        entry.append(item)
+        new_subs.append(entry)
 
-def get_subsets(setz, index):
-    all_subsets = []
-    if len(setz) == index:
-        # base case - add empty set
-        if [] not in all_subsets:
-            all_subsets.append([])
-    else:
-        all_subsets = get_subsets(setz, index + 1)
-        item = setz[index]
-        more_subsets = []
-        for subset in all_subsets:
-            new_subset = []
-            for value in subset:
-                if value not in new_subset:
-                    new_subset.append(value)
-
-            new_subset.append(item)
-            more_subsets.append(new_subset)
-        for value in more_subsets:
-            all_subsets.append(value)
-
-    return all_subsets
+    return new_subs
 
 
 # Combinatorics Solution
@@ -48,6 +44,6 @@ def convert_int_to_set(x, aset):
 
 
 if __name__ == "__main__":
-    print(get_subsets([1, 2, 3], 0))
-    print("\n")
+    print(get_subsets([1, 2, 3]))
+    print("")
     print(get_subsets_2([1, 2, 3]))

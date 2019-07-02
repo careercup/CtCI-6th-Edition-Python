@@ -20,6 +20,10 @@ def is_unique_chars_algorithmic(string):
     return True
 
 
+def is_unique_chars_pythonic(string):
+    return len(set(string)) == len(string)
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("abcd", True),
@@ -28,10 +32,12 @@ class Test(unittest.TestCase):
         ("23ds2", False),
         ("hb 627jh=j ()", False),
     ]
+    test_functions = [is_unique_chars_pythonic, is_unique_chars_algorithmic]
 
     def test_is_unique_chars(self):
-        for text, expected in self.test_cases:
-            assert is_unique_chars_algorithmic(text) == expected
+        for is_unique_chars in self.test_functions:
+            for text, expected in self.test_cases:
+                assert is_unique_chars(text) == expected
 
 
 if __name__ == "__main__":

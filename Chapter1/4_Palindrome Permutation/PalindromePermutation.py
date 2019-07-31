@@ -2,20 +2,14 @@
 import unittest
 
 
-def pal_perm(phrase):
-    '''function checks if a string is a permutation of a palindrome or not'''
-    table = [0 for _ in range(ord('z') - ord('a') + 1)]
-    countodd = 0
-    for c in phrase:
-        x = char_number(c)
-        if x != -1:
-            table[x] += 1
-            if table[x] % 2:
-                countodd += 1
-            else:
-                countodd -= 1
+def palindrome_permutation(string):
+    # No lowercase, ignore special characters
+    string = [char for char in string.lower() if ord(char) in range(97, 123)]
+    # to be a palindrome, the count of each letter has to be even, save for one letter that can be odd.
+    my_dict = {char: string.count(char) for char in set(string)}
+    odd_list = [char for char, count in my_dict.items() if count % 2 != 0]
+    return len(odd_list) <= 1
 
-    return countodd <= 1
 
 def char_number(c):
     a = ord('a')
@@ -45,7 +39,7 @@ class Test(unittest.TestCase):
 
     def test_pal_perm(self):
         for [test_string, expected] in self.data:
-            actual = pal_perm(test_string)
+            actual = palindrome_permutation(test_string)
             self.assertEqual(actual, expected)
 
 if __name__ == "__main__":

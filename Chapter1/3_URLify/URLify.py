@@ -5,18 +5,19 @@ import unittest
 def urlify(string, length):
     '''function replaces single spaces with %20 and removes trailing spaces'''
     new_index = len(string)
+    char_list = list(string)
 
     for i in reversed(range(length)):
-        if string[i] == ' ':
+        if char_list[i] == ' ':
             # Replace spaces
-            string[new_index - 3:new_index] = '%20'
+            char_list[new_index - 3:new_index] = ['%','2','0']
             new_index -= 3
         else:
             # Move characters
-            string[new_index - 1] = string[i]
+            char_list[new_index - 1] = char_list[i]
             new_index -= 1
 
-    return string
+    return "".join(char_list)
 
 
 class Test(unittest.TestCase):

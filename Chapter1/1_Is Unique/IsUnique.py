@@ -2,7 +2,7 @@
 import unittest
 
 
-def unique(string):
+def is_unique(string):
     # Assuming character set is ASCII (128 characters)
     if len(string) > 128:
         return False
@@ -18,19 +18,17 @@ def unique(string):
     return True
 
 
-class Test(unittest.TestCase):
-    dataT = [('abcd'), ('s4fad'), ('')]
-    dataF = [('23ds2'), ('hb 627jh=j ()')]
+class IsUniqueTest(unittest.TestCase):
 
-    def test_unique(self):
-        # true check
-        for test_string in self.dataT:
-            actual = unique(test_string)
-            self.assertTrue(actual)
-        # false check
-        for test_string in self.dataF:
-            actual = unique(test_string)
-            self.assertFalse(actual)
+    def test_true_check(self):
+        dataT = [('abcd'), ('s4fad'), ('')]
+        for test_string in dataT:
+            self.assertTrue(is_unique(test_string))
+
+    def test_false_check(self):
+        dataF = [('23ds2'), ('hb 627jh=j ()')]
+        for test_string in dataF:
+            self.assertFalse(is_unique(test_string))
 
 if __name__ == "__main__":
     unittest.main()

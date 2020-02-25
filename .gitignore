@@ -1,6 +1,13 @@
 
 # Created by https://www.gitignore.io/api/python
 
+### Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -61,3 +68,16 @@ docs/_build/
 
 # PyBuilder
 target/
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+pyvenv.cfg
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-selfcheck.json

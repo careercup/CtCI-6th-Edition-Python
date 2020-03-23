@@ -1,5 +1,6 @@
 # O(N)
 import unittest
+from collections import Counter
 
 
 def is_palindrome_permutation(phrase):
@@ -32,6 +33,12 @@ def char_number(c):
     return -1
 
 
+def is_palindrome_permutation_pythonic(phrase):
+    """function checks if a string is a permutation of a palindrome or not"""
+    counter = Counter(phrase.replace(" ", "").lower())
+    return sum(val % 2 for val in counter.values()) <= 1
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("aba", True),
@@ -48,11 +55,12 @@ class Test(unittest.TestCase):
         ("no x in nixon", True),
         ("azAZ", True),
     ]
+    testable_functions = [is_palindrome_permutation, is_palindrome_permutation_pythonic]
 
     def test_pal_perm(self):
-        for [test_string, expected] in self.test_cases:
-            actual = is_palindrome_permutation(test_string)
-            self.assertEqual(actual, expected)
+        for f in self.testable_functions:
+            for [test_string, expected] in self.test_cases:
+                assert f(test_string) == expected
 
 
 if __name__ == "__main__":

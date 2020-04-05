@@ -1,8 +1,10 @@
+from collections import defaultdict
+
+
 def group_anagrams(words):
-    anagrams = {}
+    anagrams = defaultdict(list)
     for word in words:
         sorted_word = "".join(sorted(word.lower()))
-        anagrams.setdefault(sorted_word, [])
         anagrams[sorted_word].append(word)
 
     sorted_words = []

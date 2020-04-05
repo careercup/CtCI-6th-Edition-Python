@@ -1,10 +1,10 @@
+from collections import defaultDict
+
 def GroupAnagrams():
     strings = initialise_anagrams()
-    anagrams = {}
+    anagrams = defaultDict(list)
     for i in range(len(strings)):
         word = "".join(sorted(strings[i].lower()))
-        if not anagrams.has_key(word):
-            anagrams.setdefault(word, [])
         anagrams[word].append(strings[i])
     keys = anagrams.keys()
     index = 0

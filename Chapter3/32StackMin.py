@@ -69,7 +69,7 @@ StackMin()
 
 
 
-class StackWithMax:
+class StackWithMin:
     def __init__(self):
 
         self.mainStack = []

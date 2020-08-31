@@ -26,6 +26,60 @@ def is_palindrome(ll):
     return True
 
 
+def is_palindrome_constant_space(ll):
+    """
+    Constant(O(N)) space solution
+    """
+    # find the list center via the runner technique
+    slow = ll.head
+    if not slow or not slow.next:
+        return True
+
+    fast = slow.next
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    # unlink left and right halves of the list
+    right_head = slow.next
+    slow.next_node = None
+    # reverse the right half of the list
+    tail = reverse(right_head)
+    # iterate over nodes from the outside in
+    left, right = ll.head, tail
+    result = True
+    while left and right:
+        if left.value != right.value:
+            result = False
+            break
+        left = left.next
+        right = right.next
+    # undo state changes
+    reverse(tail)
+    slow.next_node = right_head
+    return result
+
+
+def reverse(node):
+    """
+    reverses a linked list,
+    returns the input list's
+    tail node as the new head
+
+        Time : O(N)
+        Space: O(1)
+    """
+    previous_node = None
+    while node:
+        # keep track of the next node
+        next_node = node.next
+        # point the current node backwards
+        node.next = previous_node
+        # advance pointers
+        previous_node = node
+        node = next_node
+    return previous_node
+
+
 test_cases = [
     ([1, 2, 3, 4, 3, 2, 1], True),
     ([1], True),
@@ -36,7 +90,7 @@ test_cases = [
     ([1, 2], False),
 ]
 
-testable_functions = [is_palindrome]
+testable_functions = [is_palindrome, is_palindrome_constant_space]
 
 
 def test_is_palindrome():

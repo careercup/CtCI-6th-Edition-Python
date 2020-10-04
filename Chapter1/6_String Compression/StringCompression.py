@@ -13,7 +13,8 @@ def string_compression(string):
         counter += 1
 
     # add last repeated character
-    compressed.append(string[-1] + str(counter))
+    if counter:
+        compressed.append(string[-1] + str(counter))
 
     # returns original string if compressed string isn't smaller
     return min(string, ''.join(compressed), key=len)
@@ -23,7 +24,8 @@ class Test(unittest.TestCase):
     '''Test Cases'''
     data = [
         ('aabcccccaaa', 'a2b1c5a3'),
-        ('abcdef', 'abcdef')
+        ('abcdef', 'abcdef'),
+        ('', '')
     ]
 
     def test_string_compression(self):

@@ -8,7 +8,7 @@ class MultiStack:
         self.array = [0] * (stacksize * self.numstacks)
         self.sizes = [0] * self.numstacks
         self.stacksize = stacksize
-        self.minvals = [sys.maxint] * (stacksize * self.numstacks)
+        self.minvals = [sys.maxsize] * (stacksize * self.numstacks)
 
     def Push(self, item, stacknum):
         if self.IsFull(stacknum):
@@ -62,14 +62,14 @@ def f(N, start, end, buff, stack):
 
 def printTower(newstack):
     # while not newstack.IsEmpty(0):
-        # print newstack.Pop(0)
-        # print "".join("-" for i in range(newstack.Pop(0)))
+        # print(newstack.Pop(0))
+        # print("".join("-" for i in range(newstack.Pop(0))))
     # while not newstack.IsEmpty(1):
-        # print newstack.Pop(1)
-        # print "".join("-" for i in range(newstack.Pop(1)))
+        # print(newstack.Pop(1))
+        # print("".join("-" for i in range(newstack.Pop(1))))
     while not newstack.IsEmpty(2):
-        # print newstack.Pop(2)
-        print "".join("-" for i in range(newstack.Pop(2)))
+        # print(newstack.Pop(2))
+        print("".join("-" for i in range(newstack.Pop(2))))
 
 
 def FillTower(N):

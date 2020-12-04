@@ -3,17 +3,17 @@ def GroupAnagrams():
     anagrams = {}
     for i in range(len(strings)):
         word = "".join(sorted(strings[i].lower()))
-        if not anagrams.has_key(word):
+        if word not in anagrams:
             anagrams.setdefault(word, [])
         anagrams[word].append(strings[i])
-    keys = anagrams.keys()
+    keys = list(anagrams.keys())
     index = 0
     for i in range(len(keys)):
         values = anagrams.get(keys[i])
         for j in range(len(values)):
             strings[index] = values[j]
             index += 1
-    print strings
+    print(strings)
 
 
 def initialise_anagrams():

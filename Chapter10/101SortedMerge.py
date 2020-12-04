@@ -29,5 +29,5 @@ def FillArrayWithBuffer(length, buffer):
 
 A = FillArrayWithBuffer(5, 10)
 B = FillArrayUpTo(10)
-print A, B
-print SortedMerge(A, B)
+print(A, B)
+print(SortedMerge(A, B))

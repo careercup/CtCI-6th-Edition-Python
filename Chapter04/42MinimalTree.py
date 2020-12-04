@@ -22,5 +22,7 @@ def arrayToBinary(array, start, end):
     root.right = arrayToBinary(array, mid + 1, end)
     return root
 
-testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 22, 43, 144, 515, 4123]
-print(initiateArrayToBinary(testArray))
+
+if __name__ == "__main__":
+    testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 22, 43, 144, 515, 4123]
+    print(initiateArrayToBinary(testArray))

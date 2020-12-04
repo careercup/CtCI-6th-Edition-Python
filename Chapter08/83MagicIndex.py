@@ -22,5 +22,7 @@ def FillArray():
     array[9] = 25
     return array
 
-array = FillArray()
-print MagicIndex(array, 0, len(array) - 1)
+
+if __name__ == "__main__":
+    array = FillArray()
+    print(MagicIndex(array, 0, len(array) - 1))

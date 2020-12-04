@@ -7,3 +7,7 @@ This is a **Python** solutions for the book [Cracking the Coding Interview, 6th 
 To run the programs, just use the `python ChapterX/filename.py` command.
 
 The test cases are included in the solution files.
+
+## Contributions
+
+Contributions welcome! Please provide solutions compatible with python 3 and include test cases.

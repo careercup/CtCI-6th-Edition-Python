@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from .linked_list import LinkedList
 
 
 def intersection(list1, list2):
@@ -20,3 +20,19 @@ def intersection(list1, list2):
         longer_node = longer_node.next
 
     return longer_node
+
+
+def test_linked_list_intersection():
+    shared = LinkedList()
+    shared.add_multiple([1, 2, 3, 4])
+
+    a = LinkedList([10, 11, 12, 13, 14, 15])
+    b = LinkedList([20, 21, 22])
+
+    a.tail.next = shared.head
+    a.tail = shared.tail
+    b.tail.next = shared.head
+    b.tail = shared.tail
+
+    # should be 1
+    assert intersection(a, b).value == 1

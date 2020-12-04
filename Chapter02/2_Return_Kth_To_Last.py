@@ -1,4 +1,4 @@
-from LinkedList import LinkedList
+from .linked_list import LinkedList
 
 
 def kth_to_last(ll, k):

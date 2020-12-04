@@ -22,6 +22,13 @@ def urlify(string, length):
     return string.join(char_list)
 
 
+def urlify_stdlib(text):
+    """solution using standard library"""
+    text = text.rstrip()
+    url = text.replace(" ", "%20")
+    return url
+
+
 class Test(unittest.TestCase):
     '''Test Cases'''
     data = [
@@ -30,9 +37,10 @@ class Test(unittest.TestCase):
         ('Mr John Smith    ', 13, 'Mr%20John%20Smith')]
 
     def test_urlify(self):
-        for [test_string, length, expected] in self.data:
-            actual = urlify(test_string, length)
-            self.assertEqual(actual, expected)
+        for func in (urlify, urlify_stdlib):
+            for [test_string, length, expected] in self.data:
+                actual = func(test_string, length)
+                self.assertEqual(actual, expected)
 
 if __name__ == "__main__":
     unittest.main()

@@ -16,7 +16,8 @@ def initiateArrayToBinary(array):
 def arrayToBinary(array, start, end):
     if start > end:
         return ''
-    mid = (start + end) / 2
+    mid = (start + end) // 2 #This must be floor division, otherwise you get a slice error
+    # TypeError: list indices must be integers or slices, not float
     root = Node(array[mid])
     root.left = arrayToBinary(array, start, mid - 1)
     root.right = arrayToBinary(array, mid + 1, end)

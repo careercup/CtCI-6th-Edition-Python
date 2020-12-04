@@ -1,4 +1,4 @@
-import Queue
+import queue
 
 
 class Graph():
@@ -13,7 +13,7 @@ class Graph():
             self.vertices[self.count] = x
             self.count += 1
         else:
-            print "Graph full"
+            print("Graph full")
 
     def getNodes(self):
         return self.vertices
@@ -32,7 +32,7 @@ class Node():
             self.adjacent[self.adjacentCount] = x
             self.adjacentCount += 1
         else:
-            print "No more adjacent nodes can be added"
+            print("No more adjacent nodes can be added")
 
     def getAdjacent(self):
         return self.adjacent
@@ -44,7 +44,7 @@ class Node():
 def breadthfirstsearch(g, start, end):
     if start == end:
         return True
-    q = Queue.Queue(len(g.getNodes()))
+    q = queue.Queue(len(g.getNodes()))
     start.visited = True
     q.put(start)
     while not q.empty():
@@ -111,5 +111,5 @@ g = createNewGraphWithLoop()
 n = g.getNodes()
 start = n[0]
 end = n[5]
-print "Start at:", start.getVertex(), "End at: ", end.getVertex()
-print breadthfirstsearch(g, start, end)
+print("Start at:", start.getVertex(), "End at: ", end.getVertex())
+print(breadthfirstsearch(g, start, end))

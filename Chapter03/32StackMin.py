@@ -8,7 +8,7 @@ class MultiStack:
         self.array = [0] * (stacksize * self.numstacks)
         self.sizes = [0] * self.numstacks
         self.stacksize = stacksize
-        self.minvals = [sys.maxint] * (stacksize * self.numstacks)
+        self.minvals = [sys.maxsize] * (stacksize * self.numstacks)
 
     def Push(self, item, stacknum):
         if self.IsFull(stacknum):
@@ -56,11 +56,11 @@ def StackMin():
     newstack.Push(7, 0)
     newstack.Push(14, 0)
     newstack.Push(3, 0)
-    print newstack.Min(0)
+    print(newstack.Min(0))
     newstack.Push(1, 0)
     newstack.Push(4, 0)
     newstack.Push(44, 0)
     newstack.Push(2, 0)
-    print newstack.Min(0)
+    print(newstack.Min(0))
 
 StackMin()

@@ -2,7 +2,7 @@
 import unittest
 
 
-def unique(string):
+def is_unique_chars_algorithmic(string):
     # Assuming character set is ASCII (128 characters)
     if len(string) > 128:
         return False
@@ -19,18 +19,18 @@ def unique(string):
 
 
 class Test(unittest.TestCase):
-    dataT = [('abcd'), ('s4fad'), ('')]
-    dataF = [('23ds2'), ('hb 627jh=j ()')]
+    test_cases = [
+        ("abcd", True),
+        ("s4fad", True),
+        ("", True),
+        ("23ds2", False),
+        ("hb 627jh=j ()", False),
+    ]
 
-    def test_unique(self):
-        # true check
-        for test_string in self.dataT:
-            actual = unique(test_string)
-            self.assertTrue(actual)
-        # false check
-        for test_string in self.dataF:
-            actual = unique(test_string)
-            self.assertFalse(actual)
+    def test_is_unique_chars(self):
+        for text, expected in self.test_cases:
+            assert is_unique_chars_algorithmic(text) == expected
+
 
 if __name__ == "__main__":
     unittest.main()

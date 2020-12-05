@@ -45,6 +45,7 @@ class Test(unittest.TestCase):
         ("dcw4f", "dcw5f", False),
         ("DOG", "dog", False),
         ("dog ", "dog", False),
+        ("aaab", "bbba", False),
     )
 
     testable_functions = [

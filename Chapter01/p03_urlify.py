@@ -3,7 +3,7 @@ import unittest
 
 
 def urlify_algo(string, length):
-    """replace single spaces with %20 and removes trailing spaces"""
+    """replace spaces with %20 and removes trailing spaces"""
     # convert to list because Python strings are immutable
     char_list = list(string)
     string = ""
@@ -22,7 +22,7 @@ def urlify_algo(string, length):
     return string.join(char_list)
 
 
-def urlify_stdlib(text, length):
+def urlify_pythonic(text, length):
     """solution using standard library"""
     return text.rstrip().replace(" ", "%20")
 
@@ -31,14 +31,16 @@ class Test(unittest.TestCase):
     """Test Cases"""
 
     test_cases = [
-        ("much ado about nothing      ", 22, "much%20ado%20about%20nothing"),
-        ("Mr John Smith    ", 13, "Mr%20John%20Smith"),
+        ("much ado about nothing      ", "much%20ado%20about%20nothing"),
+        ("Mr John Smith    ", "Mr%20John%20Smith"),
     ]
+    testable_functions = [urlify_algo, urlify_pythonic]
 
     def test_urlify(self):
-        for func in (urlify_algo, urlify_stdlib):
-            for test_string, length, expected in self.test_cases:
-                actual = func(test_string, length)
+        for urlify in self.testable_functions:
+            for test_string, expected in self.test_cases:
+                stripped_length = len(test_string.rstrip(" "))
+                actual = urlify(test_string, stripped_length)
                 self.assertEqual(actual, expected)
 
 

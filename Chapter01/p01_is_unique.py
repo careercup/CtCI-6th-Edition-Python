@@ -7,7 +7,7 @@ def is_unique_chars_algorithmic(string):
     if len(string) > 128:
         return False
 
-    char_set = [False for _ in range(128)]
+    char_set = [False] * 128
     for char in string:
         val = ord(char)
         if char_set[val]:

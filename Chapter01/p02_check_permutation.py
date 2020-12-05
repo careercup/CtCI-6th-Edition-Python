@@ -7,7 +7,7 @@ def check_permutation_by_sort(s1, s2):
     if len(s1) != len(s2):
         return False
     s1, s2 = sorted(s1), sorted(s2)
-    for i in range(len(s1)-1):
+    for i in range(len(s1) - 1):
         if s1[i] != s2[i]:
             return False
     return True
@@ -34,26 +34,30 @@ def check_permutation_pythonic(str1, str2):
 
 
 class Test(unittest.TestCase):
-    dataT = (
-        ('abcd', 'bacd'),
-        ('3563476', '7334566'),
-        ('wef34f', 'wffe34'),
+    # str1, str2, is_permutation
+    test_cases = (
+        ("dog", "god", True),
+        ("abcd", "bacd", True),
+        ("3563476", "7334566", True),
+        ("wef34f", "wffe34", True),
+        ("abcd", "d2cba", False),
+        ("2354", "1234", False),
+        ("dcw4f", "dcw5f", False),
+        ("DOG", "dog", False),
+        ("dog ", "dog", False),
     )
-    dataF = (
-        ('abcd', 'd2cba'),
-        ('2354', '1234'),
-        ('dcw4f', 'dcw5f'),
-    )
+
+    testable_functions = [
+        check_permutation_by_sort,
+        check_permutation_by_count,
+        check_permutation_pythonic,
+    ]
 
     def test_cp(self):
         # true check
-        for test_strings in self.dataT:
-            result = check_permutation_by_count(*test_strings)
-            self.assertTrue(result)
-        # false check
-        for test_strings in self.dataF:
-            result = check_permutation_by_count(*test_strings)
-            self.assertFalse(result)
+        for check_permutation in self.testable_functions:
+            for str1, str2, expected in self.test_cases:
+                assert check_permutation(str1, str2) == expected
 
 
 if __name__ == "__main__":

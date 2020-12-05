@@ -1,13 +1,3 @@
-"""
-Cracking the Coding Interview
-Chapter 5 :: Bit Manipulation
-
-Question Two :: Binary to String
-Given a real number between 0 and 1 that is passed in as a
-double, print the binary representation. If the number cannot be represented
-accurately in binary with at most 32 characters, print "ERROR".
-"""
-
 def bin_to_string(number):
     bit_str = '.'
     if number >= 1.0 or number <= 0.0:

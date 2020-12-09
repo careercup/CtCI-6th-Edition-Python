@@ -1,13 +1,14 @@
-#Solution using recursion
+# Solution using recursion
+
 
 def getSubsets(setz, index):
     allSubsets = []
     if len(setz) == index:
-        #base case - add empty set
+        # base case - add empty set
         if [] not in allSubsets:
             allSubsets.append([])
     else:
-        allSubsets = getSubsets(setz, index+1)
+        allSubsets = getSubsets(setz, index + 1)
         item = setz[index]
         moreSubsets = []
         for subset in allSubsets:
@@ -18,6 +19,7 @@ def getSubsets(setz, index):
         [allSubsets.append(value) for value in moreSubsets if value not in newSubset]
     return allSubsets
 
+
 # Combinatorics Solution
 def getSubsets2(aset):
     allSubsets = []
@@ -26,6 +28,7 @@ def getSubsets2(aset):
         subset = convertIntToSet(k, aset)
         allSubsets.append(subset)
     return allSubsets
+
 
 def convertIntToSet(x, aset):
     subset = []
@@ -39,8 +42,6 @@ def convertIntToSet(x, aset):
     return subset
 
 
-
-
-print(getSubsets([1,2,3],0))
+print(getSubsets([1, 2, 3], 0))
 print("\n")
-print(getSubsets2([1,2,3]))
+print(getSubsets2([1, 2, 3]))

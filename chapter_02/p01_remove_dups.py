@@ -33,6 +33,7 @@ def remove_dups_followup(ll):
 
     return ll.head
 
+
 ll = LinkedList()
 ll.generate(100, 0, 9)
 print(ll)

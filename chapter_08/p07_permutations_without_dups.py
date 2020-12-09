@@ -1,4 +1,4 @@
-#Write a method to compute all permutations of a string of unique characters
+# Write a method to compute all permutations of a string of unique characters
 
 # approach 1: building from permutations of first n-1 characters
 def getPerms(string):
@@ -6,10 +6,10 @@ def getPerms(string):
     if string == None:
         return None
     if len(string) == 0:
-        #base case
+        # base case
         permutations.append(" ")
         return permutations
-    first = string[0] #get first letter in string
+    first = string[0]  # get first letter in string
     remainder = string[1:]
     words = getPerms(remainder)
     for word in words:
@@ -19,6 +19,7 @@ def getPerms(string):
             permutations.append(s)
             index += 1
     return permutations
+
 
 def insertCharAt(word, char, i):
     start = word[:i]
@@ -32,15 +33,17 @@ def getPerms2(string):
     getPerms2Inner(" ", string, result)
     return result
 
+
 def getPerms2Inner(prefix, remainder, result):
     if len(remainder) == 0:
         result.append(prefix)
     length = len(remainder)
     for i in range(length):
         before = remainder[:i]
-        after = remainder[i+1:]
+        after = remainder[i + 1 :]
         c = remainder[i]
         getPerms2Inner(prefix + c, before + after, result)
+
 
 print(getPerms("str"))
 print(getPerms2("str"))

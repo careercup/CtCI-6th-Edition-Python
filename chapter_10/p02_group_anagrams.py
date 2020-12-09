@@ -28,4 +28,5 @@ def initialise_anagrams():
     strings[7] = "alerted"
     return strings
 
+
 GroupAnagrams()

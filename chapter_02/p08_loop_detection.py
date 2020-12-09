@@ -1,5 +1,3 @@
-
-
 def loop_detection(ll):
     fast = slow = ll.head
 

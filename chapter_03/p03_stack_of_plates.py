@@ -2,11 +2,13 @@
 
 import unittest
 
+
 class Node(object):
     def __init__(self, value):
         self.value = value
         self.above = None
         self.below = None
+
 
 class Stack(object):
     def __init__(self, capacity):
@@ -53,6 +55,7 @@ class Stack(object):
             self.bottom.below = None
         self.size -= 1
         return b.value
+
 
 class SetOfStacks(object):
     def __init__(self, capacity):
@@ -119,5 +122,6 @@ class Tests(unittest.TestCase):
             lst.append(stacks.pop_at(0))
         self.assertEqual(lst, list(range(4, 35)))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

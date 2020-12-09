@@ -2,7 +2,6 @@ from random import randint
 
 
 class LinkedListNode:
-
     def __init__(self, value, nextNode=None, prevNode=None):
         self.value = value
         self.next = nextNode
@@ -13,7 +12,6 @@ class LinkedListNode:
 
 
 class LinkedList:
-
     def __init__(self, values=None):
         self.head = None
         self.tail = None
@@ -28,7 +26,7 @@ class LinkedList:
 
     def __str__(self):
         values = [str(x) for x in self]
-        return ' -> '.join(values)
+        return " -> ".join(values)
 
     def __len__(self):
         result = 0
@@ -65,7 +63,6 @@ class LinkedList:
 
 
 class DoublyLinkedList(LinkedList):
-
     def add(self, value):
         if self.head is None:
             self.tail = self.head = LinkedListNode(value, None, self.tail)

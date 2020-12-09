@@ -1,5 +1,4 @@
 class MultiStack:
-
     def __init__(self, stacksize):
         self.numstacks = 3
         self.array = [0] * (stacksize * self.numstacks)
@@ -8,13 +7,13 @@ class MultiStack:
 
     def Push(self, item, stacknum):
         if self.IsFull(stacknum):
-            raise Exception('Stack is full')
+            raise Exception("Stack is full")
         self.sizes[stacknum] += 1
         self.array[self.IndexOfTop(stacknum)] = item
 
     def Pop(self, stacknum):
         if self.IsEmpty(stacknum):
-            raise Exception('Stack is empty')
+            raise Exception("Stack is empty")
         value = self.array[self.IndexOfTop(stacknum)]
         self.array[self.IndexOfTop(stacknum)] = 0
         self.sizes[stacknum] -= 1
@@ -22,7 +21,7 @@ class MultiStack:
 
     def Peek(self, stacknum):
         if self.IsEmpty(stacknum):
-            raise Exception('Stack is empty')
+            raise Exception("Stack is empty")
         return self.array[self.IndexOfTop(stacknum)]
 
     def IsEmpty(self, stacknum):
@@ -47,5 +46,6 @@ def ThreeInOne():
     print(newstack.Pop(1))
     print(newstack.Peek(1))
     newstack.Push(3, 1)
+
 
 ThreeInOne()

@@ -27,6 +27,7 @@ def TripleHopRecursive(x, memo):
             memo[i] = memo[i - 1] + memo[i - 2] + memo[i - 3]
     return memo[x]
 
+
 print(TripleHop(1))
 print(TripleHop(2))
 print(TripleHop(3))

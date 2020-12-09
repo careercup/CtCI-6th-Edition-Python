@@ -1,12 +1,20 @@
 class Node:
-
     def __init__(self, item):
         self.right = None
         self.left = None
         self.val = item
 
     def __str__(self):
-        return '('+str(self.left)+':L ' + "V:" + str(self.val) + " R:" + str(self.right)+')'
+        return (
+            "("
+            + str(self.left)
+            + ":L "
+            + "V:"
+            + str(self.val)
+            + " R:"
+            + str(self.right)
+            + ")"
+        )
 
 
 def initiateArrayToBinary(array):
@@ -15,8 +23,10 @@ def initiateArrayToBinary(array):
 
 def arrayToBinary(array, start, end):
     if start > end:
-        return ''
-    mid = (start + end) // 2 #This must be floor division, otherwise you get a slice error
+        return ""
+    mid = (
+        start + end
+    ) // 2  # This must be floor division, otherwise you get a slice error
     # TypeError: list indices must be integers or slices, not float
     root = Node(array[mid])
     root.left = arrayToBinary(array, start, mid - 1)

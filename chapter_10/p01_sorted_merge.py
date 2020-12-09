@@ -27,6 +27,7 @@ def FillArrayWithBuffer(length, buffer):
         nums[i] = 3 * i + 1
     return nums
 
+
 A = FillArrayWithBuffer(5, 10)
 B = FillArrayUpTo(10)
 print(A, B)

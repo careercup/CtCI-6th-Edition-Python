@@ -2,7 +2,6 @@ import sys
 
 
 class MultiStack:
-
     def __init__(self, stacksize):
         self.numstacks = 1
         self.array = [0] * (stacksize * self.numstacks)
@@ -12,18 +11,19 @@ class MultiStack:
 
     def Push(self, item, stacknum):
         if self.IsFull(stacknum):
-            raise Exception('Stack is full')
+            raise Exception("Stack is full")
         self.sizes[stacknum] += 1
         if self.IsEmpty(stacknum):
             self.minvals[self.IndexOfTop(stacknum)] = item
         else:
             self.minvals[self.IndexOfTop(stacknum)] = min(
-                item, self.minvals[self.IndexOfTop(stacknum) - 1])
+                item, self.minvals[self.IndexOfTop(stacknum) - 1]
+            )
         self.array[self.IndexOfTop(stacknum)] = item
 
     def Pop(self, stacknum):
         if self.IsEmpty(stacknum):
-            raise Exception('Stack is empty')
+            raise Exception("Stack is empty")
         value = self.array[self.IndexOfTop(stacknum)]
         self.array[self.IndexOfTop(stacknum)] = 0
         self.sizes[stacknum] -= 1
@@ -31,7 +31,7 @@ class MultiStack:
 
     def Peek(self, stacknum):
         if self.IsEmpty(stacknum):
-            raise Exception('Stack is empty')
+            raise Exception("Stack is empty")
         return self.array[self.IndexOfTop(stacknum)]
 
     def Min(self, stacknum):
@@ -62,5 +62,6 @@ def StackMin():
     newstack.Push(44, 0)
     newstack.Push(2, 0)
     print(newstack.Min(0))
+
 
 StackMin()

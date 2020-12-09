@@ -1,8 +1,10 @@
 from .linked_list import LinkedList
 
+
 def delete_middle_node(node):
     node.value = node.next.value
     node.next = node.next.next
+
 
 ll = LinkedList()
 ll.add_multiple([1, 2, 3, 4])

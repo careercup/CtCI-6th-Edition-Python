@@ -1,8 +1,7 @@
 import queue
 
 
-class Graph():
-
+class Graph:
     def __init__(self):
         self.max_vertices = 6
         self.vertices = [0] * self.max_vertices
@@ -19,8 +18,7 @@ class Graph():
         return self.vertices
 
 
-class Node():
-
+class Node:
     def __init__(self, vertex, adjacentLength):
         self.adjacent = [0] * adjacentLength
         self.vertex = vertex
@@ -106,6 +104,7 @@ def createNewGraphWithLoop():
     for i in range(sizegraph):
         g.addNode(temp[i])
     return g
+
 
 g = createNewGraphWithLoop()
 n = g.getNodes()

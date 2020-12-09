@@ -4,7 +4,8 @@ def printPerms(string):
     printPermsInner(letterCountMap, "", len(string), result)
     return result
 
-#returns dictionary <string, integer>
+
+# returns dictionary <string, integer>
 def buildFreqTable(string):
     letterCountMap = {}
     for letter in string:
@@ -13,12 +14,13 @@ def buildFreqTable(string):
         letterCountMap[letter] += 1
     return letterCountMap
 
+
 def printPermsInner(letterCountMap, prefix, remaining, result):
-    #base case Permutation has been completed
+    # base case Permutation has been completed
     if remaining == 0:
         result.append(prefix)
         return
-    #try remaining letter for next char, and generate remaining permutations
+    # try remaining letter for next char, and generate remaining permutations
     for character in letterCountMap:
         count = letterCountMap[character]
         if count > 0:
@@ -26,6 +28,5 @@ def printPermsInner(letterCountMap, prefix, remaining, result):
             printPermsInner(letterCountMap, prefix + character, remaining - 1, result)
             letterCountMap[character] = count
 
+
 print(printPerms("aaf"))
-
-

@@ -15,8 +15,18 @@ def kth_to_last(ll, k):
     return current
 
 
+test_cases = (
+    # list, k, expected
+    ((10, 20, 30, 40, 50), 1, 50),
+    ((10, 20, 30, 40, 50), 5, 10),
+)
+
+
+def test_kth_to_last():
+    for linked_list_values, k, expected in test_cases:
+        ll = LinkedList(linked_list_values)
+        assert kth_to_last(ll, k).value == expected
+
+
 if __name__ == "__main__":
-    ll = LinkedList()
-    ll.generate(10, 0, 99)
-    print(ll)
-    print(kth_to_last(ll, 3))
+    test_kth_to_last()

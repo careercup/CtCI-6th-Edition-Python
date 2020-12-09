@@ -1,5 +1,6 @@
 # O(NxN)
 import unittest
+from copy import deepcopy
 
 
 def rotate_matrix(matrix):
@@ -56,11 +57,13 @@ class Test(unittest.TestCase):
             ],
         ),
     ]
+    testable_functions = [rotate_matrix_pythonic, rotate_matrix]
 
     def test_rotate_matrix(self):
-        for [test_matrix, expected] in self.test_cases:
-            actual = rotate_matrix(test_matrix)
-            self.assertEqual(actual, expected)
+        for f in self.testable_functions:
+            for [test_matrix, expected] in self.test_cases:
+                test_matrix = deepcopy(test_matrix)
+                assert f(test_matrix) == expected
 
 
 if __name__ == "__main__":

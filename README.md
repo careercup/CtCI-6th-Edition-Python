@@ -1,16 +1,16 @@
 # Python Solutions to *Cracking the Coding Interview, 6th Edition*
 
-This is a **Python** solutions for the book [Cracking the Coding Interview, 6th Edition](https://www.careercup.com/book) by *Gayle Laakmann McDowell*.
+These are **Python** solutions for the book [Cracking the Coding Interview, 6th Edition](https://www.careercup.com/book) by *Gayle Laakmann McDowell*.
 
 ## How to use?
 
-To run the programs, just use the `python ChapterX/filename.py` command.
+To run the programs, just use the `python chapter_X/filename.py` command.
 
 The test cases are included in the solution files.
 
 ## Contributions
 
-Contributions welcome! Please provide solutions compatible with python 3 and include test cases.
+Contributions welcome!
 
 In general solutions should fall into one of the following three categories:
  - *algorithm demonstration*.  This is the primary type of problem and solution that the text is concerned with. As
@@ -22,3 +22,8 @@ In general solutions should fall into one of the following three categories:
  also be easy to understand and good examples of pythonic ways of doing things.
  - *speed demonstration*.  These alternative solutions may be accepted if the fastest way to do something is not very
  readable or intuitive and thus it doesn't fit into the first two categories.
+
+
+Ideally solutions would work with Python 3.6 or greater, be well formatted, and include tests.  But if not we'll still
+be happy to work with you.  Our codebase is formatted with the [`black`](https://black.readthedocs.io/en/stable/) code
+ formatter.

@@ -45,5 +45,6 @@ def getPerms2Inner(prefix, remainder, result):
         getPerms2Inner(prefix + c, before + after, result)
 
 
-print(getPerms("str"))
-print(getPerms2("str"))
+if __name__ == "__main__":
+    print(getPerms("str"))
+    print(getPerms2("str"))

@@ -106,9 +106,10 @@ def createNewGraphWithLoop():
     return g
 
 
-g = createNewGraphWithLoop()
-n = g.getNodes()
-start = n[0]
-end = n[5]
-print("Start at:", start.getVertex(), "End at: ", end.getVertex())
-print(breadthfirstsearch(g, start, end))
+if __name__ == "__main__":
+    g = createNewGraphWithLoop()
+    n = g.getNodes()
+    start = n[0]
+    end = n[5]
+    print("Start at:", start.getVertex(), "End at: ", end.getVertex())
+    print(breadthfirstsearch(g, start, end))

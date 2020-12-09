@@ -79,7 +79,8 @@ def FillTower(N):
     return newstack
 
 
-N = 3
-newstack = FillTower(N)
-f(N, 0, 2, 1, newstack)
-printTower(newstack)
+if __name__ == "__main__":
+    N = 3
+    newstack = FillTower(N)
+    f(N, 0, 2, 1, newstack)
+    printTower(newstack)

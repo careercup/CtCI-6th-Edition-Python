@@ -20,8 +20,9 @@ def partition(ll, x):
         ll.tail.next = None
 
 
-ll = LinkedList()
-ll.generate(10, 0, 99)
-print(ll)
-partition(ll, ll.head.value)
-print(ll)
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.generate(10, 0, 99)
+    print(ll)
+    partition(ll, ll.head.value)
+    print(ll)

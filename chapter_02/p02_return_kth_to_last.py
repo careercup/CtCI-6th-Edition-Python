@@ -15,7 +15,8 @@ def kth_to_last(ll, k):
     return current
 
 
-ll = LinkedList()
-ll.generate(10, 0, 99)
-print(ll)
-print(kth_to_last(ll, 3))
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.generate(10, 0, 99)
+    print(ll)
+    print(kth_to_last(ll, 3))

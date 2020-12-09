@@ -28,7 +28,8 @@ def FillArrayWithBuffer(length, buffer):
     return nums
 
 
-A = FillArrayWithBuffer(5, 10)
-B = FillArrayUpTo(10)
-print(A, B)
-print(SortedMerge(A, B))
+if __name__ == "__main__":
+    A = FillArrayWithBuffer(5, 10)
+    B = FillArrayUpTo(10)
+    print(A, B)
+    print(SortedMerge(A, B))

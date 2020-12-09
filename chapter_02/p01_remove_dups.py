@@ -34,13 +34,14 @@ def remove_dups_followup(ll):
     return ll.head
 
 
-ll = LinkedList()
-ll.generate(100, 0, 9)
-print(ll)
-remove_dups(ll)
-print(ll)
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.generate(100, 0, 9)
+    print(ll)
+    remove_dups(ll)
+    print(ll)
 
-ll.generate(100, 0, 9)
-print(ll)
-remove_dups_followup(ll)
-print(ll)
+    ll.generate(100, 0, 9)
+    print(ll)
+    remove_dups_followup(ll)
+    print(ll)

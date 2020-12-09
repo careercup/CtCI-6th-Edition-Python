@@ -79,7 +79,8 @@ def minProduct3Helper(smaller, bigger):
         return halfProd + halfProd + bigger
 
 
-print(multiply(5, 6, 0))
-print(minProduct(5, 6))
-print(minProduct2(5, 6))
-print(minProduct3(5, 6))
+if __name__ == "__main__":
+    print(multiply(5, 6, 0))
+    print(minProduct(5, 6))
+    print(minProduct2(5, 6))
+    print(minProduct3(5, 6))

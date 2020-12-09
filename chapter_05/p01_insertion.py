@@ -26,4 +26,5 @@ def bits_insertion(n, m, i, j):
     return bit_str.zfill(num_bits)  # pad string to num_bits
 
 
-print(bits_insertion("10000000000", "10011", 2, 6))
+if __name__ == "__main__":
+    print(bits_insertion("10000000000", "10011", 2, 6))

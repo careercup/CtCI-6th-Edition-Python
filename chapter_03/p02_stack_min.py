@@ -64,4 +64,5 @@ def StackMin():
     print(newstack.Min(0))
 
 
-StackMin()
+if __name__ == "__main__":
+    StackMin()

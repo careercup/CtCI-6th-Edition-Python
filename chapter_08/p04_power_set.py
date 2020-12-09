@@ -42,6 +42,7 @@ def convertIntToSet(x, aset):
     return subset
 
 
-print(getSubsets([1, 2, 3], 0))
-print("\n")
-print(getSubsets2([1, 2, 3]))
+if __name__ == "__main__":
+    print(getSubsets([1, 2, 3], 0))
+    print("\n")
+    print(getSubsets2([1, 2, 3]))

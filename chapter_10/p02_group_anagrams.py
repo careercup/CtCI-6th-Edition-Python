@@ -29,4 +29,5 @@ def initialise_anagrams():
     return strings
 
 
-GroupAnagrams()
+if __name__ == "__main__":
+    GroupAnagrams()

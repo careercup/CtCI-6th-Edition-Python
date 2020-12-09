@@ -29,4 +29,5 @@ def printPermsInner(letterCountMap, prefix, remaining, result):
             letterCountMap[character] = count
 
 
-print(printPerms("aaf"))
+if __name__ == "__main__":
+    print(printPerms("aaf"))

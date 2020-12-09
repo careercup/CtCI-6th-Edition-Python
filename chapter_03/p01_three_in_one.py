@@ -48,4 +48,5 @@ def ThreeInOne():
     newstack.Push(3, 1)
 
 
-ThreeInOne()
+if __name__ == "__main__":
+    ThreeInOne()

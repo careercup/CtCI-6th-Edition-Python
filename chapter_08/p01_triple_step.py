@@ -28,16 +28,17 @@ def TripleHopRecursive(x, memo):
     return memo[x]
 
 
-print(TripleHop(1))
-print(TripleHop(2))
-print(TripleHop(3))
-print(TripleHop(4))
-print(TripleHop(5))
-print(TripleHop(6))
+if __name__ == "__main__":
+    print(TripleHop(1))
+    print(TripleHop(2))
+    print(TripleHop(3))
+    print(TripleHop(4))
+    print(TripleHop(5))
+    print(TripleHop(6))
 
-print(Method2(1))
-print(Method2(2))
-print(Method2(3))
-print(Method2(4))
-print(Method2(5))
-print(Method2(6))
+    print(Method2(1))
+    print(Method2(2))
+    print(Method2(3))
+    print(Method2(4))
+    print(Method2(5))
+    print(Method2(6))

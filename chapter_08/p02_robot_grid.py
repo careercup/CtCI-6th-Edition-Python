@@ -65,5 +65,6 @@ def isPathMemoized(maze, row, col, path, failedPoints):
     return False
 
 
-print(getPath([[True, True], [True, True]]))
-print(getPathMemoized([[True, True], [False, True]]))
+if __name__ == "__main__":
+    print(getPath([[True, True], [True, True]]))
+    print(getPathMemoized([[True, True], [False, True]]))

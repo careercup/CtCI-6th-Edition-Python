@@ -1,4 +1,4 @@
-from .linked_list import LinkedList
+from chapter_02.linked_list import LinkedList
 
 
 def intersection(list1, list2):

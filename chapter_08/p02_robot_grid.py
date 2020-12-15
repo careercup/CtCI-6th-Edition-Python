@@ -33,7 +33,7 @@ def getPathMemoized(maze):
     if maze == None or len(maze) == 0:
         return None
     path = []
-    failedPoints = []
+    failedPoints = set()
     if isPathMemoized(maze, len(maze) - 1, len(maze[0]) - 1, path, failedPoints):
         return path
     return None
@@ -61,7 +61,7 @@ def isPathMemoized(maze, row, col, path, failedPoints):
         path.append(point)
         return True
 
-    failedPoints.append(point)
+    failedPoints.add(point)
     return False
 
 

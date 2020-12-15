@@ -1,27 +1,26 @@
-from .linked_list import LinkedList
+import time
+
+from chapter_02.linked_list import LinkedList
 
 
 def remove_dups(ll):
-    if ll.head is None:
-        return
-
     current = ll.head
-    seen = set([current.value])
-    while current.next:
-        if current.next.value in seen:
-            current.next = current.next.next
-        else:
-            seen.add(current.next.value)
-            current = current.next
+    previous = None
+    seen = set()
 
+    while current:
+        if current.value in seen:
+            previous.next = current.next
+        else:
+            seen.add(current.value)
+            previous = current
+        current = current.next
+    ll.tail = previous
     return ll
 
 
 def remove_dups_followup(ll):
-    if ll.head is None:
-        return
-
-    current = ll.head
+    runner = current = ll.head
     while current:
         runner = current
         while runner.next:
@@ -30,18 +29,45 @@ def remove_dups_followup(ll):
             else:
                 runner = runner.next
         current = current.next
+    ll.tail = runner
+    return ll
 
-    return ll.head
+
+testable_functions = (remove_dups, remove_dups_followup)
+test_cases = (
+    ([], []),
+    ([1, 1, 1, 1, 1, 1], [1]),
+    ([1, 2, 3, 2], [1, 2, 3]),
+    ([1, 2, 2, 3], [1, 2, 3]),
+    ([1, 1, 2, 3], [1, 2, 3]),
+    ([1, 2, 3], [1, 2, 3]),
+)
+
+
+def test_remove_dupes():
+    for f in testable_functions:
+        start = time.perf_counter()
+        for _ in range(100):
+            for values, expected in test_cases:
+                expected = expected.copy()
+                deduped = f(LinkedList(values))
+                assert deduped.values() == expected
+
+                deduped.add(5)
+                expected.append(5)
+                assert deduped.values() == expected
+
+        duration = time.perf_counter() - start
+        print(f"{f.__name__} {duration * 1000:.1f}ms")
 
 
 if __name__ == "__main__":
-    ll = LinkedList()
-    ll.generate(100, 0, 9)
+    ll = LinkedList.generate(100, 0, 9)
     print(ll)
     remove_dups(ll)
     print(ll)
 
-    ll.generate(100, 0, 9)
+    ll = LinkedList.generate(100, 0, 9)
     print(ll)
     remove_dups_followup(ll)
     print(ll)

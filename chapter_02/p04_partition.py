@@ -1,4 +1,4 @@
-from .linked_list import LinkedList
+from chapter_02.linked_list import LinkedList
 
 
 def partition(ll, x):
@@ -21,8 +21,7 @@ def partition(ll, x):
 
 
 if __name__ == "__main__":
-    ll = LinkedList()
-    ll.generate(10, 0, 99)
+    ll = LinkedList.generate(10, 0, 99)
     print(ll)
     partition(ll, ll.head.value)
     print(ll)

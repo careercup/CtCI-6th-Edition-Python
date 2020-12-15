@@ -1,11 +1,11 @@
-from random import randint
+import random
 
 
 class LinkedListNode:
-    def __init__(self, value, nextNode=None, prevNode=None):
+    def __init__(self, value, next_node=None, prev_node=None):
         self.value = value
-        self.next = nextNode
-        self.prev = prevNode
+        self.next = next_node
+        self.prev = prev_node
 
     def __str__(self):
         return str(self.value)
@@ -36,6 +36,9 @@ class LinkedList:
             node = node.next
         return result
 
+    def values(self):
+        return [x.value for x in self]
+
     def add(self, value):
         if self.head is None:
             self.tail = self.head = LinkedListNode(value)
@@ -55,11 +58,9 @@ class LinkedList:
         for v in values:
             self.add(v)
 
-    def generate(self, n, min_value, max_value):
-        self.head = self.tail = None
-        for i in range(n):
-            self.add(randint(min_value, max_value))
-        return self
+    @classmethod
+    def generate(cls, k, min_value, max_value):
+        return cls(random.choices(range(min_value, max_value), k=k))
 
 
 class DoublyLinkedList(LinkedList):

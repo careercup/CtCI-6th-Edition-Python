@@ -62,10 +62,11 @@ class NumericLinkedList(LinkedList):
 test_cases = (
     # all values can either be list of integer or integers
     # a, b, expected_sum
+    ([7, 1, 6], [5, 9, 2], [2, 1, 9]),
     (0, 0, 0),
     ([], [], 0),
-    (123, 123, 246),
     ([3, 2, 1], [3, 2, 1], [6, 4, 2]),
+    (123, 123, 246),
     (123, 1, 124),
     (1, 123, 124),
 )

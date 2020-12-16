@@ -1,25 +1,7 @@
 # 3.4 Queue Via Stacks
 import unittest
 
-
-class Stack:
-    def __init__(self):
-        self.items = []
-
-    def is_empty(self):
-        return self.items == []
-
-    def push(self, item):
-        self.items.append(item)
-
-    def pop(self):
-        return self.items.pop()
-
-    def peek(self):
-        return self.items[len(self.items) - 1]
-
-    def size(self):
-        return len(self.items)
+from chapter_03.stack import Stack
 
 
 class MyQueue:
@@ -44,30 +26,32 @@ class MyQueue:
             return None
 
     def is_empty(self):
-        return not self.a.is_empty() or not self.b.is_empty()
+        return len(self) == 0
 
-    def size(self):
-        return self.a.size() + self.b.size()
+    def __len__(self):
+        return len(self.a) + len(self.b)
 
 
 class Tests(unittest.TestCase):
     def test_enqueue_one(self):
         queue = MyQueue()
+        assert queue.is_empty()
         queue.enqueue(1)
-        self.assertEqual(queue.size(), 1)
+        assert not queue.is_empty()
+        self.assertEqual(len(queue), 1)
 
     def test_enqueue_two(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
-        self.assertEqual(queue.size(), 2)
+        self.assertEqual(len(queue), 2)
 
     def test_enqueue_three(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
         queue.enqueue(3)
-        self.assertEqual(queue.size(), 3)
+        self.assertEqual(len(queue), 3)
 
     def test_dequeue_one(self):
         queue = MyQueue()

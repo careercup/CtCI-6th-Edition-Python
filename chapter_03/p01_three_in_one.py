@@ -35,7 +35,7 @@ class MultiStack:
         return offset + self.sizes[stacknum] - 1
 
 
-def ThreeInOne():
+if __name__ == "__main__":
     newstack = MultiStack(2)
     print(newstack.is_empty(1))
     newstack.push(3, 1)
@@ -46,7 +46,3 @@ def ThreeInOne():
     print(newstack.pop(1))
     print(newstack.peek(1))
     newstack.push(3, 1)
-
-
-if __name__ == "__main__":
-    ThreeInOne()

@@ -54,38 +54,38 @@ class Tests(unittest.TestCase):
     def test_enqueue_one(self):
         queue = MyQueue()
         queue.enqueue(1)
-        self.assertEquals(queue.size(), 1)
+        self.assertEqual(queue.size(), 1)
 
     def test_enqueue_two(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
-        self.assertEquals(queue.size(), 2)
+        self.assertEqual(queue.size(), 2)
 
     def test_enqueue_three(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
         queue.enqueue(3)
-        self.assertEquals(queue.size(), 3)
+        self.assertEqual(queue.size(), 3)
 
     def test_dequeue_one(self):
         queue = MyQueue()
         queue.enqueue(1)
-        self.assertEquals(queue.dequeue(), 1)
+        self.assertEqual(queue.dequeue(), 1)
 
     def test_dequeue_two(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
-        self.assertEquals(queue.dequeue(), 1)
-        self.assertEquals(queue.dequeue(), 2)
+        self.assertEqual(queue.dequeue(), 1)
+        self.assertEqual(queue.dequeue(), 2)
 
     def test_dequeue_three(self):
         queue = MyQueue()
         queue.enqueue(1)
         queue.enqueue(2)
         queue.enqueue(3)
-        self.assertEquals(queue.dequeue(), 1)
-        self.assertEquals(queue.dequeue(), 2)
-        self.assertEquals(queue.dequeue(), 3)
+        self.assertEqual(queue.dequeue(), 1)
+        self.assertEqual(queue.dequeue(), 2)
+        self.assertEqual(queue.dequeue(), 3)

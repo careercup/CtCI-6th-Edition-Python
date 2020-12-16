@@ -58,41 +58,41 @@ class Tests(unittest.TestCase):
     def test_push_one(self):
         queue = SortedStack()
         queue.push(1)
-        self.assertEquals(queue.size(), 1)
+        self.assertEqual(queue.size(), 1)
 
     def test_push_two(self):
         queue = SortedStack()
         queue.push(1)
         queue.push(2)
-        self.assertEquals(queue.size(), 2)
+        self.assertEqual(queue.size(), 2)
 
     def test_push_three(self):
         queue = SortedStack()
         queue.push(1)
         queue.push(2)
         queue.push(3)
-        self.assertEquals(queue.size(), 3)
+        self.assertEqual(queue.size(), 3)
 
     def test_pop_one(self):
         queue = SortedStack()
         queue.push(1)
-        self.assertEquals(queue.pop(), 1)
+        self.assertEqual(queue.pop(), 1)
 
     def test_pop_two(self):
         queue = SortedStack()
         queue.push(1)
         queue.push(2)
-        self.assertEquals(queue.pop(), 1)
-        self.assertEquals(queue.pop(), 2)
+        self.assertEqual(queue.pop(), 1)
+        self.assertEqual(queue.pop(), 2)
 
     def test_pop_three(self):
         queue = SortedStack()
         queue.push(1)
         queue.push(2)
         queue.push(3)
-        self.assertEquals(queue.pop(), 1)
-        self.assertEquals(queue.pop(), 2)
-        self.assertEquals(queue.pop(), 3)
+        self.assertEqual(queue.pop(), 1)
+        self.assertEqual(queue.pop(), 2)
+        self.assertEqual(queue.pop(), 3)
 
     def test_push_mixed(self):
         queue = SortedStack()
@@ -100,7 +100,7 @@ class Tests(unittest.TestCase):
         queue.push(2)
         queue.push(1)
         queue.push(4)
-        self.assertEquals(queue.pop(), 1)
-        self.assertEquals(queue.pop(), 2)
-        self.assertEquals(queue.pop(), 3)
-        self.assertEquals(queue.pop(), 4)
+        self.assertEqual(queue.pop(), 1)
+        self.assertEqual(queue.pop(), 2)
+        self.assertEqual(queue.pop(), 3)
+        self.assertEqual(queue.pop(), 4)

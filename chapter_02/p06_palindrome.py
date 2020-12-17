@@ -28,7 +28,7 @@ def is_palindrome(ll):
 
 def is_palindrome_constant_space(ll):
     """
-    Constant(O(N)) space solution
+    Constant(O(1)) space solution
     """
     # find the list center via the runner technique
     slow = ll.head

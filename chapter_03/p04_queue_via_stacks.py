@@ -55,48 +55,8 @@ class Tests(unittest.TestCase):
         q = MyQueue()
         q.add(4)
         q.add(6)
+        self.assertEqual(len(q), 2)
         self.assertEqual(q.remove(), 4)
         self.assertEqual(q.remove(), 6)
-
+        self.assertEqual(len(q), 0)
         self.assertFalse(q.remove())
-
-    def test_enqueue_one(self):
-        queue = MyQueue()
-        assert queue.is_empty()
-        queue.add(1)
-        assert not queue.is_empty()
-        self.assertEqual(len(queue), 1)
-
-    def test_enqueue_two(self):
-        queue = MyQueue()
-        queue.add(1)
-        queue.add(2)
-        self.assertEqual(len(queue), 2)
-
-    def test_enqueue_three(self):
-        queue = MyQueue()
-        queue.add(1)
-        queue.add(2)
-        queue.add(3)
-        self.assertEqual(len(queue), 3)
-
-    def test_dequeue_one(self):
-        queue = MyQueue()
-        queue.add(1)
-        self.assertEqual(queue.remove(), 1)
-
-    def test_dequeue_two(self):
-        queue = MyQueue()
-        queue.add(1)
-        queue.add(2)
-        self.assertEqual(queue.remove(), 1)
-        self.assertEqual(queue.remove(), 2)
-
-    def test_dequeue_three(self):
-        queue = MyQueue()
-        queue.add(1)
-        queue.add(2)
-        queue.add(3)
-        self.assertEqual(queue.remove(), 1)
-        self.assertEqual(queue.remove(), 2)
-        self.assertEqual(queue.remove(), 3)

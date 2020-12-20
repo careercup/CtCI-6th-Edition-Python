@@ -98,6 +98,8 @@ class Test(unittest.TestCase):
         ("pkle", "pable", False),
         ("pal", "palks", False),
         ("palks", "pal", False),
+        # permuatation with insert shouldn't match
+        ("ale","elas",False), 
     ]
 
     testable_functions = [are_one_edit_different, are_one_edit_different_sets]

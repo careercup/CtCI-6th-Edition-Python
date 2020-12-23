@@ -12,7 +12,7 @@ def intersection(list1, list2):
 
     shorter_node, longer_node = shorter.head, longer.head
 
-    for i in range(diff):
+    for _ in range(diff):
         longer_node = longer_node.next
 
     while shorter_node is not longer_node:

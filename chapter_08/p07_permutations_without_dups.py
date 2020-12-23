@@ -1,9 +1,9 @@
 # Write a method to compute all permutations of a string of unique characters
 
 # approach 1: building from permutations of first n-1 characters
-def getPerms(string):
+def get_perms(string):
     permutations = []
-    if string == None:
+    if string is None:
         return None
     if len(string) == 0:
         # base case
@@ -11,30 +11,30 @@ def getPerms(string):
         return permutations
     first = string[0]  # get first letter in string
     remainder = string[1:]
-    words = getPerms(remainder)
+    words = get_perms(remainder)
     for word in words:
         index = 0
-        for letter in word:
-            s = insertCharAt(word, first, index)
+        for _ in word:
+            s = insert_char_at(word, first, index)
             permutations.append(s)
             index += 1
     return permutations
 
 
-def insertCharAt(word, char, i):
+def insert_char_at(word, char, i):
     start = word[:i]
     end = word[i:]
     return start + char + end
 
 
 # approach 2: Building from permutations of all n-1 character substrings
-def getPerms2(string):
+def get_perms_2(string):
     result = []
-    getPerms2Inner(" ", string, result)
+    get_perms_inner_2(" ", string, result)
     return result
 
 
-def getPerms2Inner(prefix, remainder, result):
+def get_perms_inner_2(prefix, remainder, result):
     if len(remainder) == 0:
         result.append(prefix)
     length = len(remainder)
@@ -42,9 +42,9 @@ def getPerms2Inner(prefix, remainder, result):
         before = remainder[:i]
         after = remainder[i + 1 :]
         c = remainder[i]
-        getPerms2Inner(prefix + c, before + after, result)
+        get_perms_inner_2(prefix + c, before + after, result)
 
 
 if __name__ == "__main__":
-    print(getPerms("str"))
-    print(getPerms2("str"))
+    print(get_perms("str"))
+    print(get_perms_2("str"))

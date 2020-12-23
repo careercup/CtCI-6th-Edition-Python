@@ -59,7 +59,6 @@ class Dog(Animal):
 
 
 class AnimalShelter(LinkedList):
-
     def enqueue(self, animal):
         animal_node = Node(animal)
         self.insert(animal_node)

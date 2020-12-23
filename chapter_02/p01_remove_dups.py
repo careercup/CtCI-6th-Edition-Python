@@ -61,7 +61,7 @@ def test_remove_dupes():
         print(f"{f.__name__} {duration * 1000:.1f}ms")
 
 
-if __name__ == "__main__":
+def example():
     ll = LinkedList.generate(100, 0, 9)
     print(ll)
     remove_dups(ll)
@@ -71,3 +71,7 @@ if __name__ == "__main__":
     print(ll)
     remove_dups_followup(ll)
     print(ll)
+
+
+if __name__ == "__main__":
+    example()

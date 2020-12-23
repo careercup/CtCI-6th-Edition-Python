@@ -3,15 +3,15 @@ from chapter_04.binary_tree import BinaryTree
 
 def first_common_ancestor(p, q):
     if not p or not q:
-        return
+        return None
     depth_p = get_depth(p)
     depth_q = get_depth(q)
     delta = abs(depth_p - depth_q)
     if depth_p < depth_q:
-        for i in range(delta):
+        for _ in range(delta):
             q = q.parent
     elif depth_q < depth_p:
-        for i in range(delta):
+        for _ in range(delta):
             p = p.parent
     ancestor_p = p
     ancestor_q = q

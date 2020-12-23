@@ -1,35 +1,33 @@
-def SortedMerge(A, B):
-    index = len(A) - 1
-    indexB = len(B) - 1
-    indexA = len(A) - len(B) - 1
+def sorted_merge(a, b):
+    index = len(a) - 1
+    index_b = len(b) - 1
+    index_a = len(a) - len(b) - 1
 
-    while indexB >= 0:
-        if indexA > 0 and A[indexA] > B[indexB]:
-            A[index] = A[indexA]
-            indexA -= 1
+    while index_b >= 0:
+        if index_a > 0 and a[index_a] > b[index_b]:
+            a[index] = a[index_a]
+            index_a -= 1
         else:
-            A[index] = B[indexB]
-            indexB -= 1
+            a[index] = b[index_b]
+            index_b -= 1
         index -= 1
-    return A
+    return a
 
 
-def FillArrayUpTo(maxnum):
-    nums = [0] * maxnum
-    for i in range(len(nums)):
-        nums[i] = 2 * i + 4
-    return nums
+def fill_array_up_to(maxnum):
+    return [2 * i + 4 for i in range(maxnum)]
 
 
-def FillArrayWithBuffer(length, buffer):
-    nums = [0] * (length + buffer)
-    for i in range(length):
-        nums[i] = 3 * i + 1
-    return nums
+def fill_array_with_buffer(length, buffer):
+    return [3 * i + 1 for i in range(length)] + ([0] * buffer)
+
+
+def example():
+    a = fill_array_with_buffer(5, 10)
+    b = fill_array_up_to(10)
+    print(a, b)
+    print(sorted_merge(a, b))
 
 
 if __name__ == "__main__":
-    A = FillArrayWithBuffer(5, 10)
-    B = FillArrayUpTo(10)
-    print(A, B)
-    print(SortedMerge(A, B))
+    example()

@@ -41,15 +41,13 @@ class BinarySearchTree:
                     current.left = new
                     new.parent = current
                     return
-                else:
-                    current = current.left
+                current = current.left
             else:
                 if current.right is None:
                     current.right = new
                     new.parent = current
                     return
-                else:
-                    current = current.right
+                current = current.right
 
     def delete(self):
         """todo: needs to be implemented"""
@@ -59,7 +57,8 @@ class BinarySearchTree:
         while current:
             if current.key == key:
                 return current
-            elif current.key > key:
+
+            if current.key > key:
                 current = current.left
             else:
                 current = current.right
@@ -78,7 +77,8 @@ class BinarySearchTree:
 
             if decision == "self":
                 return current
-            elif decision == "left":
+
+            if decision == "left":
                 current = current.left
             elif decision == "right":
                 current = current.right
@@ -86,7 +86,7 @@ class BinarySearchTree:
                 raise RuntimeError("Should not be possible")
 
 
-if __name__ == "__main__":
+def example():
     bst = BinarySearchTree()
     bst.insert(20)
     bst.insert(9)
@@ -97,8 +97,12 @@ if __name__ == "__main__":
     bst.insert(14)
 
     chosen_counts = defaultdict(int)
-    for i in range(7000):
+    for _ in range(7000):
         node = bst.get_random_node()
         chosen_counts[node.key] += 1
 
     print(chosen_counts.values())
+
+
+if __name__ == "__main__":
+    example()

@@ -5,7 +5,7 @@ from chapter_04.binary_tree import BinaryTree
 
 def count_sum_paths(tree, target):
     if not isinstance(tree, BinaryTree):
-        return
+        return None
     return _count_sum_paths(tree.root, target)
 
 
@@ -36,7 +36,7 @@ def pathsfrom(node, target_sum):
 
 def count_sum_paths_optimized(tree, target_sum):
     if not isinstance(tree, BinaryTree):
-        return
+        return None
     return _count_sum_paths_optimizied(tree.root, target_sum)
 
 

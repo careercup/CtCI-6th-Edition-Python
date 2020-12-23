@@ -102,10 +102,14 @@ def test_linked_list_addition():
                 assert result.values() == expected
 
 
-if __name__ == "__main__":
+def example():
     ll_a = LinkedList.generate(4, 0, 9)
     ll_b = LinkedList.generate(3, 0, 9)
     print(ll_a)
     print(ll_b)
     print(sum_lists(ll_a, ll_b))
     # print(sum_lists_followup(ll_a, ll_b))
+
+
+if __name__ == "__main__":
+    example()

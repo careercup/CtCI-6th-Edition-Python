@@ -23,22 +23,21 @@ class BinarySearchTree:
                     current.left = new
                     new.parent = current
                     return
-                else:
-                    current = current.left
+                current = current.left
             else:
                 if current.right is None:
                     current.right = new
                     new.parent = current
                     return
-                else:
-                    current = current.right
+                current = current.right
 
     def get_node(self, key):
         current = self.root
         while current:
             if current.key == key:
                 return current
-            elif current.key > key:
+
+            if current.key > key:
                 current = current.left
             else:
                 current = current.right

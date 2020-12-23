@@ -1,16 +1,14 @@
-## 3.3 Stack of Plates
-
 import unittest
 
 
-class Node(object):
+class Node:
     def __init__(self, value):
         self.value = value
         self.above = None
         self.below = None
 
 
-class Stack(object):
+class Stack:
     def __init__(self, capacity):
         self.capacity = capacity
         self.size = 0
@@ -57,7 +55,7 @@ class Stack(object):
         return b.value
 
 
-class SetOfStacks(object):
+class SetOfStacks:
     def __init__(self, capacity):
         self.capacity = capacity
         self.stacks = []

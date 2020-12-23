@@ -5,7 +5,7 @@ def kth_to_last(ll, k):
     runner = current = ll.head
     for _ in range(k):
         if not runner:
-            return
+            return None
         runner = runner.next
 
     while runner:

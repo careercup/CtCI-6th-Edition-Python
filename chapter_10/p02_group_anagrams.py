@@ -1,33 +1,35 @@
-def GroupAnagrams():
-    strings = initialise_anagrams()
+def group_anagrams(words):
     anagrams = {}
-    for i in range(len(strings)):
-        word = "".join(sorted(strings[i].lower()))
-        if word not in anagrams:
-            anagrams.setdefault(word, [])
-        anagrams[word].append(strings[i])
-    keys = list(anagrams.keys())
-    index = 0
-    for i in range(len(keys)):
-        values = anagrams.get(keys[i])
-        for j in range(len(values)):
-            strings[index] = values[j]
-            index += 1
-    print(strings)
+    for word in words:
+        sorted_word = "".join(sorted(word.lower()))
+        anagrams.setdefault(sorted_word, [])
+        anagrams[sorted_word].append(word)
+
+    sorted_words = []
+    for similar_words in anagrams.values():
+        sorted_words.extend(similar_words)
+    return sorted_words
 
 
-def initialise_anagrams():
-    strings = [0] * 8
-    strings[0] = "abed"
-    strings[1] = "later"
-    strings[2] = "bead"
-    strings[3] = "alert"
-    strings[4] = "altered"
-    strings[5] = "bade"
-    strings[6] = "alter"
-    strings[7] = "alerted"
-    return strings
+def test_group_anagrams():
+    words = ["abed", "later", "bead", "alert", "altered", "bade", "alter", "alerted"]
+    expected_sort = [
+        "abed",
+        "bead",
+        "bade",
+        "later",
+        "alert",
+        "alter",
+        "altered",
+        "alerted",
+    ]
+    assert group_anagrams(words) == expected_sort
+
+
+def example():
+    words = ["abed", "later", "bead", "alert", "altered", "bade", "alter", "alerted"]
+    print(group_anagrams(words))
 
 
 if __name__ == "__main__":
-    GroupAnagrams()
+    example()

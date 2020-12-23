@@ -1,5 +1,5 @@
 import unittest
-from datetime import time
+import time
 
 
 class Node:
@@ -18,6 +18,7 @@ class LinkedList:
     def insert(self, node):
         if self.head is None:
             self.head = node
+            return
         current_node = self.head
         while current_node.next_node is not None:
             current_node = current_node.next_node
@@ -28,8 +29,8 @@ class LinkedList:
             head_to_pop = self.head
             self.head = self.head.next_node
             return head_to_pop
-        else:
-            return None
+
+        return None
 
     def size(self):
         current_node = self.head
@@ -45,56 +46,56 @@ class LinkedList:
 
 class Animal:
     def __init__(self, name):
-        self.time_admitted = time.clock()
+        self.time_admitted = time.time()
         self.name = name
 
 
 class Cat(Animal):
-    def __init__(self, name):
-        super(Cat, self).__init__(name)
+    pass
 
 
 class Dog(Animal):
-    def __init__(self, name):
-        super(Dog, self).__init__(name)
+    pass
 
 
 class AnimalShelter(LinkedList):
-    def __init__(self):
-        self.linked_list = LinkedList()
 
     def enqueue(self, animal):
         animal_node = Node(animal)
-        self.linked_list.insert(animal_node)
+        self.insert(animal_node)
 
     def dequeue_any(self):
-        return super(AnimalShelter, self).pop_head()
+        return super().pop_head()
 
     def dequeue_cat(self):
         previous_node = None
         current_node = self.head
         while current_node is not None:
-            if type(current_node) is Cat:
+            if isinstance(current_node.data, Cat):
                 previous_node.next_node = current_node.next_node
                 return current_node.data
+            previous_node = current_node
+            current_node = current_node.next_node
         return None
 
     def dequeue_dog(self):
         previous_node = None
         current_node = self.head
         while current_node is not None:
-            if type(current_node) is Dog:
+            if isinstance(current_node.data, Dog):
                 previous_node.next_node = current_node.next_node
                 return current_node.data
+            previous_node = current_node
+            current_node = current_node.next_node
         return None
 
 
 class Tests(unittest.TestCase):
-    def enqueue(self):
+    def test_enqueue(self):
         animal_shelter = AnimalShelter()
         animal_shelter.enqueue(Cat("Fluffy"))
         animal_shelter.enqueue(Dog("Sparky"))
         animal_shelter.enqueue(Cat("Sneezy"))
-        self.assertEquals(
+        self.assertEqual(
             animal_shelter.size(), 3, "Amount of animals in queue should be 3"
         )

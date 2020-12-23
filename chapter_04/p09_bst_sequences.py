@@ -10,14 +10,14 @@ def find_bst_sequences(bst):
 def helper(node):
     if not node:
         return [[]]
-    else:
-        right_sequences = helper(node.right)
-        left_sequences = helper(node.left)
-        sequences = []
-        for right in right_sequences:
-            for left in left_sequences:
-                sequences = weave(left, right, [node.key], sequences)
-        return sequences
+
+    right_sequences = helper(node.right)
+    left_sequences = helper(node.left)
+    sequences = []
+    for right in right_sequences:
+        for left in left_sequences:
+            sequences = weave(left, right, [node.key], sequences)
+    return sequences
 
 
 def weave(first, second, prefix, results):
@@ -50,7 +50,7 @@ def test_find_bst_sequences():
     assert len(sequences) == 2
 
 
-if __name__ == "__main__":
+def example():
     bst = BinarySearchTree()
     bst.insert(20)
     bst.insert(9)
@@ -62,3 +62,7 @@ if __name__ == "__main__":
 
     sequences = find_bst_sequences(bst)
     print(sequences)
+
+
+if __name__ == "__main__":
+    example()

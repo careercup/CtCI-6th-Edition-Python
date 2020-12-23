@@ -22,14 +22,15 @@ def is_palindrome_permutation(phrase):
 def char_number(c):
     a = ord("a")
     z = ord("z")
-    A = ord("A")
-    Z = ord("Z")
+    upper_a = ord("A")
+    upper_z = ord("Z")
     val = ord(c)
 
     if a <= val <= z:
         return val - a
-    elif A <= val <= Z:
-        return val - A
+
+    if upper_a <= val <= upper_z:
+        return val - upper_a
     return -1
 
 

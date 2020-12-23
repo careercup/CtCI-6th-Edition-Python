@@ -19,9 +19,12 @@ def bin_to_string(number):
     return bit_str.ljust(33, "0")
 
 
-if __name__ == "__main__":
-
+def example():
     for number in [0.625, 0, 0.1, 0.101, 0.2, 0.5, 1, 2]:
         bit_str = bin_to_string(number)
         response = bit_str if len(bit_str) <= 33 else "ERROR"
         print("Number: {}, Binary String: {}".format(number, response))
+
+
+if __name__ == "__main__":
+    example()

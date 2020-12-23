@@ -7,10 +7,10 @@ def are_one_edit_different(s1, s2):
     """Check if a string can converted to another string with a single edit"""
     if len(s1) == len(s2):
         return one_edit_replace(s1, s2)
-    elif len(s1) + 1 == len(s2):
+    if len(s1) + 1 == len(s2):
         return one_edit_insert(s1, s2)
-    elif len(s1) - 1 == len(s2):
-        return one_edit_insert(s2, s1)
+    if len(s1) - 1 == len(s2):
+        return one_edit_insert(s2, s1)  # noqa
     return False
 
 
@@ -74,13 +74,13 @@ class Test(unittest.TestCase):
 
     def test_one_away(self):
 
-        for are_one_edit_different in self.testable_functions:
+        for f in self.testable_functions:
             start = time.perf_counter()
             for _ in range(100):
                 for [text_a, text_b, expected] in self.test_cases:
-                    assert are_one_edit_different(text_a, text_b) == expected
+                    assert f(text_a, text_b) == expected
             duration = time.perf_counter() - start
-            print(f"{are_one_edit_different.__name__} {duration * 1000:.1f}ms")
+            print(f"{f.__name__} {duration * 1000:.1f}ms")
 
 
 if __name__ == "__main__":

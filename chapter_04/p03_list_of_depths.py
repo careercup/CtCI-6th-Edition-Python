@@ -73,7 +73,7 @@ def test_create_node_list_by_depth():
         assert lists[3].values() == LinkedList([node_h, node_g]).values()
 
 
-if __name__ == "__main__":
+def example():
     root = BinaryNode(0)
     root.left = BinaryNode(1)
     root.right = BinaryNode(2)
@@ -84,3 +84,7 @@ if __name__ == "__main__":
 
     levels = create_node_list_by_depth(root)
     print(levels)
+
+
+if __name__ == "__main__":
+    example()

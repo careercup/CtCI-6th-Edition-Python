@@ -1,28 +1,19 @@
-def MagicIndex(array, min, max):
-    mid = (max + min) / 2
+def magic_index(array, min, max):
+    mid = (max + min) // 2
     if array[mid] == mid:
         return mid
     if array[mid] < mid:
-        return MagicIndex(array, mid + 1, max)
+        return magic_index(array, mid + 1, max)
     if array[mid] > mid:
-        return MagicIndex(array, min, mid - 1)
+        return magic_index(array, min, mid - 1)
+
+    raise Exception("Not possible")
 
 
-def FillArray():
-    array = [0] * 10
-    array[0] = -14
-    array[1] = -12
-    array[2] = 0
-    array[3] = 1
-    array[4] = 2
-    array[5] = 5
-    array[6] = 9
-    array[7] = 10
-    array[8] = 23
-    array[9] = 25
-    return array
+def example():
+    array = [-14, -12, 0, 1, 2, 5, 9, 10, 23, 25]
+    print(magic_index(array, 0, len(array) - 1))
 
 
 if __name__ == "__main__":
-    array = FillArray()
-    print(MagicIndex(array, 0, len(array) - 1))
+    example()

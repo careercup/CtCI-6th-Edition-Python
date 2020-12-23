@@ -1,25 +1,25 @@
 # Solution with recursion O(2^r+c)
-def getPath(maze):
-    if maze == None or len(maze) == 0:
+def get_path(maze):
+    if not maze:
         return None
     path = []
-    if isPath(maze, len(maze) - 1, len(maze[0]) - 1, path):
+    if is_path(maze, len(maze) - 1, len(maze[0]) - 1, path):
         return path
     return None
 
 
-def isPath(maze, row, col, path):
+def is_path(maze, row, col, path):
     # if out of bounds or not available, return
     if col < 0 or row < 0 or not maze[row][col]:
         return False
 
-    isAtOrigin = (row == 0) and (col == 0)
+    is_at_origin = (row == 0) and (col == 0)
 
     # if there's a path from the start to here, add my location
     if (
-        isAtOrigin
-        or isPath(maze, row, col - 1, path)
-        or isPath(maze, row - 1, col, path)
+        is_at_origin
+        or is_path(maze, row, col - 1, path)
+        or is_path(maze, row - 1, col, path)
     ):
         point = (row, col)
         path.append(point)
@@ -29,17 +29,17 @@ def isPath(maze, row, col, path):
 
 
 # Solution with memoization
-def getPathMemoized(maze):
-    if maze == None or len(maze) == 0:
+def get_path_memoized(maze):
+    if not maze:
         return None
     path = []
-    failedPoints = set()
-    if isPathMemoized(maze, len(maze) - 1, len(maze[0]) - 1, path, failedPoints):
+    failed_points = set()
+    if is_path_memoized(maze, len(maze) - 1, len(maze[0]) - 1, path, failed_points):
         return path
     return None
 
 
-def isPathMemoized(maze, row, col, path, failedPoints):
+def is_path_memoized(maze, row, col, path, failed_points):
     # If out of bounds or not availabe, return
     if col < 0 or row < 0 or not maze[row][col]:
         return False
@@ -47,24 +47,24 @@ def isPathMemoized(maze, row, col, path, failedPoints):
     point = (row, col)
 
     # if we've already visisted this cell, return
-    if point in failedPoints:
+    if point in failed_points:
         return False
 
-    isAtOrigin = (row == 0) and (col == 0)
+    is_at_origin = (row == 0) and (col == 0)
 
     # If there's a path from start to my current location, add my location
     if (
-        isAtOrigin
-        or isPathMemoized(maze, row, col - 1, path, failedPoints)
-        or isPathMemoized(maze, row - 1, col, path, failedPoints)
+        is_at_origin
+        or is_path_memoized(maze, row, col - 1, path, failed_points)
+        or is_path_memoized(maze, row - 1, col, path, failed_points)
     ):
         path.append(point)
         return True
 
-    failedPoints.add(point)
+    failed_points.add(point)
     return False
 
 
 if __name__ == "__main__":
-    print(getPath([[True, True], [True, True]]))
-    print(getPathMemoized([[True, True], [False, True]]))
+    print(get_path([[True, True], [True, True]]))
+    print(get_path_memoized([[True, True], [False, True]]))

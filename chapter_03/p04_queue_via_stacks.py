@@ -84,7 +84,7 @@ class Tests(unittest.TestCase):
             q = MyQueue()
             for val in vals:
                 q.add(val)
-            for i in range(len(vals)):
+            for i in range(len(vals)):  # noqa
                 self.assertEqual(q.remove(), vals[i])
 
     def test_peek_simple(self):

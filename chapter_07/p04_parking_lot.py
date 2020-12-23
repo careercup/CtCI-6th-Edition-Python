@@ -15,9 +15,9 @@ class Vehicle:
         if self.parked:
             print("Vehicle is parked")
             return True
-        else:
-            print("Vehicle is not parked")
-            return False
+
+        print("Vehicle is not parked")
+        return False
 
 
 class Bike(Vehicle):
@@ -50,6 +50,7 @@ class ParkZone:
             print("Token: ", token, ", Space available ", self.space_available)
             return token
         print("No space available")
+        return None
 
     def is_space_available(self, size):
         return (self.space_available - size) >= 0
@@ -99,10 +100,10 @@ class Test(unittest.TestCase):
         self.assertFalse(car.is_parked())
 
         bus = Bus("Volvo", 5, "AN657")
-        bus_token = park_zone.park(bus)
+        park_zone.park(bus)
 
         scooter = Scooter("Honda Activa", 1, "GI653")
-        scooter_token = park_zone.park(scooter)
+        park_zone.park(scooter)
         park_zone.list_parked_vehicles()
 
 

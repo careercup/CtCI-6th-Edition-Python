@@ -1,20 +1,19 @@
-#
-def TripleHop(x):
+def triple_hop(x):
     if x < 0:
         return 0
     if x == 0:
         return 1
     if x == 1:
         return 1
-    return TripleHop(x - 1) + TripleHop(x - 2) + TripleHop(x - 3)
+    return triple_hop(x - 1) + triple_hop(x - 2) + triple_hop(x - 3)
 
 
-def Method2(x):
+def method_2(x):
     memo = [-1] * (x + 1)
-    return TripleHopRecursive(x, memo)
+    return triple_hop_recursive(x, memo)
 
 
-def TripleHopRecursive(x, memo):
+def triple_hop_recursive(x, memo):
     if x < 0:
         return 0
     memo[0] = 1
@@ -29,16 +28,16 @@ def TripleHopRecursive(x, memo):
 
 
 if __name__ == "__main__":
-    print(TripleHop(1))
-    print(TripleHop(2))
-    print(TripleHop(3))
-    print(TripleHop(4))
-    print(TripleHop(5))
-    print(TripleHop(6))
+    print(triple_hop(1))
+    print(triple_hop(2))
+    print(triple_hop(3))
+    print(triple_hop(4))
+    print(triple_hop(5))
+    print(triple_hop(6))
 
-    print(Method2(1))
-    print(Method2(2))
-    print(Method2(3))
-    print(Method2(4))
-    print(Method2(5))
-    print(Method2(6))
+    print(method_2(1))
+    print(method_2(2))
+    print(method_2(3))
+    print(method_2(4))
+    print(method_2(5))
+    print(method_2(6))

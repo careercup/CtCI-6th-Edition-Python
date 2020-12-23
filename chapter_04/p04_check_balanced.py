@@ -29,8 +29,7 @@ def test_is_balanced():
     assert not is_balanced(root)
 
 
-if __name__ == "__main__":
-
+def example():
     root = BinaryNode(1)
     root.left = BinaryNode(2)
     print(is_balanced(root))
@@ -44,3 +43,7 @@ if __name__ == "__main__":
     root.right.right.right = BinaryNode(10)
     root.right.right.right.right = BinaryNode(11)
     print(is_balanced(root))
+
+
+if __name__ == "__main__":
+    example()

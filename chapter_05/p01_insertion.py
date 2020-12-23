@@ -1,6 +1,5 @@
 def bits_insertion(n, m, i, j):
     """
-    Insert m into n, where m starts at bit j, ends at bit i.
     Accepts:
         m: str, representation of integer as binary string
         n: str, representation of integer as binary string
@@ -22,8 +21,12 @@ def bits_insertion(n, m, i, j):
     # if the remainder is odd, prefix the bit string with '1', else '0'
     while answer:
         bit_str = "1" + bit_str if answer & 1 == 1 else "0" + bit_str
-        answer /= 2
+        answer //= 2
     return bit_str.zfill(num_bits)  # pad string to num_bits
+
+
+def test_bits_insertion():
+    assert bits_insertion("10000000000", "10011", 2, 6) == "10001001100"
 
 
 if __name__ == "__main__":

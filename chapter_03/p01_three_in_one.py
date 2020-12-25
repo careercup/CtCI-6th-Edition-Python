@@ -117,7 +117,7 @@ def test_stack_does_not_exist():
 
 
 if __name__ == "__main__":
-    newstack = MultiStack(2)
+    newstack = MultiStack(2, 2)
     print(newstack.is_empty(1))
     newstack.push(3, 1)
     print(newstack.peek(1))

@@ -66,7 +66,7 @@ class Test(unittest.TestCase):
         ("pkle", "pable", False),
         ("pal", "palks", False),
         ("palks", "pal", False),
-        # permuatation with insert shouldn't match
+        # permutation with insert shouldn't match
         ("ale", "elas", False),
     ]
 

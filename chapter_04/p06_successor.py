@@ -19,7 +19,7 @@ def in_order_successor(input_node):
     return ancestor
 
 
-if __name__ == "__main__":
+def test_in_order_successor():
     bst = BinarySearchTree()
     bst.insert(20)
     bst.insert(9)
@@ -41,3 +41,7 @@ if __name__ == "__main__":
             assert succ.key == y
         else:
             assert succ == y
+
+
+if __name__ == "__main__":
+    test_in_order_successor()

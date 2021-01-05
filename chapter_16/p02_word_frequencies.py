@@ -36,9 +36,9 @@ def get_frequency_single_query(book, word):
 
 
 def example():
-    book = """Once upon a time there was this book. 
-            This is a sentence. This is a much longer sentence. 
-            This book is terribly short. But you get the idea. 
+    book = """Once upon a time there was this book.
+            This is a sentence. This is a much longer sentence.
+            This book is terribly short. But you get the idea.
             You should see the word this 6 times in this example text.
             """
     word = "book"

@@ -1,21 +1,22 @@
 name: Python Checks
-on: [push, pull_request, workflow_dispatch]
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.6]
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.6
     - name: Install test dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install flake8 pep8-naming
+        python -m pip install -r .github/lint-requirements.txt
     - name: Lint with flake8
       run: |
         echo "::add-matcher::.github/flake8_matcher.json"
@@ -31,7 +32,7 @@ jobs:
         python -m pip install black==20.8b1
     - name: Autoformatter
       run: |
-        black --check .
+        black --diff .
   test:
     runs-on: ubuntu-latest
     strategy:

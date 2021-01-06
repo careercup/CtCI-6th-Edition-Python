@@ -64,7 +64,7 @@ class Test(unittest.TestCase):
     def test_is_route(self):
         for [start, end, expected] in self.tests:
             actual = is_route(self.graph, start, end)
-            self.assertEqual(actual, expected)
+            assert actual == expected
 
 
 if __name__ == "__main__":

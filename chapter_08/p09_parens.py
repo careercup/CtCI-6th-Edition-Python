@@ -101,8 +101,7 @@ class TestSuite(unittest.TestCase):
     def test_generate_parentheses_permutations(self):
         for f in testable_functions:
             for num, expected in test_cases:
-                self.assertEqual(sorted(f(num)), expected)
-                print(expected)
+                assert sorted(f(num)) == expected, f"{f.__name__} {num} failed"
 
 
 def example():

@@ -34,7 +34,7 @@ class MultiStack:
             raise Exception("Stack is empty")
         return self.array[self.index_of_top(stacknum)]
 
-    def min(self, stacknum):
+    def minimum(self, stacknum):
         return self.minvals[self.index_of_top(stacknum)]
 
     def is_empty(self, stacknum):

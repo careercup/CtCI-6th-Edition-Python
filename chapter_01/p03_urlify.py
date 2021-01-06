@@ -41,7 +41,7 @@ class Test(unittest.TestCase):
             for test_string, expected in self.test_cases:
                 stripped_length = len(test_string.rstrip(" "))
                 actual = urlify(test_string, stripped_length)
-                self.assertEqual(actual, expected)
+                assert actual == expected
 
 
 if __name__ == "__main__":

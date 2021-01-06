@@ -1,11 +1,11 @@
-def magic_index(array, min, max):
-    mid = (max + min) // 2
+def magic_index(array, min_index, max_index):
+    mid = (max_index + min_index) // 2
     if array[mid] == mid:
         return mid
     if array[mid] < mid:
-        return magic_index(array, mid + 1, max)
+        return magic_index(array, mid + 1, max_index)
     if array[mid] > mid:
-        return magic_index(array, min, mid - 1)
+        return magic_index(array, min_index, mid - 1)
 
     raise Exception("Not possible")
 

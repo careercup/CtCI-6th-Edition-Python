@@ -1,4 +1,3 @@
-import unittest
 import time
 
 
@@ -89,12 +88,9 @@ class AnimalShelter(LinkedList):
         return None
 
 
-class Tests(unittest.TestCase):
-    def test_enqueue(self):
-        animal_shelter = AnimalShelter()
-        animal_shelter.enqueue(Cat("Fluffy"))
-        animal_shelter.enqueue(Dog("Sparky"))
-        animal_shelter.enqueue(Cat("Sneezy"))
-        self.assertEqual(
-            animal_shelter.size(), 3, "Amount of animals in queue should be 3"
-        )
+def test_enqueue():
+    animal_shelter = AnimalShelter()
+    animal_shelter.enqueue(Cat("Fluffy"))
+    animal_shelter.enqueue(Dog("Sparky"))
+    animal_shelter.enqueue(Cat("Sneezy"))
+    assert animal_shelter.size() == 3

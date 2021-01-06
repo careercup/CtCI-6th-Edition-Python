@@ -1,5 +1,4 @@
 import random
-import unittest
 
 
 def random_number_generator(lower, higher):
@@ -30,19 +29,15 @@ def shuffle_list_iteratively(cards):
     return cards
 
 
-class TestShuffles(unittest.TestCase):
+def test_shuffle_list_recursively():
     cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-    def test_shuffle_list_recursively(self):
-        result = shuffle_list_recursively(self.cards, len(self.cards) - 1)
-        self.assertEqual(len(result), len(self.cards))
-        self.assertEqual(sum(result), sum(range(0, len(self.cards))))
-
-    def test_shuffle_list_iteratively(self):
-        result = shuffle_list_iteratively(self.cards)
-        self.assertEqual(len(result), len(self.cards))
-        self.assertEqual(sum(result), sum(range(0, len(self.cards))))
+    result = shuffle_list_recursively(cards, len(cards) - 1)
+    assert len(result) == len(cards)
+    assert sum(result) == sum(range(0, len(cards)))
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_shuffle_list_iteratively():
+    cards = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    result = shuffle_list_iteratively(cards)
+    assert len(result) == len(cards)
+    assert sum(result) == sum(range(0, len(cards)))

@@ -19,7 +19,7 @@ class Test(unittest.TestCase):
     def test_string_rotation(self):
         for [s1, s2, expected] in self.test_cases:
             actual = string_rotation(s1, s2)
-            self.assertEqual(actual, expected)
+            assert actual == expected
 
 
 if __name__ == "__main__":

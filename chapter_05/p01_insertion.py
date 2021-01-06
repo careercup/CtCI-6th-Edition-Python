@@ -9,7 +9,7 @@ def bits_insertion(n, m, i, j):
         str, representation of the number where n inserted into m
     """
     num_bits = len(m)  # determine number of characters for returned string
-    ones = sum([2 ** _ for _ in range(num_bits)])  # Generate all binary 1s
+    ones = sum(2 ** _ for _ in range(num_bits))  # Generate all binary 1s
     ones_left = ones << (j + 1)  # shift 1s over to the left, before position j
     ones_right = (1 << i) - 1  # place 1s to the right of position i
     mask = ones_left | ones_right  # encapsulate 0s with the 1s from above

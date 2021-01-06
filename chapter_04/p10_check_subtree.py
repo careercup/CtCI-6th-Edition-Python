@@ -1,4 +1,4 @@
-from chapter_04.binary_tree import Node, BinaryTree
+from chapter_04.binary_tree import BinaryTree, Node
 
 
 class ComparableTreeNode(Node):

@@ -1,6 +1,3 @@
-import unittest
-
-
 def longest_composite_word(word_list):
     mapping = {}
 
@@ -33,31 +30,28 @@ def contains_subwords(word, is_original_word, mapping):
     return False
 
 
-class Test(unittest.TestCase):
-    def test_lcw(self):
-        word_list = ["cat", "banana", "dog", "nana", "walk", "walker", "dogwalker"]
-        result = longest_composite_word(word_list)
-        self.assertEqual(result, "dogwalker")
-
-    def test_lcw_returns_none_for_no_match(self):
-        word_list = ["cat", "banana", "dog"]
-        result = longest_composite_word(word_list)
-        self.assertEqual(result, None)
-
-    def test_lcw_checks_alphabetically(self):
-        word_list = [
-            "cat",
-            "banana",
-            "dog",
-            "nana",
-            "catbanana",
-            "walk",
-            "walker",
-            "dogwalker",
-        ]
-        result = longest_composite_word(word_list)
-        self.assertEqual(result, "catbanana")
+def test_lcw():
+    word_list = ["cat", "banana", "dog", "nana", "walk", "walker", "dogwalker"]
+    result = longest_composite_word(word_list)
+    assert result == "dogwalker"
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_lcw_returns_none_for_no_match():
+    word_list = ["cat", "banana", "dog"]
+    result = longest_composite_word(word_list)
+    assert result is None
+
+
+def test_lcw_checks_alphabetically():
+    word_list = [
+        "cat",
+        "banana",
+        "dog",
+        "nana",
+        "catbanana",
+        "walk",
+        "walker",
+        "dogwalker",
+    ]
+    result = longest_composite_word(word_list)
+    assert result == "catbanana"

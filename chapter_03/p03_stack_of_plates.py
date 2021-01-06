@@ -109,7 +109,7 @@ class Tests(unittest.TestCase):
         lst = []
         for _ in range(35):
             lst.append(stacks.pop())
-        self.assertEqual(lst, list(reversed(range(35))))
+        assert lst == list(reversed(range(35)))
 
     def test_pop_at(self):
         stacks = SetOfStacks(5)
@@ -118,7 +118,7 @@ class Tests(unittest.TestCase):
         lst = []
         for _ in range(31):
             lst.append(stacks.pop_at(0))
-        self.assertEqual(lst, list(range(4, 35)))
+        assert lst == list(range(4, 35))
 
 
 if __name__ == "__main__":

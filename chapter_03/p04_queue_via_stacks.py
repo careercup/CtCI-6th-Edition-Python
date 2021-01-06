@@ -40,73 +40,73 @@ class Tests(unittest.TestCase):
     test_cases = [([1, 2, 3]), ([-1, 0, 1]), (["a", "b", "c", "d", "e", "f"])]
 
     def test_size(self):
-        for vals in self.test_cases:
+        for sequence in self.test_cases:
             q = MyQueue()
-            for index, val in enumerate(vals, start=1):
+            for index, val in enumerate(sequence, start=1):
                 q.add(val)
-                self.assertEqual(len(q), index)
-            for index, val in enumerate(vals, start=1):
+                assert len(q) == index
+            for index, val in enumerate(sequence, start=1):
                 q.remove()
-                self.assertEqual(len(q), len(vals) - index)
+                assert len(q) == len(sequence) - index
 
     def test_add(self):
-        for vals in self.test_cases:
+        for sequence in self.test_cases:
             q = MyQueue()
-            for val in vals:
+            for val in sequence:
                 q.add(val)
-            self.assertEqual(q.peek(), vals[0])
-            self.assertEqual(len(q), len(vals))
+            assert q.peek() == sequence[0]
+            assert len(q) == len(sequence)
 
     def test_shift_stacks(self):
-        for vals in self.test_cases:
+        for sequence in self.test_cases:
             q = MyQueue()
-            for val in vals:
+            for val in sequence:
                 q.add(val)
-            self.assertEqual(len(q.old_stack), 0)
-            self.assertEqual(len(q.new_stack), len(vals))
-            self.assertEqual(q.new_stack.peek(), vals[-1])
+            assert len(q.old_stack) == 0
+            assert len(q.new_stack) == len(sequence)
+            assert q.new_stack.peek() == sequence[-1]
             q._shift_stacks()
-            self.assertEqual(len(q.old_stack), len(vals))
-            self.assertEqual(len(q.new_stack), 0)
-            self.assertEqual(q.old_stack.peek(), vals[0])
+            assert len(q.old_stack) == len(sequence)
+            assert len(q.new_stack) == 0
+            assert q.old_stack.peek() == sequence[0]
 
     def test_peek(self):
-        for vals in self.test_cases:
+        for sequence in self.test_cases:
             q = MyQueue()
-            for val in vals:
+            for val in sequence:
                 q.add(val)
-                self.assertEqual(q.peek(), vals[0])
+                assert q.peek() == sequence[0]
             q.remove()
-            self.assertEqual(q.peek(), vals[1])
+            assert q.peek() == sequence[1]
 
     def test_remove(self):
-        for vals in self.test_cases:
+        for sequence in self.test_cases:
             q = MyQueue()
-            for val in vals:
+            for val in sequence:
                 q.add(val)
-            for i in range(len(vals)):  # noqa
-                self.assertEqual(q.remove(), vals[i])
+            for i in range(len(sequence)):  # noqa
+                assert q.remove() == sequence[i]
 
     def test_peek_simple(self):
         q = MyQueue()
         q.add(4)
         q.add(6)
-        self.assertEqual(q.peek(), 4)
+        assert q.peek() == 4
 
     def test_add_simple(self):
         q = MyQueue()
         q.add(4)
         q.add(6)
-        self.assertEqual(q.peek(), 4)
+        assert q.peek() == 4
         q.add(101)
-        self.assertNotEqual(q.peek(), 101)
+        assert q.peek() != 101
 
     def test_remove_simple(self):
         q = MyQueue()
         q.add(4)
         q.add(6)
-        self.assertEqual(len(q), 2)
-        self.assertEqual(q.remove(), 4)
-        self.assertEqual(q.remove(), 6)
-        self.assertEqual(len(q), 0)
-        self.assertFalse(q.remove())
+        assert len(q) == 2
+        assert q.remove() == 4
+        assert q.remove() == 6
+        assert len(q) == 0
+        assert not q.remove()

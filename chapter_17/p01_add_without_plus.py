@@ -1,6 +1,3 @@
-import unittest
-
-
 def add_without_plus(a, b):
     while b != 0:
         # Sum without carry bit
@@ -33,20 +30,11 @@ test_cases = [
     (1, 2, 3),
     (1001, 234, 1235),
     (123456789, 123456789, 123456789 * 2),
+    # does not work with negatives :(
 ]
 
 
-class Test(unittest.TestCase):
-    def test_add_without_plus(self):
-        for f in testable_functions:
-            for a, b, expected in test_cases:
-                assert f(a, b) == expected
-            # does not work with negatives :(
-            # self.assertEqual(f(5, -1), 4)
-            # self.assertEqual(f(7,-5), 2)
-            # self.assertEqual(f(7,-29), -22)
-            # self.assertEqual(f(-2,10), 8)
-
-
-if __name__ == "__main__":
-    unittest.main()
+def test_add_without_plus():
+    for f in testable_functions:
+        for a, b, expected in test_cases:
+            assert f(a, b) == expected

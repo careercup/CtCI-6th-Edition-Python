@@ -50,9 +50,6 @@ class BinarySearchTree:
                 current = current.right
 
     def delete(self, key):
-        if self.root is None:
-            return
-
         _delete(self.root, key)
 
     def get_node(self, key):
@@ -109,7 +106,7 @@ def _delete(node, key):
             temp, node = node.left, None
             return temp
 
-        temp = minvalnode(node.right)
+        temp = min_val_node(node.right)
         node.key = temp.key
         node.right = _delete(node.right, temp.key)
 
@@ -117,7 +114,7 @@ def _delete(node, key):
     return node
 
 
-def minvalnode(node):
+def min_val_node(node):
     current = node
     # loop down to find the leftmost leaf
     while current.left is not None:
@@ -138,7 +135,7 @@ def example():
     bst.delete(12)
 
     chosen_counts = defaultdict(int)
-    for _ in range(7000):
+    for _ in range(6000):
         node = bst.get_random_node()
         chosen_counts[node.key] += 1
 

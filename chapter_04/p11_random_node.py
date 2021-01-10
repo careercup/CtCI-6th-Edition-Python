@@ -49,8 +49,11 @@ class BinarySearchTree:
                     return
                 current = current.right
 
-    def delete(self):
-        """todo: needs to be implemented"""
+    def delete(self, key):
+        if self.root is None:
+            return
+
+        _delete(self.root, key)
 
     def get_node(self, key):
         current = self.root
@@ -86,6 +89,43 @@ class BinarySearchTree:
                 raise RuntimeError("Should not be possible")
 
 
+def _delete(node, key):
+
+    if node is None:
+        return node
+
+    if key < node.key:
+        node.left = _delete(node.left, key)
+
+    elif key > node.key:
+        node.right = _delete(node.right, key)
+
+    else:
+        if node.left is None:
+            temp, node = node.right, None
+            return temp
+
+        elif node.right is None:
+            temp, node = node.left, None
+            return temp
+
+        temp = minValueNode(node.right)
+        node.key = temp.key
+        node.right = _delete(node.right, temp.key)
+
+    node.size -= 1
+    return node
+
+
+def minValueNode(node):
+    current = node
+    # loop down to find the leftmost leaf
+    while current.left is not None:
+        current = current.left
+
+    return current
+
+
 def example():
     bst = BinarySearchTree()
     bst.insert(20)
@@ -95,6 +135,7 @@ def example():
     bst.insert(12)
     bst.insert(11)
     bst.insert(14)
+    bst.delete(12)
 
     chosen_counts = defaultdict(int)
     for _ in range(7000):

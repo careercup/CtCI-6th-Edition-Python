@@ -1,6 +1,6 @@
-from chapter_04.binary_search_tree import BinarySearchTree
-
 from collections import deque
+
+from chapter_04.binary_search_tree import BinarySearchTree
 
 
 def find_bst_sequences(bst):

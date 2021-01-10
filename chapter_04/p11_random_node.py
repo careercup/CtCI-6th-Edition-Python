@@ -109,7 +109,7 @@ def _delete(node, key):
             temp, node = node.left, None
             return temp
 
-        temp = minValueNode(node.right)
+        temp = minvalnode(node.right)
         node.key = temp.key
         node.right = _delete(node.right, temp.key)
 
@@ -117,7 +117,7 @@ def _delete(node, key):
     return node
 
 
-def minValueNode(node):
+def minvalnode(node):
     current = node
     # loop down to find the leftmost leaf
     while current.left is not None:

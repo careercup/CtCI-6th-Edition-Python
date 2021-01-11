@@ -35,7 +35,7 @@ def is_unique_no_ds(string):
         val = ord(c)
         if (checker & (1 << val)) > 0:
             return False
-        checker |= (1 << val)
+        checker |= 1 << val
     return True
 
 
@@ -49,7 +49,11 @@ class Test(unittest.TestCase):
         ("".join([chr(val) for val in range(128)]), True),  # unique 128 chars
         ("".join([chr(val // 2) for val in range(129)]), False),  # non-unique 129 chars
     ]
-    test_functions = [is_unique_chars_pythonic, is_unique_chars_algorithmic, is_unique_no_ds]
+    test_functions = [
+        is_unique_chars_pythonic,
+        is_unique_chars_algorithmic,
+        is_unique_no_ds,
+    ]
 
     def test_is_unique_chars(self):
         for is_unique_chars in self.test_functions:

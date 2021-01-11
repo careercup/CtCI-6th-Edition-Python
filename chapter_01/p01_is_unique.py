@@ -25,11 +25,11 @@ def is_unique_chars_pythonic(string):
 
 
 def is_unique_no_ds(string):
+    """Uses bitwise operation instead of extra data structures."""
     # Assuming character set is ASCII (128 characters)
     if len(string) > 128:
         return False
 
-    """Uses bitwise operation instead of extra data structures."""
     checker = 0
     for c in string:
         val = ord(c)

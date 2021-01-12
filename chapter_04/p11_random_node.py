@@ -49,8 +49,35 @@ class BinarySearchTree:
                     return
                 current = current.right
 
+    def delete_helper(self, node, key):
+
+        if node is None:
+            return node
+
+        if key < node.key:
+            node.left = self.delete_helper(node.left, key)
+
+        elif key > node.key:
+            node.right = self.delete_helper(node.right, key)
+
+        else:
+            if node.left is None:
+                temp, node = node.right, None
+                return temp
+
+            elif node.right is None:
+                temp, node = node.left, None
+                return temp
+
+            temp = min_val_node(node.right)
+            node.key = temp.key
+            node.right = self.delete_helper(node.right, temp.key)
+
+        node.size -= 1
+        return node
+
     def delete(self, key):
-        _delete(self.root, key)
+        self.delete_helper(self.root, key)
 
     def get_node(self, key):
         current = self.root
@@ -84,34 +111,6 @@ class BinarySearchTree:
                 current = current.right
             else:
                 raise RuntimeError("Should not be possible")
-
-
-def _delete(node, key):
-
-    if node is None:
-        return node
-
-    if key < node.key:
-        node.left = _delete(node.left, key)
-
-    elif key > node.key:
-        node.right = _delete(node.right, key)
-
-    else:
-        if node.left is None:
-            temp, node = node.right, None
-            return temp
-
-        elif node.right is None:
-            temp, node = node.left, None
-            return temp
-
-        temp = min_val_node(node.right)
-        node.key = temp.key
-        node.right = _delete(node.right, temp.key)
-
-    node.size -= 1
-    return node
 
 
 def min_val_node(node):

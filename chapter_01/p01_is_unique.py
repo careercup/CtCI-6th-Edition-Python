@@ -24,7 +24,7 @@ def is_unique_chars_pythonic(string):
     return len(set(string)) == len(string)
 
 
-def is_unique_no_ds(string):
+def is_unique_bit_vector(string):
     """Uses bitwise operation instead of extra data structures."""
     # Assuming character set is ASCII (128 characters)
     if len(string) > 128:
@@ -52,7 +52,7 @@ class Test(unittest.TestCase):
     test_functions = [
         is_unique_chars_pythonic,
         is_unique_chars_algorithmic,
-        is_unique_no_ds,
+        is_unique_bit_vector,
     ]
 
     def test_is_unique_chars(self):

@@ -1,5 +1,5 @@
-from typing import List
 import unittest
+from typing import List
 
 
 def flood_fill(screen: List[List[int]], i: int, j: int, color: int, new_color: int):
@@ -18,7 +18,9 @@ def flood_fill(screen: List[List[int]], i: int, j: int, color: int, new_color: i
     flood_fill(screen, i, j - 1, color, new_color)
 
 
-def paint_fill(screen: List[List[int]], r: int, c: int, new_color: int) -> List[List[int]]:
+def paint_fill(
+    screen: List[List[int]], r: int, c: int, new_color: int
+) -> List[List[int]]:
     if not screen:
         return None
 
@@ -46,10 +48,9 @@ class Test(unittest.TestCase):
     testable_functions = [paint_fill]
 
     def test_paint_fill(self):
-      for f in self.testable_functions:
-        for [screen, r, c, new_color, expected] in self.test_cases:
-          assert f(screen, r, c, new_color) == expected
-
+        for f in self.testable_functions:
+            for [screen, r, c, new_color, expected] in self.test_cases:
+                assert f(screen, r, c, new_color) == expected
 
 
 if __name__ == "__main__":

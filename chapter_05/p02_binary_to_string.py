@@ -20,19 +20,19 @@ def bin_to_string(number):
 
 
 def bin_to_string_alt(number):
-    number_s31 = int(number * (2**32))
-    if number_s31 > 2**32:
+    number_s31 = int(number * (2 ** 32))
+    if number_s31 > 2 ** 32:
         return "ERROR"
 
-    if number_s31 == (2**32):
-        number_s31 = 2**32 - 1 # approximate 1; technically, the question says number has to be between 0 and 1; not sure if that includes 1. #  [0,1) means greater than or equal to 0 and less than 1.
+    if number_s31 == (2 ** 32):
+        number_s31 = 2 ** 32 - 1
 
     ans = ""
     for _ in range(32):
-        ans = str(number_s31%2) + ans
+        ans = str(number_s31 % 2) + ans
         number_s31 = number_s31 // 2
 
-    return "."+ans
+    return "." + ans
 
 
 def example():
@@ -43,8 +43,7 @@ def example():
         bit_str = bin_to_string_alt(number)
         response = bit_str if len(bit_str) <= 33 else "ERROR"
         print(f"Number: {number}, Binary String: {response}")
-        assert (bin_to_string(number) == bin_to_string_alt(number))
-
+        assert bin_to_string(number) == bin_to_string_alt(number)
 
 
 if __name__ == "__main__":

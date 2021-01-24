@@ -40,7 +40,7 @@ class Test(unittest.TestCase):
         ("abcd", "bacd", True),
         ("3563476", "7334566", True),
         ("wef34f", "wffe34", True),
-        ("dogz", "godx", False),        
+        ("dogz", "godx", False),
         ("abcd", "d2cba", False),
         ("2354", "1234", False),
         ("dcw4f", "dcw5f", False),

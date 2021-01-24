@@ -7,12 +7,15 @@ def pairwise_swap(number):
     return swp_num
 
 
-def example():
-    for number in [123, 781, 278]:
+def test_pairwise_swap():
+    view_output = 1
+    for number, exp_output in zip([123, 781, 278], [183, 782, 553]):
         swap_num = pairwise_swap(number)
-        print(f"Number:  {bin(number)}")
-        print(f"Swapped: {bin(swap_num)}")
+        if view_output:
+            print(f"Number:  {bin(number)}")
+            print(f"Swapped: {bin(swap_num)}")
+        assert swap_num == exp_output
 
 
 if __name__ == "__main__":
-    example()
+    test_pairwise_swap()

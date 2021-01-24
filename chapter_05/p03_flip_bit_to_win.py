@@ -21,7 +21,7 @@ def flip_bit_to_win(number):
     return max_cnt + 1
 
 
-def example():
+def test_flip_bit_to_win():
     test_in = [7, 1775]
     test_out = [4, 8]
     for i, o in zip(test_in, test_out):
@@ -29,4 +29,4 @@ def example():
 
 
 if __name__ == "__main__":
-    example()
+    test_flip_bit_to_win()

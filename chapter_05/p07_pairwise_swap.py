@@ -1,5 +1,4 @@
 def pairwise_swap(number):
-    bin_str = bin(number)[2:]
     mask_10 = 0xAAAAAAAA  # 32 bits
     mask_01 = 0x55555555  # 32 bits
     num_evn = number & mask_10

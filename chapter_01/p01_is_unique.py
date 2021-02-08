@@ -38,6 +38,18 @@ def is_unique_bit_vector(string):
         checker |= 1 << val
     return True
 
+def allUniqueChar(s:str):
+    hmap = {}
+    for char in s:
+        if char not in hmap:
+            hmap[char] = 1
+        else:
+            hmap[char] += 1
+    for key in hmap:
+        if hmap[key] > 1:
+            return False
+    return True
+
 
 class Test(unittest.TestCase):
     test_cases = [
@@ -53,6 +65,7 @@ class Test(unittest.TestCase):
         is_unique_chars_pythonic,
         is_unique_chars_algorithmic,
         is_unique_bit_vector,
+        allUniqueChar
     ]
 
     def test_is_unique_chars(self):

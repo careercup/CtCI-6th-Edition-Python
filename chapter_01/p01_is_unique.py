@@ -39,6 +39,15 @@ def is_unique_bit_vector(string):
     return True
 
 
+def is_unique_chars_using_dictionary(string: str) -> bool:
+    character_counts = {}
+    for char in string:
+        if char in character_counts:
+            return False
+        character_counts[char] = 1
+    return True
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("abcd", True),
@@ -53,6 +62,7 @@ class Test(unittest.TestCase):
         is_unique_chars_pythonic,
         is_unique_chars_algorithmic,
         is_unique_bit_vector,
+        is_unique_chars_using_dictionary,
     ]
 
     def test_is_unique_chars(self):

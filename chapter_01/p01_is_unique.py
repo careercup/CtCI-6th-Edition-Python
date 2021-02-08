@@ -38,6 +38,7 @@ def is_unique_bit_vector(string):
         checker |= 1 << val
     return True
 
+
 def alluniquechar(s: str) -> bool:
     hmap = {}
     for char in s:

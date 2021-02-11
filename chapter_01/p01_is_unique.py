@@ -48,6 +48,19 @@ def is_unique_chars_using_dictionary(string: str) -> bool:
     return True
 
 
+# O(NlogN)
+def is_unique_chars_sorting(string: str) -> bool:
+    if len(string) == 1 or len(string) == 0:
+        return True
+    sorted_string = sorted(string)
+    last_character = sorted_string[0]
+    for i in range(1, len(sorted_string)):
+        if sorted_string[i] == last_character:
+            return False
+        last_character = sorted_string[i]
+    return True
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("abcd", True),
@@ -63,6 +76,7 @@ class Test(unittest.TestCase):
         is_unique_chars_algorithmic,
         is_unique_bit_vector,
         is_unique_chars_using_dictionary,
+        is_unique_chars_sorting,
     ]
 
     def test_is_unique_chars(self):

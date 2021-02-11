@@ -1,4 +1,3 @@
-# O(N)
 import unittest
 
 
@@ -21,6 +20,7 @@ def is_unique_chars_algorithmic(string):
 
 
 def is_unique_chars_pythonic(string):
+    # return len(set(string)) == len(string)
     return len(set(string)) == len(string)
 
 
@@ -48,6 +48,17 @@ def is_unique_chars_using_dictionary(string: str) -> bool:
     return True
 
 
+# O(NlogN)
+def is_unique_chars_sorting(string: str) -> bool:
+    sorted_string = sorted(string)
+    last_character = None
+    for char in sorted_string:
+        if char == last_character:
+            return False
+        last_character = char
+    return True
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("abcd", True),
@@ -63,6 +74,7 @@ class Test(unittest.TestCase):
         is_unique_chars_algorithmic,
         is_unique_bit_vector,
         is_unique_chars_using_dictionary,
+        is_unique_chars_sorting,
     ]
 
     def test_is_unique_chars(self):

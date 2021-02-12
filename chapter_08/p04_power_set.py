@@ -43,6 +43,23 @@ def convert_int_to_set(x, aset):
     return subset
 
 
+# alternative recursive solution.
+def get_subsets_c(_set):
+    subsets = [[]]
+
+    def recurse(current_set, remaining_set):
+        if len(remaining_set) == 0:  # base case
+            return
+
+        for i in range(len(remaining_set)):
+            if current_set + [remaining_set[i]] not in subsets:
+                subsets.append(current_set + [remaining_set[i]])
+                recurse(current_set + [remaining_set[i]], remaining_set[i + 1 :])
+
+    recurse([], _set)
+    return subsets
+
+
 testable_functions = [get_subsets_a, get_subsets_b]
 
 test_cases = [({1, 2, 3}, {(), (1,), (1, 2), (1, 2, 3), (1, 3), (2,), (2, 3), (3,)})]
@@ -60,3 +77,5 @@ if __name__ == "__main__":
     print(get_subsets_a([1, 2, 3]))
     print("")
     print(get_subsets_b([1, 2, 3]))
+    print("")
+    print(get_subsets_c([1, 2, 3]))

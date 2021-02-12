@@ -43,7 +43,27 @@ def convert_int_to_set(x, aset):
     return subset
 
 
+# alternative easier to understand recursive solution.
+def get_subsets_3(s):
+    cache = []  # holds all the subsets
+    cache.append([])
+
+    def recurse(cs, rs):  # cs is current, and rs is remaining.
+        if len(rs) == 0:  # base case
+            return
+
+        for i in range(len(rs)):
+            if cs + [rs[i]] not in cache:
+                cache.append(cs + [rs[i]])
+                recurse(cs + [rs[i]], rs[i + 1 :])
+
+    recurse([], s)
+    return cache
+
+
 if __name__ == "__main__":
     print(get_subsets([1, 2, 3]))
     print("")
     print(get_subsets_2([1, 2, 3]))
+    print("")
+    print(get_subsets_3([1, 2, 3]))

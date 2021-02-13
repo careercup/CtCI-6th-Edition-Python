@@ -1,4 +1,6 @@
+import time
 import unittest
+from collections import defaultdict
 
 
 def is_unique_chars_algorithmic(string):
@@ -20,7 +22,6 @@ def is_unique_chars_algorithmic(string):
 
 
 def is_unique_chars_pythonic(string):
-    # return len(set(string)) == len(string)
     return len(set(string)) == len(string)
 
 
@@ -78,9 +79,23 @@ class Test(unittest.TestCase):
     ]
 
     def test_is_unique_chars(self):
-        for is_unique_chars in self.test_functions:
+        num_runs = 1000
+        function_runtimes = defaultdict(float)
+
+        for _ in range(num_runs):
             for text, expected in self.test_cases:
-                assert is_unique_chars(text) == expected
+                for is_unique_chars in self.test_functions:
+                    start = time.perf_counter()
+                    assert (
+                        is_unique_chars(text) == expected
+                    ), f"{is_unique_chars.__name__} failed for value: {text}"
+                    function_runtimes[is_unique_chars.__name__] += (
+                        time.perf_counter() - start
+                    ) * 1000
+
+        print(f"\n{num_runs} runs")
+        for function_name, runtime in function_runtimes.items():
+            print(f"{function_name}: {runtime:.1f}ms")
 
 
 if __name__ == "__main__":

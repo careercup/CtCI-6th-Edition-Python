@@ -32,7 +32,7 @@ jobs:
         python -m pip install black==20.8b1
     - name: Autoformatter
       run: |
-        black --diff .
+        black --diff --check .
   test:
     runs-on: ubuntu-latest
     strategy:

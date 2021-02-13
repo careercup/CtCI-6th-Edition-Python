@@ -32,17 +32,11 @@ def paint_fill(
 class Test(unittest.TestCase):
     test_cases = [
         (
-            [
-                [1, 2, 5],
-                [2, 2, 4],
-                [2, 8, 6]
-            ],
-            1, 1, 3,
-            [
-                [1, 3, 5],
-                [3, 3, 4],
-                [3, 8, 6]
-            ],
+            [[1, 2, 5], [2, 2, 4], [2, 8, 6]],
+            1,
+            1,
+            3,
+            [[1, 3, 5], [3, 3, 4], [3, 8, 6]],
         )
     ]
     testable_functions = [paint_fill]

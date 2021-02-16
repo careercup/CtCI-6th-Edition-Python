@@ -60,7 +60,7 @@ def get_subsets_c(_set):
     return subsets
 
 
-testable_functions = [get_subsets_a, get_subsets_b]
+testable_functions = [get_subsets_a, get_subsets_b, get_subsets_c]
 
 test_cases = [({1, 2, 3}, {(), (1,), (1, 2), (1, 2, 3), (1, 3), (2,), (2, 3), (3,)})]
 

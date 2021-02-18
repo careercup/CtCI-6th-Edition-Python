@@ -85,8 +85,22 @@ def min_product_3_helper(smaller, bigger):
     return half_prod + half_prod + bigger
 
 
+# solution 4 # non-recursive
+def multiply_bit_based(a, b):
+    b_bin = bin(b)
+    b_bin = b_bin[2:]
+    prod = 0
+    for i in range(len(b_bin)):  # O(len_b)
+        if int(b_bin[-i - 1]):
+            prod = prod + (a << i)
+
+    return prod
+
+
 if __name__ == "__main__":
-    print(multiply(5, 6, 0))
-    print(min_product(5, 6))
-    print(min_product_2(5, 6))
-    print(min_product_3(5, 6))
+    inputs = [(5, 6), (28, 89), (1234, 245334)]
+    for i in inputs:
+        assert multiply_bit_based(i[0], i[1]) == i[0] * i[1]
+        assert min_product(i[0], i[1]) == i[0] * i[1]
+        assert min_product_2(i[0], i[1]) == i[0] * i[1]
+        assert min_product_3(i[0], i[1]) == i[0] * i[1]

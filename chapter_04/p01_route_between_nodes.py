@@ -1,4 +1,5 @@
 import unittest
+from collections import deque
 
 # VISUAL OF TEST GRAPH:
 
@@ -25,6 +26,24 @@ def is_route(graph, start, end, visited=None):
             visited.add(node)
             if node == end or is_route(graph, node, end, visited):
                 return True
+    return False
+
+
+def is_route_bfs(graph, start, end):
+    if start == end:
+        return True
+    visited = set()
+    queue = deque()
+    queue.append(start)
+    while queue:
+        node = queue.popleft()
+        for adjacent in graph[node]:
+            if adjacent not in visited:
+                if adjacent == end:
+                    return True
+                else:
+                    queue.append(adjacent)
+        visited.add(node)
     return False
 
 
@@ -64,6 +83,11 @@ class Test(unittest.TestCase):
     def test_is_route(self):
         for [start, end, expected] in self.tests:
             actual = is_route(self.graph, start, end)
+            assert actual == expected
+
+    def test_is_route_bfs(self):
+        for [start, end, expected] in self.tests:
+            actual = is_route_bfs(self.graph, start, end)
             assert actual == expected
 
 

@@ -1,6 +1,5 @@
 def bits_insertion(n, m, i, j):
-    ones = sum(2 ** _ for _ in range(m.bit_length()))  # Generate all binary 1s
-    ones_left = ones << (j + 1)  # shift 1s over to the left, before position j
+    ones_left = -1 << (j + 1)  # shift 1s over to the left, before position j
     ones_right = (1 << i) - 1  # place 1s to the right of position i
     mask = ones_left | ones_right  # encapsulate 0s with the 1s from above
     cleared = n & mask  # zero bits in positions j through i

@@ -35,14 +35,7 @@ def bits_insertion_easy_to_understand(n, m, i, j):
         if (int_m >> idx) & 1 != 0:
             int_n |= 1 << (idx + i)
 
-    ret = ""
-    for idx in reversed(range(len(n))):
-        if (int_n >> idx) & 1 != 0:
-            ret += "1"
-        else:
-            ret += "0"
-
-    return ret
+    return bin(int_n)[2:]
 
 
 def test_bits_insertion():

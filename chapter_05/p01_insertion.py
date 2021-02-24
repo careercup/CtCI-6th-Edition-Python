@@ -35,8 +35,14 @@ def bits_insertion_easy_to_understand(n, m, i, j):
         if (int_m >> idx) & 1 != 0:
             int_n |= 1 << (idx + i)
 
-    # format func change int to binary number representation string
-    return "{0:b}".format(int_n)
+    ret = ""
+    for idx in reversed(range(len(n))):
+        if (int_n >> idx) & 1 != 0:
+            ret += "1"
+        else:
+            ret += "0"
+
+    return ret
 
 
 def test_bits_insertion():

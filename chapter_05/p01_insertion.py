@@ -25,9 +25,27 @@ def bits_insertion(n, m, i, j):
     return bit_str.zfill(num_bits)  # pad string to num_bits
 
 
+def bits_insertion_easy_to_understand(n, m, i, j):
+    # change str into int in order to do bit manipulation
+    int_n, int_m = int(n, 2), int(m, 2)
+
+    # do a liner search through the bits of M (tail to head)
+    # and if you find 1, do a bit insertion to N
+    for idx in range(j - i + 1):
+        if (int_m >> idx) & 1 != 0:
+            int_n |= 1 << (idx + i)
+
+    # format func change int to binary number representation string
+    return "{0:b}".format(int_n)
+
+
 def test_bits_insertion():
     assert bits_insertion("10000000000", "10011", 2, 6) == "10001001100"
+    assert (
+        bits_insertion_easy_to_understand("10000000000", "10011", 2, 6) == "10001001100"
+    )
 
 
 if __name__ == "__main__":
     print(bits_insertion("10000000000", "10011", 2, 6))
+    print(bits_insertion_easy_to_understand("10000000000", "10011", 2, 6))

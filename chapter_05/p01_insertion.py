@@ -1,30 +1,11 @@
 def bits_insertion(n, m, i, j):
-    """
-    Accepts:
-        m: str, representation of integer as binary string
-        n: str, representation of integer as binary string
-        i: int, ending bit position of number m for n
-        j: int, starting bit position of number m for n
-    Returns:
-        str, representation of the number where n inserted into m
-    """
-    n = f"{n:b}"
-    m = f"{m:b}"
-    num_bits = len(m)  # determine number of characters for returned string
-    ones = sum(2 ** _ for _ in range(num_bits))  # Generate all binary 1s
+    ones = sum(2 ** _ for _ in range(m.bit_length()))  # Generate all binary 1s
     ones_left = ones << (j + 1)  # shift 1s over to the left, before position j
     ones_right = (1 << i) - 1  # place 1s to the right of position i
     mask = ones_left | ones_right  # encapsulate 0s with the 1s from above
-    cleared = int(n, 2) & mask  # zero bits in positions j through i
-    moved = int(m, 2) << i  # shift m over i places, prepped for n insertion
-    answer = cleared | moved  # answer is the value after insertion
-    bit_str = ""  # format the answer number as a string of 0s and 1s
-    # repeat dividing the answer by two until it reaches zero, or less than one
-    # if the remainder is odd, prefix the bit string with '1', else '0'
-    while answer:
-        bit_str = "1" + bit_str if answer & 1 == 1 else "0" + bit_str
-        answer //= 2
-    return int(bit_str.zfill(num_bits), 2)  # pad string to num_bits
+    cleared = n & mask  # zero bits in positions j through i
+    moved = m << i  # shift m over i places, prepped for n insertion
+    return cleared | moved  # answer is the value after insertion
 
 
 test_cases = [
@@ -32,7 +13,16 @@ test_cases = [
     ((int("11111111111", 2), int("10011", 2), 2, 6), int("11111001111", 2)),
 ]
 
+testable_functions = [bits_insertion]
+
 
 def test_bits_insertion():
-    for (n, m, i, j), expected in test_cases:
-        assert bits_insertion(n, m, i, j) == expected
+    for bits_insert in testable_functions:
+        for (n, m, i, j), expected in test_cases:
+            calculated = bits_insert(n, m, i, j)
+            error_msg = f"{bits_insert.__name__}: {calculated:b} != {expected:b}"
+            assert bits_insert(n, m, i, j) == expected, error_msg
+
+
+if __name__ == "__main__":
+    test_bits_insertion()

@@ -8,6 +8,8 @@ def bits_insertion(n, m, i, j):
     Returns:
         str, representation of the number where n inserted into m
     """
+    n = f"{n:b}"
+    m = f"{m:b}"
     num_bits = len(m)  # determine number of characters for returned string
     ones = sum(2 ** _ for _ in range(num_bits))  # Generate all binary 1s
     ones_left = ones << (j + 1)  # shift 1s over to the left, before position j
@@ -22,12 +24,15 @@ def bits_insertion(n, m, i, j):
     while answer:
         bit_str = "1" + bit_str if answer & 1 == 1 else "0" + bit_str
         answer //= 2
-    return bit_str.zfill(num_bits)  # pad string to num_bits
+    return int(bit_str.zfill(num_bits), 2)  # pad string to num_bits
+
+
+test_cases = [
+    ((int("10000000000", 2), int("10011", 2), 2, 6), int("10001001100", 2)),
+    ((int("11111111111", 2), int("10011", 2), 2, 6), int("11111001111", 2)),
+]
 
 
 def test_bits_insertion():
-    assert bits_insertion("10000000000", "10011", 2, 6) == "10001001100"
-
-
-if __name__ == "__main__":
-    print(bits_insertion("10000000000", "10011", 2, 6))
+    for (n, m, i, j), expected in test_cases:
+        assert bits_insertion(n, m, i, j) == expected

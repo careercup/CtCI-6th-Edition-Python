@@ -28,9 +28,15 @@ def bits_insertion(n, m, i, j):
 def bits_insertion_easy_to_understand(n, m, i, j):
     # do a liner search through the bits of M (from tail to head)
     # and if you find 1, do a bit insertion to N
+    # if you find 0, clear bit using a mask
     for idx in range(j - i + 1):
         if (m >> idx) & 1 != 0:
+            # set bit
             n |= 1 << (idx + i)
+        else:
+            # clear bit
+            mask = ~(1 << (idx + i))
+            n &= mask
 
     return f"{n:b}"
 

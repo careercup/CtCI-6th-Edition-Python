@@ -8,12 +8,28 @@ def bits_insertion(n, m, i, j):
     return cleared | moved  # answer is the value after insertion
 
 
+def bits_insertion_easy_to_understand(n, m, i, j):
+    # do a liner search through the bits of M (from tail to head)
+    # and if you find 1, do a bit insertion to N
+    # if you find 0, clear idxth bit of N using a mask
+    for idx in range(j - i + 1):
+        if (m >> idx) & 1 != 0:
+            # set bit
+            n |= 1 << (idx + i)
+        else:
+            # clear bit
+            mask = ~(1 << (idx + i))
+            n &= mask
+
+    return n
+
+
 test_cases = [
     ((int("10000000000", 2), int("10011", 2), 2, 6), int("10001001100", 2)),
     ((int("11111111111", 2), int("10011", 2), 2, 6), int("11111001111", 2)),
 ]
 
-testable_functions = [bits_insertion]
+testable_functions = [bits_insertion, bits_insertion_easy_to_understand]
 
 
 def test_bits_insertion():

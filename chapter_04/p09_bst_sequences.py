@@ -39,15 +39,42 @@ def weave(first, second, prefix, results):
     return results
 
 
+def find_bst_sequences_backtracking(bst):
+    if not bst.root:
+        return []
+
+    ret_backtracking = []
+
+    def backtracking(choices, weave):
+        if not len(choices):
+            ret_backtracking.append(weave)
+            return
+
+        for i in range(len(choices)):
+            nextchoices = choices[:i] + choices[i + 1 :]
+            if choices[i].left:
+                nextchoices += [choices[i].left]
+            if choices[i].right:
+                nextchoices += [choices[i].right]
+            backtracking(nextchoices, weave + [choices[i].key])
+
+    backtracking([bst.root], [])
+    return ret_backtracking
+
+
+testable_functions = [find_bst_sequences, find_bst_sequences_backtracking]
+
+
 def test_find_bst_sequences():
-    bst = BinarySearchTree()
-    bst.insert(2)
-    bst.insert(1)
-    bst.insert(3)
-    sequences = find_bst_sequences(bst)
-    assert [2, 1, 3] in sequences
-    assert [2, 3, 1] in sequences
-    assert len(sequences) == 2
+    for find_bst in testable_functions:
+        bst = BinarySearchTree()
+        bst.insert(2)
+        bst.insert(1)
+        bst.insert(3)
+        sequences = find_bst(bst)
+        assert [2, 1, 3] in sequences
+        assert [2, 3, 1] in sequences
+        assert len(sequences) == 2
 
 
 def example():
@@ -61,6 +88,9 @@ def example():
     # bst.insert(14);
 
     sequences = find_bst_sequences(bst)
+    print(sequences)
+
+    sequences = find_bst_sequences_backtracking(bst)
     print(sequences)
 
 

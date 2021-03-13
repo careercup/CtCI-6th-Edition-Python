@@ -45,8 +45,10 @@ def find_smallest_difference(array1, array2):
             pair = [array1[a], array2[b]]
         if array1[a] < array2[b]:
             a += 1
-        else:
+        elif array1[a] > array2[b]:
             b += 1
+        else:
+            return difference, pair
 
     return difference, pair
 
@@ -55,6 +57,7 @@ def test_find_smallest_diff():
     test_cases = [
         [[1, 3, 15, 11, 2], [23, 127, 235, 19, 8], (3, [11, 8])],
         [[2, 11, 15, 1], [12, 4, 235, 19, 127, 23], (1, [11, 12])],
+        [[32, 1, 5, -31], [98, 7, 32, 43, 72, 86], (0, [32, 32])]
     ]
     for a, b, expected in test_cases:
         assert find_smallest_difference(a, b) == expected

@@ -1,3 +1,5 @@
+import collections
+
 names = {
 		"john":10,\
 		"jon":3,\
@@ -28,7 +30,7 @@ def union(x1,x2):
 	r2 = find(x2)
 	if r1!=r2:
 		parent[r1]=r2
-res = defaultdict(int)
+res = collections.defaultdict(int)
 for pair in pairs:
 	union(pair[0],pair[1])
 

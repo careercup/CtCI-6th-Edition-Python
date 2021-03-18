@@ -24,7 +24,7 @@ def get_kth_multiple(k):
     print(res)
     return res[-1]
 
-k = 10000
+k = 1000
 import time
 tic = time.time()
 # for i in range(k):

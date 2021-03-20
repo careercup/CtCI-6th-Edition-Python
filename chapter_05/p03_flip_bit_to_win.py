@@ -24,14 +24,15 @@ def flip_bit_to_win(number):
 def flip_bit_to_win_alt(num):
     longest, current_segment, past_segment = 1, 0, 0
     while num != 0:
-        if num & 1: # Current bit is 1
+        if num & 1:  # Current bit is 1
             current_segment += 1
-        else: # Current bit is 0
-            past_segment = 0 if (num & 2 == True) else current_segment
+        else:  # Current bit is 0
+            past_segment = 0 if (num & 2 is True) else current_segment
             current_segment = 0
         longest = max(current_segment + past_segment + 1, longest)
         num >>= 1  # Move 1 bit to the right
     return longest
+    
 
 def test_flip_bit_to_win():
     test_in = [7, 1775]

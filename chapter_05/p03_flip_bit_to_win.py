@@ -21,12 +21,27 @@ def flip_bit_to_win(number):
     return max_cnt + 1
 
 
-test_cases = [(0b0, 1), (0b111, 4), (0b11011101111, 8)]
+def flip_bit_to_win_alt(num):
+    longest, current_segment, past_segment = 1, 0, 0
+    while num != 0:
+        if num & 1:  # Current bit is 1
+            current_segment += 1
+        else:  # Current bit is 0
+            past_segment = 0 if (num & 2 is True) else current_segment
+            current_segment = 0
+        longest = max(current_segment + past_segment + 1, longest)
+        num >>= 1  # Move 1 bit to the right
+    return longest
+
+
+test_cases = [(0b0, 1), (0b111, 4), (0b10011100111, 4), (0b11011101111, 8)]
+testable_functions = [flip_bit_to_win, flip_bit_to_win_alt]
 
 
 def test_flip_bit_to_win():
-    for num, expected in test_cases:
-        assert flip_bit_to_win(num) == expected
+    for fli_bit in testable_functions:
+        for num, expected in test_cases:
+            assert fli_bit(num) == expected
 
 
 if __name__ == "__main__":

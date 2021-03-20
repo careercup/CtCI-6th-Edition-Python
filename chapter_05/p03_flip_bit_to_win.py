@@ -32,7 +32,7 @@ def flip_bit_to_win_alt(num):
         longest = max(current_segment + past_segment + 1, longest)
         num >>= 1  # Move 1 bit to the right
     return longest
-    
+
 
 def test_flip_bit_to_win():
     test_in = [7, 1775]

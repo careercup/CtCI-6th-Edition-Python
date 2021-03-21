@@ -33,14 +33,14 @@ def index(nums: Sequence[int], target: int) -> Optional[int]:
 def search_rotated(array: Sequence[int], num: int) -> Optional[int]:
     if not array:
         return None
-    return _recursive_search(array, num, 0, len(array) -1)
+    return _recursive_search(array, num, 0, len(array) - 1)
 
 
 def _recursive_search(array, num, start, end):
     middle = ((end - start) // 2 + start)
-    if array[middle] == num: 
+    if array[middle] == num:
         return middle
-    if end - start <= 0: 
+    if end - start <= 0:
         return None
 
     result = None
@@ -85,7 +85,7 @@ def test_index():
                 assert ind in expected
             else:
                 error_msg = (
-                    f"array:{array} target:{target} calculated:{ind} expected:{expected}"
+                    f"arr:{array} target:{target} calculated:{ind} expected:{expected}"
                 )
                 print(error_msg)
                 assert ind == expected, error_msg

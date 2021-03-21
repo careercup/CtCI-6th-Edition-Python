@@ -37,7 +37,7 @@ def search_rotated(array: Sequence[int], num: int) -> Optional[int]:
 
 
 def _recursive_search(array, num, start, end):
-    middle = ((end - start) // 2 + start)
+    middle = (end - start) // 2 + start
     if array[middle] == num:
         return middle
     if end - start <= 0:

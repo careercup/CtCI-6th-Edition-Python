@@ -31,18 +31,21 @@ def index(nums: Sequence[int], target: int) -> Optional[int]:
 
 
 def search_rotated(array: Sequence[int], num: int) -> Optional[int]:
-    if not array: return None
-    return _recursive_search(array, num, 0, len(array) -1 )
+    if not array:
+        return None
+    return _recursive_search(array, num, 0, len(array) -1)
 
 
 def _recursive_search(array, num, start, end):
     middle = ((end - start) // 2 + start)
-    if array[middle] == num: return middle
-    if end - start <= 0: return None
+    if array[middle] == num: 
+        return middle
+    if end - start <= 0: 
+        return None
 
     result = None
-    if array[start] < array[middle]: # left side is normal
-        if array[start] <= num and num < array[middle]: # serch left
+    if array[start] < array[middle]:  # left side is normal
+        if array[start] <= num and num < array[middle]:
             result = _recursive_search(array, num, start, middle - 1)
         else:
             result = _recursive_search(array, num, middle + 1, end)

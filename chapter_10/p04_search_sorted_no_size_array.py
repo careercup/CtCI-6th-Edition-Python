@@ -1,5 +1,5 @@
 def sorted_nosize_search(listy, num):
-    # Adapted to work with a Python sorted 
+    # Adapted to work with a Python sorted
     # array and handle the index error exception
     exp_backoff = index = 0
     limit = False

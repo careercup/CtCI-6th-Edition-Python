@@ -45,7 +45,7 @@ test_cases = [
     (([1, 2, 3, 4, 5, 6, 7, 8, 9], 7), 6),
     (([1, 2, 3, 4, 5, 6, 7, 8, 9], 8), 7),
     (([1, 2, 3, 4, 5, 6, 7, 8, 9], 9), 8),
-    (([1, 2, 3, 4, 5, 6, 7, 8, 9], 10), -1)
+    (([1, 2, 3, 4, 5, 6, 7, 8, 9], 10), -1),
 ]
 
 testable_functions = [sorted_nosize_search]
@@ -59,5 +59,5 @@ def run_tests():
             assert function(n, m) == expected, error_msg
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_tests()

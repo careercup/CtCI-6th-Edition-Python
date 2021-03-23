@@ -21,11 +21,12 @@ def flip_bit_to_win(number):
     return max_cnt + 1
 
 
+test_cases = [(0b0, 1), (0b111, 4), (0b11011101111, 8)]
+
+
 def test_flip_bit_to_win():
-    test_in = [7, 1775]
-    test_out = [4, 8]
-    for i, o in zip(test_in, test_out):
-        assert flip_bit_to_win(i) == o
+    for num, expected in test_cases:
+        assert flip_bit_to_win(num) == expected
 
 
 if __name__ == "__main__":

@@ -51,6 +51,7 @@ def test_magic_index():
             with pytest.raises(expected):
                 magic_index(array)
 
+
 def test_magic_index_non_distinct():
     for array, expected in followup_test_cases:
         if isinstance(expected, int):

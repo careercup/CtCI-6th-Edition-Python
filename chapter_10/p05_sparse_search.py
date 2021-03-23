@@ -22,16 +22,16 @@ def sparce_search(arr, item):
             return middle
         if arr[middle] > item:
             return inner_search(arr, item, low, middle - 1)
-        if arr[middle] < item :
+        if arr[middle] < item:
             return inner_search(arr, item, middle + 1, high)
 
     return inner_search(arr, item, 0, len(arr) - 1)
 
 
 test_cases = [
-    ((["a", "", "", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "d"), 10),
-    ((["a", "", "", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "f"), None),
-    ((["a", "", "", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "a"), 0),
+    ((["a", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "d"), 8),
+    ((["a", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "f"), None),
+    ((["a", "", "", "b", "", "c", "", "", "d", "", "", "", "", "e", ""], "a"), 0),
 ]
 
 testable_functions = [sparce_search]

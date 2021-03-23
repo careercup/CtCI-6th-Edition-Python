@@ -21,28 +21,10 @@ def magic_index(array, min_index=0, max_index=None):
         return magic_index(array, min_index, mid - 1)
 
 
-test_cases = [
-    ([-14, -12, 0, 1, 2, 5, 9, 10, 23, 25], 5),
-    ([-14, -12, 0, 1, 2, 7, 9, 10, 23, 25], NoMagicIndexExistsError),
-    ([0, 1, 2, 3, 4], 2),
-    ([], NoMagicIndexExistsError),
-]
+def magic_index_non_distinct(array, min_index=0, max_index=None):
+    if max_index is None:
+        max_index = len(array) - 1
 
-followup_test_cases = [
-    ([-10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13], 3),
-]
-
-
-def test_magic_index():
-    for array, expected in test_cases:
-        if isinstance(expected, int):
-            assert magic_index(array) == expected
-        else:
-            with pytest.raises(expected):
-                magic_index(array)
-
-
-def magic_index_non_distinct(array, min_index, max_index):
     if max_index < min_index:
         return -1
 
@@ -58,21 +40,33 @@ def magic_index_non_distinct(array, min_index, max_index):
 
     # Search right recursively
     right_index = max(mid + 1, array[mid])
-    right = magic_index_non_distinct(array, right_index, max_index)
-    if right >= 0:
-        return right
+    return magic_index_non_distinct(array, right_index, max_index)
 
 
-def example_magic_index():
-    array = [-14, -12, 0, 1, 2, 5, 9, 10, 23, 25]
-    print(magic_index(array, 0, len(array) - 1))
+def test_magic_index(method, test_cases):
+    for array, expected in test_cases:
+        if isinstance(expected, int):
+            assert method(array) == expected
+        else:
+            with pytest.raises(expected):
+                method(array)
 
 
-def example_magic_index_non_distinct():
-    array = [-10, -5, 1, 3, 3, 3, 4, 7, 9, 12, 13]
-    print(magic_index_non_distinct(array, 0, len(array) - 1))
+test_cases = [
+    ([-14, -12, 0, 1, 2, 5, 9, 10, 23, 25], 5),
+    ([-14, -12, 0, 1, 2, 7, 9, 10, 23, 25], NoMagicIndexExistsError),
+    ([0, 1, 2, 3, 4], 2),
+    ([], NoMagicIndexExistsError),
+]
+
+followup_test_cases = [
+    ([-10, -5, 2, 2, 2, 3, 4, 7, 9, 12, 13], 2),
+    ([-14, -12, 0, 1, 2, 5, 9, 10, 23, 25], 5),
+    ([0, 1, 2, 3, 4], 2),
+
+]
 
 
 if __name__ == "__main__":
-    example_magic_index()
-    example_magic_index_non_distinct()
+    test_magic_index(magic_index, test_cases)
+    test_magic_index(magic_index_non_distinct, followup_test_cases)

@@ -1,5 +1,4 @@
 def sparce_search(arr, item):
-
     def inner_search(arr, item, low, high):
         middle = ((high - low) // 2) + low
 

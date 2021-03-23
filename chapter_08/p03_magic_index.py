@@ -43,13 +43,21 @@ def magic_index_non_distinct(array, min_index=0, max_index=None):
     return magic_index_non_distinct(array, right_index, max_index)
 
 
-def test_magic_index(method, test_cases):
+def test_magic_index():
     for array, expected in test_cases:
         if isinstance(expected, int):
-            assert method(array) == expected
+            assert magic_index(array) == expected
         else:
             with pytest.raises(expected):
-                method(array)
+                magic_index(array)
+
+def test_magic_index_non_distinct():
+    for array, expected in followup_test_cases:
+        if isinstance(expected, int):
+            assert magic_index_non_distinct(array) == expected
+        else:
+            with pytest.raises(expected):
+                magic_index_non_distinct(array)
 
 
 test_cases = [
@@ -67,5 +75,5 @@ followup_test_cases = [
 
 
 if __name__ == "__main__":
-    test_magic_index(magic_index, test_cases)
-    test_magic_index(magic_index_non_distinct, followup_test_cases)
+    test_magic_index()
+    test_magic_index_non_distinct()

@@ -1,6 +1,6 @@
 import time
 
-from linked_list import LinkedList
+from chapter_02.linked_list import LinkedList
 
 
 def is_palindrome(ll):
@@ -85,7 +85,7 @@ def is_palindrome_recursive(list):
         if not node:
             return 0
         else:
-            return 1 + get_len(node.next)    
+            return 1 + get_len(node.next)
 
     def recursive_transverse(node, length):
         if not node or length ==  0:  ## even list
@@ -101,7 +101,7 @@ def is_palindrome_recursive(list):
         if node.value == fwd_node.value:
             return True, fwd_node.next
         else:
-            return False, None        
+            return False, None
 
     length = get_len(list.head)
     is_palindrome, node = recursive_transverse(list.head, length)

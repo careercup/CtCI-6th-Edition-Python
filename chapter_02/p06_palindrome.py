@@ -80,6 +80,32 @@ def reverse(node):
     return previous_node
 
 
+def is_palindrome_recursive(ll):
+    def get_len(node):
+        if not node:
+            return 0
+        else:
+            return 1 + get_len(node.next)
+
+    def recursive_transverse(node, length):
+        if not node or length == 0:  # even list
+            return True, node
+        elif length == 1:  # odd list
+            return True, node.next
+
+        _is_palindrome, fwd_node = recursive_transverse(node.next, length - 2)
+
+        if not _is_palindrome or not fwd_node:
+            return False, None
+
+        if node.value == fwd_node.value:
+            return True, fwd_node.next
+        else:
+            return False, None
+
+    return recursive_transverse(ll.head, get_len(ll.head))[0]
+
+
 test_cases = [
     ([1, 2, 3, 4, 3, 2, 1], True),
     ([1], True),
@@ -90,7 +116,11 @@ test_cases = [
     ([1, 2], False),
 ]
 
-testable_functions = [is_palindrome, is_palindrome_constant_space]
+testable_functions = [
+    is_palindrome,
+    is_palindrome_constant_space,
+    is_palindrome_recursive,
+]
 
 
 def test_is_palindrome():

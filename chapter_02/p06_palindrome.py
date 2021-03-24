@@ -80,7 +80,7 @@ def reverse(node):
     return previous_node
 
 
-def is_palindrome_recursive(list):
+def is_palindrome_recursive(ll):
     def get_len(node):
         if not node:
             return 0
@@ -88,7 +88,7 @@ def is_palindrome_recursive(list):
             return 1 + get_len(node.next)
 
     def recursive_transverse(node, length):
-        if not node or length ==  0:  ## even list
+        if not node or length == 0:  # even list
             return True, node
         elif length == 1:  # odd list
             return True, node.next
@@ -97,14 +97,14 @@ def is_palindrome_recursive(list):
 
         if not is_palindrome or not fwd_node:
             return False, None
-        
+
         if node.value == fwd_node.value:
             return True, fwd_node.next
         else:
             return False, None
 
-    length = get_len(list.head)
-    is_palindrome, node = recursive_transverse(list.head, length)
+    length = get_len(ll.head)
+    is_palindrome, node = recursive_transverse(ll.head, length)
     return is_palindrome
 
 

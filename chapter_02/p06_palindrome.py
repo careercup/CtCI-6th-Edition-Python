@@ -118,7 +118,11 @@ test_cases = [
     ([1, 2], False),
 ]
 
-testable_functions = [is_palindrome, is_palindrome_constant_space, is_palindrome_recursive]
+testable_functions = [
+    is_palindrome,
+    is_palindrome_constant_space,
+    is_palindrome_recursive,
+]
 
 
 def test_is_palindrome():

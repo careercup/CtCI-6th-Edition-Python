@@ -13,7 +13,7 @@ def is_unique_chars_algorithmic(string):
     char_set = [False] * 128
     for char in string:
         val = ord(char)
-        if char_set[val]:
+        if char_set[val] == True:
             # Char already found in string
             return False
         char_set[val] = True

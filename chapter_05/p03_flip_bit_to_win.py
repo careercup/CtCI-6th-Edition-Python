@@ -1,8 +1,10 @@
 def check_all_ones(num):
     return num & (num + 1) == 0 and num != 0
 
+
 def count_all_ones(num):
-    return bin(num)[2:].count('1')
+    return bin(num)[2:].count("1")
+
 
 def flip_bit_to_win(number):
     if check_all_ones(number):
@@ -44,7 +46,14 @@ def flip_bit_to_win_alt(num):
     return longest
 
 
-test_cases = [(0b0, 1), (0b111, 3), (0b10011100111, 4), (0b11011101111, 8), (0b1, 1), (0b0, 1)]
+test_cases = [
+    (0b0, 1),
+    (0b111, 3),
+    (0b10011100111, 4),
+    (0b11011101111, 8),
+    (0b1, 1),
+    (0b0, 1),
+]
 testable_functions = [flip_bit_to_win, flip_bit_to_win_alt]
 
 

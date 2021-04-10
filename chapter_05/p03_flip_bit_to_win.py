@@ -1,4 +1,12 @@
+def check_all_ones(num):
+    return num & (num + 1) == 0 and num != 0
+
+def count_all_ones(num):
+    return bin(num)[2:].count('1')
+
 def flip_bit_to_win(number):
+    if check_all_ones(number):
+        return count_all_ones(number)
     number_str = bin(number)[2:]
     max_cnt, cnt, cnt0 = 0, 0, 0
     i = len(number_str)  # start index
@@ -22,6 +30,8 @@ def flip_bit_to_win(number):
 
 
 def flip_bit_to_win_alt(num):
+    if check_all_ones(num):
+        return count_all_ones(num)
     longest, current_segment, past_segment = 1, 0, 0
     while num != 0:
         if num & 1:  # Current bit is 1
@@ -34,7 +44,7 @@ def flip_bit_to_win_alt(num):
     return longest
 
 
-test_cases = [(0b0, 1), (0b111, 4), (0b10011100111, 4), (0b11011101111, 8)]
+test_cases = [(0b0, 1), (0b111, 3), (0b10011100111, 4), (0b11011101111, 8), (0b1, 1), (0b0, 1)]
 testable_functions = [flip_bit_to_win, flip_bit_to_win_alt]
 
 

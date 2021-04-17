@@ -1,4 +1,4 @@
-STANDARD_COIN_SIZES = [1, 5, 10, 20, 25]
+STANDARD_COIN_SIZES = [1, 5, 10, 25]
 
 
 def coin_combinations(amount, coin_sizes=None):

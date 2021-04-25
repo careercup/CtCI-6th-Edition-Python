@@ -32,6 +32,15 @@ def check_permutation_pythonic(str1, str2):
 
     return Counter(str1) == Counter(str2)
 
+def check_permutation2(str1,str2):
+    if len(str1) != len(str2):
+        return False
+    str1, str2 = sorted(str1), sorted(str2)
+    if str1 == str2:
+        return True
+    else:
+        return False
+
 
 class Test(unittest.TestCase):
     # str1, str2, is_permutation
@@ -53,6 +62,7 @@ class Test(unittest.TestCase):
         check_permutation_by_sort,
         check_permutation_by_count,
         check_permutation_pythonic,
+        check_permutation2,
     ]
 
     def test_cp(self):

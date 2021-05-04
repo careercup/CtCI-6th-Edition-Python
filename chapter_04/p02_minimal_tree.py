@@ -19,16 +19,14 @@ class Node:
         return self.disp()
 
 
-def array_to_binary_tree(array, start, end):
-    if start > end:
+def array_to_binary_tree(array):
+    if not array:
         return None
-    mid = (
-        start + end
-    ) // 2  # This must be floor division, otherwise you get a slice error
+    mid = len(array)// 2  # This must be floor division, otherwise you get a slice error
     # TypeError: list indices must be integers or slices, not float
     root = Node(array[mid])
-    root.left = array_to_binary_tree(array, start, mid - 1)
-    root.right = array_to_binary_tree(array, mid + 1, end)
+    root.left = array_to_binary_tree(array[:mid])
+    root.right = array_to_binary_tree(array[mid + 1:])
     return root
 
 

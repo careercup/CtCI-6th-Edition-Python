@@ -13,7 +13,7 @@ class Stack:
 
     def peek(self):
         if self.items:
-            return self.items[len(self.items) - 1]
+            return self.items[-1]
         return None
 
     def __len__(self):

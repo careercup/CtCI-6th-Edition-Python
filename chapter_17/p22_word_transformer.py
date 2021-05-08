@@ -1,5 +1,6 @@
-
 import collections
+
+
 def word_transformer(source, target, words):
     # state function
     # takes a word, gives the other words one hop away
@@ -15,51 +16,54 @@ def word_transformer(source, target, words):
                 if n_unequal_chars == 1:
                     res.append(word2)
         return res
-    #function to reconstruct the path from parent pointers after bfs
-    def reconstruct_path(parents,target):
-        res = []
-        res.append(target)
-        temp =target
+
+    # function to reconstruct the path from parent pointers after bfs
+    def reconstruct_path(parents, target):
+        res = [target]
+        temp = target
         while temp:
-            temp= parents[temp]
+            temp = parents[temp]
             res.append(temp)
-        return res[::-1] #list needs to be reversed since we need the path from source to target. parent pointers are in opposite directions by default
+        # list needs to be reversed since we need the path from source to target.
+        # parent pointers are in opposite directions by default
+        return res[::-1]
 
     # naive bfs loop
-    import collections
+
     q = collections.deque()
     visited = set()
     q.append(source)
     level = 0
-    #a dictionary to keep a track of the parent pointers
+    # a dictionary to keep a track of the parent pointers
     parents = collections.defaultdict(str)
-    parents[source]=None
+    parents[source] = None
 
     while q:
         for i in range(len(q)):
             word = q.popleft()
             if word == target:
-                path = reconstruct_path(parents,target)
-                return path,level
+                path = reconstruct_path(parents, target)
+                return path[1:]
             visited.add(word)
             # get neighbouring words
             neighs = state(word)
             for neigh in neighs:
                 if neigh not in visited:
-                    parents[neigh]= word
+                    parents[neigh] = word
                     q.append(neigh)
         level += 1
     return -1
 
-#test case 1
-source = "bit"
-target = "dog"
-dictionary = ["but", "put", "big", "pot", "pog", "dog", "lot"]
-print(word_transformer(source,target,dictionary))
 
+def test_word_transformer():
+    source = "bit"
+    target = "dog"
+    dictionary = ["but", "put", "big", "pot", "pog", "dog", "lot"]
+    expected = ["bit", "but", "put", "pot", "pog", "dog"]
+    assert word_transformer(source, target, dictionary) == expected
 
-#test case 2 (from ctci)
-source = "damp"
-target = "like"
-dictionary = ["damp","lime","limp","lamp","like"]
-print(word_transformer(source,target,dictionary))
+    source = "damp"
+    target = "like"
+    dictionary = ["damp", "lime", "limp", "lamp", "like"]
+    expected = ["damp", "lamp", "limp", "lime", "like"]
+    assert word_transformer(source, target, dictionary) == expected

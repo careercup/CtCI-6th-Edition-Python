@@ -1,14 +1,15 @@
-#o(n) time, o(n) space solution via sliding window.
-#better than the one provided in ctci.
+# o(n) time, o(n) space solution via sliding window.
+# better than the one provided in ctci.
 
-#find the smallest substring in s, which matches t.
 import collections
-def minWindow(s: str, t: str) -> str:
-    m, n = len(s), len(t)
-    hash = collections.defaultdict(int)
-    # store frequencies in hash
+
+
+def min_window(big_array, small_array):
+    n = len(small_array)
+    frequencies = collections.defaultdict(int)
+
     for i in range(n):
-        hash[t[i]] += 1
+        frequencies[small_array[i]] += 1
 
     # window invariant: 'contains all the chars in t'
     min_win_len = float("inf")
@@ -16,12 +17,12 @@ def minWindow(s: str, t: str) -> str:
     missing = n
     min_win_left = -1
     min_win_right = -1
-    for right, char in enumerate(s):
+    for right, char in enumerate(big_array):
         # insertion logic
-        if hash[char] > 0:
+        if frequencies[char] > 0:
             missing -= 1
         # nevertheless, insert the element
-        hash[char] -= 1
+        frequencies[char] -= 1
 
         if missing == 0:
 
@@ -31,19 +32,22 @@ def minWindow(s: str, t: str) -> str:
                     min_win_left = left
                     min_win_right = right
 
-                if hash[s[left]] == 0:
+                if frequencies[big_array[left]] == 0:
                     # then you are making a blunder
                     missing += 1
-                    hash[s[left]] += 1
+                    frequencies[big_array[left]] += 1
                     left += 1
                     # break
                 else:
-                    hash[s[left]] += 1
+                    frequencies[big_array[left]] += 1
                     left += 1
 
-    if min_win_len == float("inf"): return 
-    print(min_win_left,min_win_right)
+    if min_win_len == float("inf"):
+        return
+    return min_win_left, min_win_right
 
-s = "75902135791158897"
-t = "159"
-minWindow(s,t)
+
+def test_min_window():
+    s = "75902135791158897"
+    t = "159"
+    assert min_window(s, t) == (7, 10)

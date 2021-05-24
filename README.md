@@ -27,7 +27,7 @@ If you want to do everything really well, here are some guidelines. Solutions sh
  - work with Python 3.6 or greater
  - not depend on third-party libraries (like `numpy`)
  - follow [python style conventions](https://www.python.org/dev/peps/pep-0008/)
-   - camel_case for everything except classes
+   - lower_case_with_underscores for everything except classes
    - descriptive, longer variable names
  - be formatted using the [`black`](https://black.readthedocs.io/en/stable/) code formatter
  - include tests to prove they work. [pytest](https://docs.pytest.org/en/stable/) is supported

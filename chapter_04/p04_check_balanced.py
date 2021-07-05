@@ -5,7 +5,7 @@ class BinaryNode:
         self.right = None
 
 # Version 2: 
-# Traverse the tree and store the depth of each node in a list.
+# Traverse the tree and store the depth of each leaf node in a list.
 # Then compare the largest and smallest depth.
 def is_balanced_v2(node):
     depths = []

@@ -5,10 +5,11 @@ class BinaryNode:
         self.right = None
 
 # Version 2: 
-# Traverse the tree and store the depth of each leaf node in a list.
+# Traverse the tree and track the largest and smallest depth of each leaf node.
 # Then compare the largest and smallest depth.
 def is_balanced_v2(node):
-    depths = []
+    minDepth = 10 ** 100
+    maxDepth = -10 ** 100
     queue = [(node, 0)]
     visited = [node]
 
@@ -16,8 +17,10 @@ def is_balanced_v2(node):
         currNode, currDepth = queue.pop(0)
 
         if currNode.left is None and currNode.right is None:
-            if currDepth not in depths:
-                depths.append(currDepth)
+            if currDepth > maxDepth:
+                maxDepth = currDepth
+            if currDepth < minDepth:
+                minDepth = currDepth
         else:
             if currNode.left and currNode.left not in visited:
                 visited.append(currNode.left)
@@ -26,17 +29,25 @@ def is_balanced_v2(node):
                 visited.append(currNode.right)
                 queue.append((currNode.right, currDepth + 1))
 
-    return max(depths) - min(depths) < 2
+    return maxDepth - minDepth < 2
         
 
 def findMaxDepth(node, level = 0):
     if node is None:
         return level
+    if not node.left:
+        return findMaxDepth(node.right, level + 1)
+    if not node.right:
+        return findMaxDepth(node.left, level + 1)
     return max(findMaxDepth(node.left, level + 1), findMaxDepth(node.right, level + 1))
 
 def findMinDepth(node, level = 0):
     if node is None:
         return level
+    if not node.left:
+        return findMinDepth(node.right, level + 1)
+    if not node.right:
+        return findMinDepth(node.left, level + 1)
     return min(findMinDepth(node.left, level + 1), findMinDepth(node.right, level + 1))
 
 # Version 1:
@@ -73,6 +84,15 @@ def example():
     tree.left.right.left.left = BinaryNode(16)
     tree.left.right.left.right = BinaryNode(0)
     assert is_balanced_v1(tree) == is_balanced_v2(tree) == False
+
+    root = BinaryNode(7)
+    root.left = BinaryNode(2)
+    root.left.left = BinaryNode(4)
+    root.right = BinaryNode(3)
+    root.right.left = BinaryNode(8)
+    root.right.right = BinaryNode(9)
+    root.right.right.right = BinaryNode(10)
+    assert is_balanced_v1(root) == is_balanced_v2(root) == True
 
 
 if __name__ == "__main__":

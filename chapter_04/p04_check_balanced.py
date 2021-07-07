@@ -19,7 +19,7 @@ def is_balanced_v2(node):
 
         if curr_node.left is None and curr_node.right is None:
             if curr_depth > max_depth:
-                maxDepth = curr_depth
+                max_depth = curr_depth
             if curr_depth < min_depth:
                 min_depth = curr_depth
         else:
@@ -30,7 +30,7 @@ def is_balanced_v2(node):
                 visited.append(curr_node.right)
                 queue.append((curr_node.right, curr_depth + 1))
 
-    return maxDepth - min_depth < 2
+    return max_depth - min_depth < 2
 
 
 def find_max_depth(node, level=0):
@@ -64,11 +64,26 @@ def is_balanced_v1(node):
     return find_max_depth(node) - find_min_depth(node) < 2
 
 
-def example():
+def _gen_balanced_1():
     root = BinaryNode(1)
     root.left = BinaryNode(2)
-    assert is_balanced_v1(root) == is_balanced_v2(root) is True
+    return root
 
+
+def _gen_balanced_2():
+    root = BinaryNode(7)
+    root.left = BinaryNode(2)
+    root.left.left = BinaryNode(4)
+    root.right = BinaryNode(3)
+    root.right.left = BinaryNode(8)
+    root.right.right = BinaryNode(9)
+    root.right.right.right = BinaryNode(10)
+    return root
+
+
+def _gen_unbalanced_1():
+    root = BinaryNode(1)
+    root.left = BinaryNode(2)
     root.left.left = BinaryNode(4)
     root.left.right = BinaryNode(5)
     root.left.right.right = BinaryNode(6)
@@ -78,8 +93,10 @@ def example():
     root.right.right = BinaryNode(9)
     root.right.right.right = BinaryNode(10)
     root.right.right.right.right = BinaryNode(11)
-    assert is_balanced_v1(root) == is_balanced_v2(root) is False
+    return root
 
+
+def _gen_unbalanced_2():
     tree = BinaryNode(1)
     tree.left = BinaryNode(2)
     tree.right = BinaryNode(9)
@@ -91,17 +108,25 @@ def example():
     tree.left.right.left = BinaryNode(12)
     tree.left.right.left.left = BinaryNode(16)
     tree.left.right.left.right = BinaryNode(0)
-    assert is_balanced_v1(tree) == is_balanced_v2(tree) is False
+    return tree
 
-    root = BinaryNode(7)
-    root.left = BinaryNode(2)
-    root.left.left = BinaryNode(4)
-    root.right = BinaryNode(3)
-    root.right.left = BinaryNode(8)
-    root.right.right = BinaryNode(9)
-    root.right.right.right = BinaryNode(10)
-    assert is_balanced_v1(root) == is_balanced_v2(root) is True
+
+test_cases = [
+    (_gen_balanced_1, True),
+    (_gen_balanced_2, True),
+    (_gen_unbalanced_1, False),
+    (_gen_unbalanced_2, False),
+]
+
+testable_functions = [is_balanced_v1, is_balanced_v2]
+
+
+def test_is_balanced():
+    for tree_gen, expected in test_cases:
+        for is_balanced in testable_functions:
+            error_msg = f"{is_balanced.__name__} failed on {tree_gen.__name__}"
+            assert is_balanced(tree_gen()) == expected, error_msg
 
 
 if __name__ == "__main__":
-    example()
+    test_is_balanced()

@@ -23,7 +23,7 @@ def urlify_algo(string, length):
 
 def urlify_pythonic(text, length):
     """solution using standard library"""
-    return text.strip().replace(" ", "%20")
+    return text[:length].replace(" ", "%20")
 
 
 class Test(unittest.TestCase):

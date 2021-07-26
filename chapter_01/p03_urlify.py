@@ -32,8 +32,8 @@ class Test(unittest.TestCase):
     test_cases = {
         ("much ado about nothing      ", 22): "much%20ado%20about%20nothing",
         ("Mr John Smith       ", 13): "Mr%20John%20Smith",
-        (" a b    ", 4): '%20a%20b',
-        (" a b       ", 5): '%20a%20b%20',
+        (" a b    ", 4): "%20a%20b",
+        (" a b       ", 5): "%20a%20b%20",
     }
     testable_functions = [urlify_algo, urlify_pythonic]
 
@@ -41,7 +41,7 @@ class Test(unittest.TestCase):
         for urlify in self.testable_functions:
             for args, expected in self.test_cases.items():
                 actual = urlify(*args)
-                assert actual == expected, f'Failed {urlify.__name__} for: {[*args]}'
+                assert actual == expected, f"Failed {urlify.__name__} for: {[*args]}"
 
 
 if __name__ == "__main__":

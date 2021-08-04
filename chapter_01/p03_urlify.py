@@ -23,24 +23,25 @@ def urlify_algo(string, length):
 
 def urlify_pythonic(text, length):
     """solution using standard library"""
-    return text.strip().replace(" ", "%20")
+    return text[:length].replace(" ", "%20")
 
 
 class Test(unittest.TestCase):
     """Test Cases"""
 
-    test_cases = [
-        ("much ado about nothing      ", "much%20ado%20about%20nothing"),
-        ("Mr John Smith       ", "Mr%20John%20Smith"),
-    ]
+    test_cases = {
+        ("much ado about nothing      ", 22): "much%20ado%20about%20nothing",
+        ("Mr John Smith       ", 13): "Mr%20John%20Smith",
+        (" a b    ", 4): "%20a%20b",
+        (" a b       ", 5): "%20a%20b%20",
+    }
     testable_functions = [urlify_algo, urlify_pythonic]
 
     def test_urlify(self):
         for urlify in self.testable_functions:
-            for test_string, expected in self.test_cases:
-                stripped_length = len(test_string.rstrip(" "))
-                actual = urlify(test_string, stripped_length)
-                assert actual == expected
+            for args, expected in self.test_cases.items():
+                actual = urlify(*args)
+                assert actual == expected, f"Failed {urlify.__name__} for: {[*args]}"
 
 
 if __name__ == "__main__":

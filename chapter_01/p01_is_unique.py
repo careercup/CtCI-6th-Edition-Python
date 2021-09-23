@@ -49,6 +49,15 @@ def is_unique_chars_using_dictionary(string: str) -> bool:
     return True
 
 
+def is_unique_chars_using_set(string: str) -> bool:
+    characters_seen = set()
+    for char in string:
+        if char in characters_seen:
+            return False
+        characters_seen.add(char)
+    return True
+
+
 # O(NlogN)
 def is_unique_chars_sorting(string: str) -> bool:
     sorted_string = sorted(string)
@@ -75,6 +84,7 @@ class Test(unittest.TestCase):
         is_unique_chars_algorithmic,
         is_unique_bit_vector,
         is_unique_chars_using_dictionary,
+        is_unique_chars_using_set,
         is_unique_chars_sorting,
     ]
 

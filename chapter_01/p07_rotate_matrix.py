@@ -36,6 +36,11 @@ def rotate_matrix_pythonic(matrix):
     return result
 
 
+def rotate_matrix_pythonic_alternate(matrix):
+    """rotates a matrix 90 degrees clockwise"""
+    return [list(reversed(row)) for row in zip(*matrix)]
+
+
 class Test(unittest.TestCase):
 
     test_cases = [
@@ -57,7 +62,11 @@ class Test(unittest.TestCase):
             ],
         ),
     ]
-    testable_functions = [rotate_matrix_pythonic, rotate_matrix]
+    testable_functions = [
+        rotate_matrix_pythonic,
+        rotate_matrix,
+        rotate_matrix_pythonic_alternate,
+    ]
 
     def test_rotate_matrix(self):
         for f in self.testable_functions:

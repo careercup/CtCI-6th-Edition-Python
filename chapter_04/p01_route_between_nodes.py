@@ -7,9 +7,9 @@ from collections import deque
 # |    |
 # C -- D
 # |
-# E -- F -- G -- H
+# E -- F -- G --> H
 #      | \
-#      O   I -- J -- K
+#      O   I -- J --> K
 #               |
 #               L
 
@@ -57,12 +57,8 @@ class Test(unittest.TestCase):
         "E": ["C", "F"],
         "F": ["E", "O", "I", "G"],
         "G": ["F", "H"],
-        "H": ["G"],
-        "I": ["F", "J"],
-        "O": ["F"],
+        "I": ["F", "J"],  
         "J": ["K", "L", "I"],
-        "K": ["J"],
-        "L": ["J"],
         "P": ["Q", "R"],
         "Q": ["P", "R"],
         "R": ["P", "Q"],

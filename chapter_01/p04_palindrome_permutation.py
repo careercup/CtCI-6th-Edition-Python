@@ -36,7 +36,7 @@ def char_number(c):
 
 def is_palindrome_permutation_pythonic(phrase):
     """function checks if a string is a permutation of a palindrome or not"""
-    counter = Counter(phrase.replace(" ", "").lower())
+    counter = Counter([c for c in phrase.lower() if c in string.ascii_lowercase])
     return sum(val % 2 for val in counter.values()) <= 1
 
 
@@ -47,6 +47,7 @@ class Test(unittest.TestCase):
         ("abba", True),
         ("aabb", True),
         ("a-bba", True),
+        ("a-bba!", True),
         ("Tact Coa", True),
         ("jhsabckuj ahjsbckj", True),
         ("Able was I ere I saw Elba", True),

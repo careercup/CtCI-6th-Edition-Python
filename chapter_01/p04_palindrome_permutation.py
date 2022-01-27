@@ -34,6 +34,20 @@ def char_number(c):
     return -1
 
 
+def is_palindrome_bit_vector(phrase):
+    """checks if a string is a permutation of a palindrome"""
+    phrase = phrase.replace(" ", "").lower()
+    r = 0
+    for c in phrase:
+        val = ord(c)
+        mask = 1 << val
+        if r & mask:
+            r &= ~mask
+        else:
+            r |= mask
+    return (r - 1) & r == 0
+
+
 def is_palindrome_permutation_pythonic(phrase):
     """function checks if a string is a permutation of a palindrome or not"""
     counter = Counter(phrase.replace(" ", "").lower())
@@ -56,7 +70,7 @@ class Test(unittest.TestCase):
         ("no x in nixon", True),
         ("azAZ", True),
     ]
-    testable_functions = [is_palindrome_permutation, is_palindrome_permutation_pythonic]
+    testable_functions = [is_palindrome_permutation, is_palindrome_bit_vector, is_palindrome_permutation_pythonic]
 
     def test_pal_perm(self):
         for f in self.testable_functions:

@@ -1,10 +1,11 @@
 # O(N)
+import string
 import unittest
 from collections import Counter
 
 
 def clean_phrase(phrase):
-    return phrase.replace(" ", "").lower()
+    return [c for c in phrase.lower() if c in string.ascii_lowercase]
 
 
 def is_palindrome_permutation(phrase):
@@ -64,6 +65,7 @@ class Test(unittest.TestCase):
         ("abba", True),
         ("aabb", True),
         ("a-bba", True),
+        ("a-bba!", True),
         ("Tact Coa", True),
         ("jhsabckuj ahjsbckj", True),
         ("Able was I ere I saw Elba", True),

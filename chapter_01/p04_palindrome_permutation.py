@@ -70,9 +70,11 @@ class Test(unittest.TestCase):
         ("no x in nixon", True),
         ("azAZ", True),
     ]
-    testable_functions = [is_palindrome_permutation,
-                          is_palindrome_bit_vector,
-                          is_palindrome_permutation_pythonic]
+    testable_functions = [
+        is_palindrome_permutation,
+        is_palindrome_bit_vector,
+        is_palindrome_permutation_pythonic,
+    ]
 
     def test_pal_perm(self):
         for f in self.testable_functions:

@@ -10,7 +10,7 @@ def flip_bit_to_win(number):
                 temp_i = i
                 cnt0 = 1
             else:  # second 0
-                max_cnt = cnt
+                max_cnt = max(cnt, max_cnt)
                 i = temp_i  # rewind
                 cnt0 = 0
                 cnt = 0
@@ -34,7 +34,13 @@ def flip_bit_to_win_alt(num):
     return longest
 
 
-test_cases = [(0b0, 1), (0b111, 4), (0b10011100111, 4), (0b11011101111, 8)]
+test_cases = [
+    (0b0, 1),
+    (0b111, 4),
+    (0b10011100111, 4),
+    (0b10110110111, 6),
+    (0b11011101111, 8),
+]
 testable_functions = [flip_bit_to_win, flip_bit_to_win_alt]
 
 

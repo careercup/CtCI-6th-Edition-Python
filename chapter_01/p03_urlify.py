@@ -6,7 +6,9 @@ def urlify_algo(string, length):
     """replace spaces with %20 and removes trailing spaces"""
     # convert to list because Python strings are immutable
     char_list = list(string)
-    new_index = len(char_list)
+    # count spaces and find current length
+    space_count = string.count(' ')
+    new_index = len(char_list) + space_count * 2
 
     for i in reversed(range(length)):
         if char_list[i] == " ":

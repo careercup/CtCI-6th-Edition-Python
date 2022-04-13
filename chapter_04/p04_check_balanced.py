@@ -127,6 +127,37 @@ def test_is_balanced():
             error_msg = f"{is_balanced.__name__} failed on {tree_gen.__name__}"
             assert is_balanced(tree_gen()) == expected, error_msg
 
+#Alternative Recursive Approach
+
+# Balanced Tree
+class Node():
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def helper(root):
+    if root is None:
+        return 0
+    leftheight = helper(root.left)
+    if leftheight == -1:
+        return -1
+        
+    rightheight = helper(root.right)
+    if rightheight == -1:
+        return -1
+        
+    if abs(leftheight - rightheight) > 1:
+        return -1
+        
+    return max(leftheight, rightheight) + 1
+        
+def isBalanced(root):
+    return helper(root) > -1
+    
+    
+    
 
 if __name__ == "__main__":
     test_is_balanced()

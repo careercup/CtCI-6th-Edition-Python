@@ -64,6 +64,28 @@ def is_balanced_v1(node):
     return find_max_depth(node) - find_min_depth(node) < 2
 
 
+# Alternative Recursive Approach
+def _find_height(root):
+    if root is None:
+        return 0
+    left_height = _find_height(root.left)
+    if left_height == -1:
+        return -1
+
+    right_height = _find_height(root.right)
+    if right_height == -1:
+        return -1
+
+    if abs(left_height - right_height) > 1:
+        return -1
+
+    return max(left_height, right_height) + 1
+
+
+def is_balanced_v3(root):
+    return _find_height(root) > -1
+
+
 def _gen_balanced_1():
     root = BinaryNode(1)
     root.left = BinaryNode(2)
@@ -118,7 +140,7 @@ test_cases = [
     (_gen_unbalanced_2, False),
 ]
 
-testable_functions = [is_balanced_v1, is_balanced_v2]
+testable_functions = [is_balanced_v1, is_balanced_v2, is_balanced_v3]
 
 
 def test_is_balanced():

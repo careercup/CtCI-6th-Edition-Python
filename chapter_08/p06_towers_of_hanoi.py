@@ -1,90 +1,119 @@
-import sys
+from collections import deque
+
+
+class Stack:
+    def __init__(self, stack_size) -> None:
+        self.stack_size = stack_size
+        self.stack = deque()
+
+    def __str__(self):
+        return " ".join(reversed([str(val) for val in self.stack]))
+
+    def push(self, val):
+        if len(self.stack) == self.stack_size:
+            return
+        self.stack.append(val)
+
+    def pop(self):
+        if len(self.stack):
+            return self.stack.pop()
+        return None
+
+    def top(self):
+        if len(self.stack):
+            return self.stack[-1]
+        return None
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def get_stack(self):
+        return self.stack
 
 
 class MultiStack:
-    def __init__(self, stacksize):
-        self.numstacks = 3
-        self.array = [0] * (stacksize * self.numstacks)
-        self.sizes = [0] * self.numstacks
-        self.stacksize = stacksize
-        self.minvals = [sys.maxsize] * (stacksize * self.numstacks)
+    def __init__(self, stack_size, num_stacks=3):
+        self.stack_size = stack_size
+        self.num_stacks = num_stacks
+        self.multistack = [Stack(self.stack_size) for _ in range(self.num_stacks)]
 
-    def push(self, item, stacknum):
-        if self.is_full(stacknum):
-            raise Exception("Stack is full")
-        self.sizes[stacknum] += 1
-        if self.is_empty(stacknum):
-            self.minvals[self.index_of_top(stacknum)] = item
-        else:
-            self.minvals[self.index_of_top(stacknum)] = min(
-                item, self.minvals[self.index_of_top(stacknum) - 1]
-            )
-        self.array[self.index_of_top(stacknum)] = item
+    def stack_num_check(f):
+        def wrapper(self, *args):
+            if args[0] >= self.num_stacks:
+                return None
+            return f(self, *args)
 
-    def pop(self, stacknum):
-        if self.is_empty(stacknum):
-            raise Exception("Stack is empty")
-        value = self.array[self.index_of_top(stacknum)]
-        self.array[self.index_of_top(stacknum)] = 0
-        self.sizes[stacknum] -= 1
-        return value
+        return wrapper
 
-    def peek(self, stacknum):
-        if self.is_empty(stacknum):
-            raise Exception("Stack is empty")
-        return self.array[self.index_of_top(stacknum)]
+    @stack_num_check
+    def push(self, stack_num, val):
+        return self.multistack[stack_num].push(val)
 
-    def minimum(self, stacknum):
-        return self.minvals[self.index_of_top(stacknum)]
+    @stack_num_check
+    def top(self, stack_num):
+        return self.multistack[stack_num].top()
 
-    def is_empty(self, stacknum):
-        return self.sizes[stacknum] == 0
+    @stack_num_check
+    def pop(self, stack_num):
+        return self.multistack[stack_num].pop()
 
-    def is_full(self, stacknum):
-        return self.sizes[stacknum] == self.stacksize
+    @stack_num_check
+    def is_empty(self, stack_num):
+        return self.multistack[stack_num].is_empty()
 
-    def index_of_top(self, stacknum):
-        offset = stacknum * self.stacksize
-        return offset + self.sizes[stacknum] - 1
+    @stack_num_check
+    def show_stack(self, stack_num):
+        print(str(self.multistack[stack_num]))
 
-    def size(self, stacknum):
-        return self.sizes[stacknum]
+    @stack_num_check
+    def get_stack(self, stack_num):
+        return self.multistack[stack_num].get_stack()
 
+    def __str__(self):
+        str_result = ""
+        idx = 0
+        for stack in self.multistack:
+            str_result += f"Stack {idx}\n"
+            str_result += str(stack) + "\n"
+            idx += 1
+        return str_result
 
-def f(n, start, end, buff, stack):
-    if n == 1:
-        stack.push(stack.pop(start), end)
-    else:
-        f(n - 1, start, buff, end, stack)
-        f(1, start, end, buff, stack)
-        f(n - 1, buff, end, start, stack)
+    def __repr__(self):
+        return str(self)
 
 
-def print_tower(newstack):
-    # while not newstack.is_empty(0):
-    # print(newstack.pop(0))
-    # print("".join("-" for i in range(newstack.pop(0))))
-    # while not newstack.is_empty(1):
-    # print(newstack.pop(1))
-    # print("".join("-" for i in range(newstack.pop(1))))
-    while not newstack.is_empty(2):
-        # print(newstack.pop(2))
-        print("".join("-" for i in range(newstack.pop(2))))
+class TOH:
+    def __init__(self, stack_size):
+        self.stack_size = stack_size
+        self.stacks = MultiStack(stack_size)
+        self.init_first_stack()
 
+    def init_first_stack(self):
+        for val in range(self.stack_size, 0, -1):
+            self.stacks.push(0, val)
 
-def fill_tower(n):
-    newstack = MultiStack(n * 3)
-    for i in range(n, 0, -1):
-        newstack.push(i, 0)
-    return newstack
+    def solve(self, debug=True):
+        self.debug = debug
+        return self.toh_solve(self.stack_size, 0, 1, 2)
 
+    def toh_solve(self, n, A, B, C):
+        if n > 0:
+            self.toh_solve(n - 1, A, C, B)
+            if self.debug:
+                print(f"{self.stacks.top(A)} -> Stack {C}")
+            self.stacks.push(C, self.stacks.pop(A))
+            self.toh_solve(n - 1, B, A, C)
 
-def example():
-    n = 3
-    newstack = fill_tower(n)
-    f(n, 0, 2, 1, newstack)
-    print_tower(newstack)
+    def print_stacks(self):
+        print(self.stacks)
+
+    def get_stack(self, stack_num):
+        return self.stacks.get_stack(stack_num)
 
 
 if __name__ == "__main__":
-    example()
+    for test_case in range(1, 10):
+        toh = TOH(test_case)
+        toh.solve(debug=False)
+        assert toh.get_stack(2) == deque([val for val in range(test_case, 0, -1)])
+        assert toh.get_stack(0) == toh.get_stack(1) == deque()

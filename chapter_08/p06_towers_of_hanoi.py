@@ -37,35 +37,35 @@ class MultiStack:
         self.num_stacks = num_stacks
         self.multistack = [Stack(self.stack_size) for _ in range(self.num_stacks)]
 
-    def stack_num_check(f):
+    def __stack_num_check(f):
         def wrapper(self, *args):
-            if args[0] >= self.num_stacks:
-                return None
+            if args[0] >= self.num_stacks or args[0] < 0:
+                raise Exception("stack_num invalid")
             return f(self, *args)
 
         return wrapper
 
-    @stack_num_check
+    @__stack_num_check
     def push(self, stack_num, val):
         return self.multistack[stack_num].push(val)
 
-    @stack_num_check
+    @__stack_num_check
     def top(self, stack_num):
         return self.multistack[stack_num].top()
 
-    @stack_num_check
+    @__stack_num_check
     def pop(self, stack_num):
         return self.multistack[stack_num].pop()
 
-    @stack_num_check
+    @__stack_num_check
     def is_empty(self, stack_num):
         return self.multistack[stack_num].is_empty()
 
-    @stack_num_check
+    @__stack_num_check
     def show_stack(self, stack_num):
         print(str(self.multistack[stack_num]))
 
-    @stack_num_check
+    @__stack_num_check
     def get_stack(self, stack_num):
         return self.multistack[stack_num].get_stack()
 
@@ -86,23 +86,23 @@ class TOH:
     def __init__(self, stack_size):
         self.stack_size = stack_size
         self.stacks = MultiStack(stack_size)
-        self.init_first_stack()
+        self.__init_first_stack()
 
-    def init_first_stack(self):
+    def __init_first_stack(self):
         for val in range(self.stack_size, 0, -1):
             self.stacks.push(0, val)
 
     def solve(self, debug=True):
         self.debug = debug
-        return self.toh_solve(self.stack_size, 0, 1, 2)
+        return self.__toh_solve(self.stack_size, 0, 1, 2)
 
-    def toh_solve(self, n, A, B, C):
+    def __toh_solve(self, n, A, B, C):
         if n > 0:
-            self.toh_solve(n - 1, A, C, B)
+            self.__toh_solve(n - 1, A, C, B)
             if self.debug:
                 print(f"{self.stacks.top(A)} -> Stack {C}")
             self.stacks.push(C, self.stacks.pop(A))
-            self.toh_solve(n - 1, B, A, C)
+            self.__toh_solve(n - 1, B, A, C)
 
     def print_stacks(self):
         print(self.stacks)

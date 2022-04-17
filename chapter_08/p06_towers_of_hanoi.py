@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from collections import deque
 
 
@@ -96,13 +97,13 @@ class TOH:
         self.debug = debug
         return self.__toh_solve(self.stack_size, 0, 1, 2)
 
-    def __toh_solve(self, n, A, B, C):
+    def __toh_solve(self, n, a, b, c):
         if n > 0:
-            self.__toh_solve(n - 1, A, C, B)
+            self.__toh_solve(n - 1, a, c, b)
             if self.debug:
-                print(f"{self.stacks.top(A)} -> Stack {C}")
-            self.stacks.push(C, self.stacks.pop(A))
-            self.__toh_solve(n - 1, B, A, C)
+                print(f"{self.stacks.top(a)} -> Stack {c}")
+            self.stacks.push(c, self.stacks.pop(a))
+            self.__toh_solve(n - 1, b, a, c)
 
     def print_stacks(self):
         print(self.stacks)
@@ -115,5 +116,5 @@ if __name__ == "__main__":
     for test_case in range(1, 10):
         toh = TOH(test_case)
         toh.solve(debug=False)
-        assert toh.get_stack(2) == deque([val for val in range(test_case, 0, -1)])
+        assert toh.get_stack(2) == deque(list(range(test_case, 0, -1)))
         assert toh.get_stack(0) == toh.get_stack(1) == deque()

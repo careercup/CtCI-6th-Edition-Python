@@ -9,8 +9,8 @@ class BinaryNode:
 # Traverse the tree and track the largest and smallest depth of each leaf node.
 # Then compare the largest and smallest depth.
 def is_balanced_v2(node):
-    min_depth = 10 ** 100
-    max_depth = -(10 ** 100)
+    min_depth = 10**100
+    max_depth = -(10**100)
     queue = [(node, 0)]
     visited = [node]
 

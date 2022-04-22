@@ -55,7 +55,7 @@ class NumericLinkedList(LinkedList):
     def numeric_value(self):
         number = 0
         for place, node in enumerate(self):
-            number += node.value * 10 ** place
+            number += node.value * 10**place
         return number
 
 

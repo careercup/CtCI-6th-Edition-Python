@@ -20,12 +20,12 @@ def bin_to_string(number):
 
 
 def bin_to_string_alt(number):
-    number_s31 = int(number * (2 ** 32))
-    if number_s31 > 2 ** 32:
+    number_s31 = int(number * (2**32))
+    if number_s31 > 2**32:
         return "ERROR"
 
-    if number_s31 == (2 ** 32):
-        number_s31 = 2 ** 32 - 1
+    if number_s31 == (2**32):
+        number_s31 = 2**32 - 1
 
     ans = ""
     for _ in range(32):

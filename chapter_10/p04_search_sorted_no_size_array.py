@@ -9,7 +9,7 @@ def sorted_nosize_search(listy, num):
             if temp > num:
                 limit = True
             else:
-                index = 2 ** exp_backoff
+                index = 2**exp_backoff
                 exp_backoff += 1
         except IndexError:
             limit = True

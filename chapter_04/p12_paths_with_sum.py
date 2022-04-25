@@ -65,6 +65,37 @@ def increment(hashmap, key, delta):
     if hashmap[key] == 0:
         hashmap.pop(key)
 
+#Question 12; Alternative Approach 
+class tree:
+    def __init__(self, value=None, left= None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+    def path_sum(self, root, target_sum):
+        if root is None: return 0
+        return self.path_sum_helper(root, target_sum, [])
+
+    def path_sum_helper(self, root, target_sum, current_path):
+        if root is None: #edge case if there is no node
+            return 0
+        current_path.append(root.val) #append the starting node value to path
+        path_sum, path_count = 0,0 #initially no path ---> no count
+        for p in range(len(current_path)-1,-1,-1): #for every single potentials path
+            path_sum += current_path[p] #add current selected path to the paths
+            if path_sum == target_sum: #if meet the target sum
+                path_count +=1 #add up to the number of counts
+            #all potential paths in left n right sub trees
+            path_count = path_count + self.path_sum_helper(
+                root.left,target_sum,current_path) + self.path_sum_helper(
+                    root.right, target_sum, current_path
+                )
+        del current_path[p] #delete the calculated path from paths
+        return path_count 
+
+
+
+
 
 if __name__ == "__main__":
     t1 = BinaryTree()

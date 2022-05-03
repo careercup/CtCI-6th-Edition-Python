@@ -1,35 +1,31 @@
-from abc import abstractmethod
 from collections import deque
 
 
 class Stack:
     def __init__(self, stack_size) -> None:
         self.stack_size = stack_size
-        self.stack = deque()
+        self._stack = deque()
 
     def __str__(self):
-        return " ".join(reversed([str(val) for val in self.stack]))
+        return " ".join(reversed([str(val) for val in self._stack]))
 
     def push(self, val):
-        if len(self.stack) == self.stack_size:
+        if len(self._stack) == self.stack_size:
             return
-        self.stack.append(val)
+        self._stack.append(val)
 
     def pop(self):
-        if len(self.stack):
-            return self.stack.pop()
-        return None
+        if len(self._stack):
+            return self._stack.pop()
+        raise Exception("Stack Empty")
 
     def top(self):
-        if len(self.stack):
-            return self.stack[-1]
-        return None
+        if len(self._stack):
+            return self._stack[-1]
+        raise Exception("Stack Empty")
 
     def is_empty(self):
-        return len(self.stack) == 0
-
-    def get_stack(self):
-        return self.stack
+        return len(self._stack) == 0
 
 
 class MultiStack:
@@ -38,83 +34,67 @@ class MultiStack:
         self.num_stacks = num_stacks
         self.multistack = [Stack(self.stack_size) for _ in range(self.num_stacks)]
 
-    def __stack_num_check(f):
-        def wrapper(self, *args):
-            if args[0] >= self.num_stacks or args[0] < 0:
-                raise Exception("stack_num invalid")
-            return f(self, *args)
-
-        return wrapper
-
-    @__stack_num_check
-    def push(self, stack_num, val):
-        return self.multistack[stack_num].push(val)
-
-    @__stack_num_check
-    def top(self, stack_num):
-        return self.multistack[stack_num].top()
-
-    @__stack_num_check
-    def pop(self, stack_num):
-        return self.multistack[stack_num].pop()
-
-    @__stack_num_check
-    def is_empty(self, stack_num):
-        return self.multistack[stack_num].is_empty()
-
-    @__stack_num_check
-    def show_stack(self, stack_num):
-        print(str(self.multistack[stack_num]))
-
-    @__stack_num_check
     def get_stack(self, stack_num):
-        return self.multistack[stack_num].get_stack()
+        if 0 > stack_num >= self.num_stacks:
+            raise Exception("stack_num invalid")
+        return self.multistack[stack_num]
+
+    def push(self, stack_num, val):
+        return self.get_stack(stack_num).push(val)
+
+    def top(self, stack_num):
+        return self.get_stack(stack_num).top()
+
+    def pop(self, stack_num):
+        return self.get_stack(stack_num).pop()
+
+    def is_empty(self, stack_num):
+        return self.get_stack(stack_num).is_empty()
 
     def __str__(self):
-        str_result = ""
-        idx = 0
-        for stack in self.multistack:
-            str_result += f"Stack {idx}\n"
-            str_result += str(stack) + "\n"
-            idx += 1
-        return str_result
+        str_result = [
+            f"Stack {idx}\n{stack}" for idx, stack in enumerate(self.multistack)
+        ]
+        return "\n".join(str_result)
 
     def __repr__(self):
         return str(self)
 
 
-class TOH:
-    def __init__(self, stack_size):
+class TowersOfHanoi:
+    def __init__(self, stack_size, debug=False):
         self.stack_size = stack_size
-        self.stacks = MultiStack(stack_size)
+        self.debug = debug
+        self._stacks = MultiStack(stack_size)
         self.__init_first_stack()
 
     def __init_first_stack(self):
         for val in range(self.stack_size, 0, -1):
-            self.stacks.push(0, val)
+            self._stacks.push(0, val)
 
-    def solve(self, debug=True):
-        self.debug = debug
+    def solve(self):
+        if self.debug:
+            print(f"Solving Towers of Hanoi - {self.stack_size} size")
         return self.__toh_solve(self.stack_size, 0, 1, 2)
 
-    def __toh_solve(self, n, a, b, c):
+    def __toh_solve(self, n, A, B, C):
         if n > 0:
-            self.__toh_solve(n - 1, a, c, b)
+            self.__toh_solve(n - 1, A, C, B)
             if self.debug:
-                print(f"{self.stacks.top(a)} -> Stack {c}")
-            self.stacks.push(c, self.stacks.pop(a))
-            self.__toh_solve(n - 1, b, a, c)
+                print(f"Plate {self._stacks.top(A)} -> Stack {C}")
+            self._stacks.push(C, self._stacks.pop(A))
+            self.__toh_solve(n - 1, B, A, C)
 
-    def print_stacks(self):
-        print(self.stacks)
+    def __str__(self):
+        return str(self._stacks)
 
     def get_stack(self, stack_num):
-        return self.stacks.get_stack(stack_num)
+        return self._stacks.get_stack(stack_num)._stack
 
 
 if __name__ == "__main__":
     for test_case in range(1, 10):
-        toh = TOH(test_case)
-        toh.solve(debug=False)
-        assert toh.get_stack(2) == deque(list(range(test_case, 0, -1)))
+        toh = TowersOfHanoi(test_case, debug=False)
+        toh.solve()
+        assert toh.get_stack(2) == deque([val for val in range(test_case, 0, -1)])
         assert toh.get_stack(0) == toh.get_stack(1) == deque()

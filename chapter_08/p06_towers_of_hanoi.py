@@ -1,8 +1,10 @@
 from collections import deque
 
+
 # Custom Exceptions
 class StackTooBigError(Exception):
     pass
+
 
 class Stack:
     def __init__(self, stack_size) -> None:
@@ -76,13 +78,13 @@ class TowersOfHanoi:
             print(f"Solving Towers of Hanoi - {self.stack_size} size")
         return self.__toh_solve(self.stack_size, 0, 1, 2)
 
-    def __toh_solve(self, n, A, B, C):
+    def __toh_solve(self, n, a, b, c):
         if n > 0:
-            self.__toh_solve(n - 1, A, C, B)
+            self.__toh_solve(n - 1, a, c, b)
             if self.debug:
-                print(f"Plate {self._stacks.top(A)} -> Stack {C}")
-            self._stacks.push(C, self._stacks.pop(A))
-            self.__toh_solve(n - 1, B, A, C)
+                print(f"Plate {self._stacks.top(a)} -> Stack {c}")
+            self._stacks.push(c, self._stacks.pop(a))
+            self.__toh_solve(n - 1, b, a, c)
 
     def __str__(self):
         return str(self._stacks)
@@ -95,5 +97,5 @@ if __name__ == "__main__":
     for test_case in range(1, 10):
         toh = TowersOfHanoi(test_case, debug=False)
         toh.solve()
-        assert toh.get_stack(2) == deque([val for val in range(test_case, 0, -1)])
+        assert toh.get_stack(2) == deque(range(test_case, 0, -1))
         assert toh.get_stack(0) == toh.get_stack(1) == deque()

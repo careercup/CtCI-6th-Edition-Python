@@ -1,5 +1,8 @@
 from collections import deque
 
+# Custom Exceptions
+class StackTooBigError(Exception):
+    pass
 
 class Stack:
     def __init__(self, stack_size) -> None:
@@ -11,21 +14,20 @@ class Stack:
 
     def push(self, val):
         if len(self._stack) == self.stack_size:
-            return
+            raise StackTooBigError("stack already reached max size")
         self._stack.append(val)
 
     def pop(self):
-        if len(self._stack):
+        try:
             return self._stack.pop()
-        raise Exception("Stack Empty")
+        except IndexError:
+            raise IndexError("pop attempted from an empty stack")
 
     def top(self):
-        if len(self._stack):
+        try:
             return self._stack[-1]
-        raise Exception("Stack Empty")
-
-    def is_empty(self):
-        return len(self._stack) == 0
+        except IndexError:
+            raise IndexError("top attempted from an empty stack")
 
 
 class MultiStack:
@@ -36,7 +38,7 @@ class MultiStack:
 
     def get_stack(self, stack_num):
         if 0 > stack_num >= self.num_stacks:
-            raise Exception("stack_num invalid")
+            raise IndexError("stack_num invalid")
         return self.multistack[stack_num]
 
     def push(self, stack_num, val):
@@ -47,9 +49,6 @@ class MultiStack:
 
     def pop(self, stack_num):
         return self.get_stack(stack_num).pop()
-
-    def is_empty(self, stack_num):
-        return self.get_stack(stack_num).is_empty()
 
     def __str__(self):
         str_result = [

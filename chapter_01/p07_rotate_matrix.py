@@ -26,6 +26,22 @@ def rotate_matrix(matrix):
     return matrix
 
 
+def rotate_matrix_double_swap(matrix):
+    n = len(matrix)
+    for i in range(n):
+        for j in range(i, n):
+            temp = matrix[i][j]
+            matrix[i][j] = matrix[j][i]
+            matrix[j][i] = temp
+
+    for i in range(n):
+        for j in range(int(n / 2)):
+            temp = matrix[i][j]
+            matrix[i][j] = matrix[i][n - 1 - j]
+            matrix[i][n - 1 - j] = temp
+    return matrix
+
+
 def rotate_matrix_pythonic(matrix):
     """rotates a matrix 90 degrees clockwise"""
     n = len(matrix)
@@ -66,6 +82,7 @@ class Test(unittest.TestCase):
         rotate_matrix_pythonic,
         rotate_matrix,
         rotate_matrix_pythonic_alternate,
+        rotate_matrix_double_swap,
     ]
 
     def test_rotate_matrix(self):

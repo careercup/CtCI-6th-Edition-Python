@@ -27,9 +27,6 @@ def check_permutation_by_count(str1, str2):
 
 
 def check_permutation_pythonic(str1, str2):
-    if len(str1) != len(str2):
-        return False
-
     return Counter(str1) == Counter(str2)
 
 

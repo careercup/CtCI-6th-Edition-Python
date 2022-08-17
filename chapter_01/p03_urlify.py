@@ -5,6 +5,11 @@ import unittest
 def urlify_algo(string, length):
     """replace spaces with %20 and removes trailing spaces"""
     # convert to list because Python strings are immutable
+    
+    # there must be at least two trailing spaces for this algorithm to work
+    if ord(string[-1]) != ord(string[-2]) != 32:
+        return False
+    
     char_list = list(string)
     new_index = len(char_list)
 

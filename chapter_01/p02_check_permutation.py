@@ -27,7 +27,8 @@ def check_permutation_by_count(str1, str2):
 
 
 def check_permutation_pythonic(str1, str2):
-    # short-circuit to avoid instantiating a Counter which for big strings may be an expensive operation
+    # short-circuit to avoid instantiating a Counter which for big strings
+    # may be an expensive operation
     if len(str1) != len(str2):
         return False
 

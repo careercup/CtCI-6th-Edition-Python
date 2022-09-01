@@ -21,7 +21,7 @@ class Person:
 class Employee(Person):
     def __init__(self, call_center, **kwargs):
         super().__init__(**kwargs)
-        self.grade = EMPLOYEE
+        self.rank = EMPLOYEE
         self.superior = None
         self.current_call = None
         self.call_center = call_center
@@ -52,7 +52,7 @@ class Employee(Person):
         self.take_next_call()
 
     def take_next_call(self):
-        queue_ = self.call_center.queues[self.grade]
+        queue_ = self.call_center.queues[self.rank]
         if not queue_.empty():
             next_call = queue_.get()
             self.take_call(next_call)
@@ -64,21 +64,21 @@ class Respondent(Employee):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.superior = MANAGER
-        self.grade = RESPONDENT
+        self.rank = RESPONDENT
 
 
 class Manager(Employee):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.superior = DIRECTOR
-        self.grade = MANAGER
+        self.rank = MANAGER
 
 
 class Director(Employee):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.superior = None
-        self.grade = DIRECTOR
+        self.rank = DIRECTOR
 
     def escalate_call(self):
         pass
@@ -99,13 +99,21 @@ class Call:
         self.end_time = None
 
     def __repr__(self):
-        resp = f"Call from {self.person}, started at {self.start_time}. Employees in charge: {'->'.join(str(employee) for employee in self.employees)}."
+        resp = (
+            f"Call from {self.person}, started at {self.start_time}."
+            + "Employees in charge: "
+            + f"{'->'.join(str(employee) for employee in self.employees)}."
+        )
         if self.end_time is not None:
             resp += f" Ended at {self.end_time}."
         return resp
 
     def __str__(self):
-        resp = f"Call from {self.person}, started at {self.start_time}. Employees in charge: {'->'.join(str(employee) for employee in self.employees)}."
+        resp = (
+            f"Call from {self.person}, started at {self.start_time}."
+            + "Employees in charge: "
+            + f"{'->'.join(str(employee) for employee in self.employees)}."
+        )
         if self.end_time is not None:
             resp += f" Ended at {self.end_time}."
         return resp
@@ -140,7 +148,7 @@ class CallCenter:
 
     def add_employees(self, employees_list: list):
         for employee in employees_list:
-            self.employees[employee.grade].append(employee)
+            self.employees[employee.rank].append(employee)
 
     def print_archives(self):
         print("Calls archives:")

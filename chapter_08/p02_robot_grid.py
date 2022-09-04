@@ -65,6 +65,42 @@ def is_path_memoized(maze, row, col, path, failed_points):
     return False
 
 
+def find_path(grid: list) -> list:
+    path = []
+    visited = {}
+    return _find_path(grid, 0, 0, path, visited)[0]
+
+
+def _find_path(grid: list, r: int, c: int, path: list, visited: list) -> tuple:
+    path.append((r, c))
+    visited[r, c] = 1
+    if r == len(grid) - 1 and c == len(grid[0]) - 1:
+        return path, True
+    for dr, dc in ((1, 0), (0, 1)):
+        if (
+            r + dr < len(grid)
+            and c + dc < len(grid[0])
+            and not (r + dr, c + dc) in visited
+            and grid[r + dr][c + dc]
+        ):
+            path, found_path = _find_path(grid, r + dr, c + dc, path, visited)
+            if found_path:
+                return path, True
+    path.pop()
+    return path, False
+
+
+def test_path():
+    testable_functions = [get_path, get_path_memoized, find_path]
+    grid = [
+        [True, True, True, False, True],
+        [False, True, False, True, True],
+        [True, True, True, True, True],
+    ]
+    path = [(0, 0), (0, 1), (1, 1), (2, 1), (2, 2), (2, 3), (2, 4)]
+    for f in testable_functions:
+        assert f(grid) == path
+
+
 if __name__ == "__main__":
-    print(get_path([[True, True], [True, True]]))
-    print(get_path_memoized([[True, True], [False, True]]))
+    test_path()

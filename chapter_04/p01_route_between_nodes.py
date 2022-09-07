@@ -47,6 +47,30 @@ def is_route_bfs(graph, start, end):
     return False
 
 
+def is_route_bidirectional(graph, start, end):
+    to_visit = deque()
+    to_visit.append(start)
+    to_visit.append(end)
+    visited_start = set()
+    visited_start.add(start)
+    visited_end = set()
+    visited_end.add(end)
+    while to_visit:
+        node = to_visit.popleft()
+
+        if node in visited_start and node in visited_end:
+            return True
+
+        for y in graph[node]:
+            if node in visited_start and y not in visited_start:
+                visited_start.add(y)
+                to_visit.append(y)
+            if node in visited_end and y not in visited_end:
+                visited_end.add(y)
+                to_visit.append(y)
+    return False
+
+
 class Test(unittest.TestCase):
 
     graph = {
@@ -88,6 +112,11 @@ class Test(unittest.TestCase):
     def test_is_route_bfs(self):
         for [start, end, expected] in self.tests:
             actual = is_route_bfs(self.graph, start, end)
+            assert actual == expected
+
+    def test_is_route_bidirectional(self):
+        for [start, end, expected] in self.tests:
+            actual = is_route_bidirectional(self.graph, start, end)
             assert actual == expected
 
 

@@ -21,6 +21,21 @@ def urlify_algo(string, length):
     return "".join(char_list[new_index:])
 
 
+
+def url_Ify(str1,length):
+    """ check each char and replace  spaces with %20  Time Complexity = o(n) """
+    
+    new = '' #create a emtpy string
+    for i in range(length):
+        if str1[i] == ' ':
+            new += '%20'
+        else:
+            new += str1[i]
+    return new
+
+
+
+
 def urlify_pythonic(text, length):
     """solution using standard library"""
     return text[:length].replace(" ", "%20")

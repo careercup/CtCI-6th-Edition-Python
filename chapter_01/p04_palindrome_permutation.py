@@ -51,6 +51,17 @@ def is_palindrome_bit_vector(phrase):
             r |= mask
     return (r - 1) & r == 0
 
+def is_palindrome_bit_vector2(phrase):
+    """checks if a string is a permutation of a palindrome using XOR operation"""
+    count_odd = 0
+    for c in phrase:
+        val = char_number(c)
+        if val == -1:
+            continue
+        count_odd ^= 1 << val
+
+    return count_odd & count_odd - 1 == 0
+
 
 def is_palindrome_permutation_pythonic(phrase):
     """function checks if a string is a permutation of a palindrome or not"""
@@ -79,6 +90,7 @@ class Test(unittest.TestCase):
         is_palindrome_permutation,
         is_palindrome_bit_vector,
         is_palindrome_permutation_pythonic,
+        is_palindrome_bit_vector2,
     ]
 
     def test_pal_perm(self):

@@ -51,10 +51,11 @@ def is_palindrome_bit_vector(phrase):
             r |= mask
     return (r - 1) & r == 0
 
-# with xor
-def is_palindrome_bit_vector2(s:str) -> bool:
+
+def is_palindrome_bit_vector2(phrase):
+    """checks if a string is a permutation of a palindrome using XOR operation"""
     count_odd = 0
-    for c in s:
+    for c in phrase:
         val = char_number(c)
         if val == -1:
             continue

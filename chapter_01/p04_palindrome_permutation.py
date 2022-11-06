@@ -52,7 +52,7 @@ def is_palindrome_bit_vector(phrase):
     return (r - 1) & r == 0
 
 # with xor
-def is_palindrome_bit_vector(s:str) -> bool:
+def is_palindrome_bit_vector2(s:str) -> bool:
     count_odd = 0
     for c in s:
         val = char_number(c)
@@ -90,6 +90,7 @@ class Test(unittest.TestCase):
         is_palindrome_permutation,
         is_palindrome_bit_vector,
         is_palindrome_permutation_pythonic,
+        is_palindrome_bit_vector2
     ]
 
     def test_pal_perm(self):

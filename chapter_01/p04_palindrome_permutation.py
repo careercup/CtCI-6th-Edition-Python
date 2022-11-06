@@ -51,6 +51,17 @@ def is_palindrome_bit_vector(phrase):
             r |= mask
     return (r - 1) & r == 0
 
+# with xor
+def is_palindrome_bit_vector(s:str) -> bool:
+    count_odd = 0
+    for c in s:
+        val = char_number(c)
+        if val == -1:
+            continue
+        count_odd ^= 1 << val
+
+    return count_odd & count_odd - 1 == 0
+
 
 def is_palindrome_permutation_pythonic(phrase):
     """function checks if a string is a permutation of a palindrome or not"""

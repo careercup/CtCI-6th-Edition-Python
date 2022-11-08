@@ -28,6 +28,43 @@ def get_depth(node):
         depth += 1
     return depth
 
+
+def fst_common_anc(root: Node, node1: Node, node2: Node) -> Node:
+    """return the first common ancestor of two nodes without using parent"""
+    a, b, node = fst_anc_rec(root, node1, node2)
+    return node
+
+
+def fst_anc_rec(root: Node, node1: Node, node2: Node):
+
+    left_found_n1, left_found_n2, left_anc = None, None, None
+    right_found_n1, right_found_n2, right_anc = None, None, None
+    if root.left:
+        left_found_n1, left_found_n2, left_anc = fst_anc_rec(root.left, node1, node2)
+
+    if root.right:
+        right_found_n1, right_found_n2, right_anc = fst_anc_rec(
+            root.right, node1, node2
+        )
+
+    if left_anc is not None:
+        return left_found_n1, left_found_n2, left_anc
+    if right_anc is not None:
+        return right_found_n1, right_found_n2, right_anc
+
+    found_n1 = left_found_n1 or right_found_n1
+    found_n2 = left_found_n2 or right_found_n2
+
+    ancestor = None
+    if found_n1 and found_n2:
+        ancestor = root
+
+    found_n1 = found_n1 or root == node1
+    found_n2 = found_n2 or root == node2
+
+    return found_n1, found_n2, ancestor
+
+
 t = BinaryTree()
 n1 = t.insert(1, None)
 n2 = t.insert(2, n1)
@@ -39,13 +76,18 @@ n8 = t.insert(8, n4)
 n9 = Node(9)
 
 test_cases = [
-    (n3,n4,n1),
-    (n3,n9,None),    
+    (n3, n4, n1),
+    (n3, n9, None),
 ]
+
 
 def test_first_common_ancestor():
     for n_1, n_2, result in test_cases:
         assert result == first_common_ancestor(n_1, n_2)
+
+    for n_1, n_2, result in test_cases:
+        assert result == fst_common_anc(n1, n_1, n_2)
+
 
 if __name__ == "__main__":
     test_first_common_ancestor()

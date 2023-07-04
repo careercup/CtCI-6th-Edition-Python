@@ -34,6 +34,19 @@ def check_permutation_pythonic(str1, str2):
 
     return Counter(str1) == Counter(str2)
 
+def check_permutation_hashmap(s1, s2):
+    if len(s1) != len(s2):
+        return False
+
+    # Create 2 hashmap for 2 strings
+    countS1, countS2 = {}, {}
+    
+    for i in range(len(s1)):
+        # Add to hashmap
+        countS1[s1[i]] = 1 + countS1.get(s1[i], 0)
+        countS2[s2[i]] = 1 + countS2.get(s2[i], 0)
+
+    return countS1 == countS2
 
 class Test(unittest.TestCase):
     # str1, str2, is_permutation
@@ -55,6 +68,7 @@ class Test(unittest.TestCase):
         check_permutation_by_sort,
         check_permutation_by_count,
         check_permutation_pythonic,
+        check_permutation_hashmap,
     ]
 
     def test_cp(self):

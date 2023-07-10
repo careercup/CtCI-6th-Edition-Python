@@ -1,4 +1,5 @@
 from chapter_02.linked_list import LinkedList
+import pytest
 
 
 def sum_lists(ll_a, ll_b):
@@ -21,6 +22,27 @@ def sum_lists(ll_a, ll_b):
         ll.add(carry)
 
     return ll
+
+
+def sum_lists_recursive(ll1, ll2) -> LinkedList:
+    def sum_lists_helper(ll1_head, ll2_head, remainder, summed_list):
+        if ll1_head is None and ll2_head is None:
+            if remainder != 0:
+                summed_list.add(remainder)
+            return summed_list
+        elif ll1_head is None:
+            result = ll2_head.value + remainder
+            summed_list.add(result % 10)
+            return sum_lists_helper(ll1_head, ll2_head.next, result//10, summed_list)
+        elif ll2_head is None:
+            result = ll1_head.value + remainder
+            summed_list.add(result % 10)
+            return sum_lists_helper(ll1_head.next, ll2_head, result//10, summed_list)
+        else:
+            result = ll1_head.value + ll2_head.value + remainder
+            summed_list.add(result % 10)
+            return sum_lists_helper(ll1_head.next, ll2_head.next, result//10, summed_list)     
+    return sum_lists_helper(ll1.head, ll2.head, 0, LinkedList())
 
 
 # this solution does not pass tests
@@ -111,5 +133,26 @@ def example():
     # print(sum_lists_followup(ll_a, ll_b))
 
 
+class TestSumListsRecursive:
+    def test_empty(self):
+        assert sum_lists_recursive(LinkedList(), LinkedList()).values() == LinkedList().values()
+    
+    def test_single_digit(self):
+        assert sum_lists_recursive(LinkedList([1]), LinkedList([2])).values() == LinkedList([3]).values()
+    
+    def test_ll1_longer(self):
+        assert sum_lists_recursive(LinkedList([1, 2]), LinkedList([2])).values() == LinkedList([3, 2]).values()
+    
+    def test_ll2_longer(self):
+        assert sum_lists_recursive(LinkedList([2]), LinkedList([1, 2])).values() == LinkedList([3, 2]).values()
+    
+    def test_carry_end(self):
+        assert sum_lists_recursive(LinkedList([9, 9, 9]), LinkedList([1, 0, 0])).values() == LinkedList([0, 0, 0, 1]).values()
+    
+    def test_multiple_carry(self):
+        assert sum_lists_recursive(LinkedList([9, 9, 9]), LinkedList([9, 9, 9])).values() == LinkedList([8, 9, 9, 1]).values()
+
+
 if __name__ == "__main__":
     example()
+    pytest.main(args=[__file__])

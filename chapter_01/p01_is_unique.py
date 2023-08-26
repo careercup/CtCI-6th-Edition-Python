@@ -69,6 +69,15 @@ def is_unique_chars_sorting(string: str) -> bool:
     return True
 
 
+# Sorting without extra variable. TC: O(NlogN) SC: O(1) Con: Modifies input string
+def is_unique_chars_sort(string: str) -> bool:
+    string = sorted(string)
+    for i in range(len(string) - 1):
+        if string[i] == string[i + 1]:
+            return False
+    return True
+
+
 class Test(unittest.TestCase):
     test_cases = [
         ("abcd", True),
@@ -86,6 +95,7 @@ class Test(unittest.TestCase):
         is_unique_chars_using_dictionary,
         is_unique_chars_using_set,
         is_unique_chars_sorting,
+        is_unique_chars_sort,
     ]
 
     def test_is_unique_chars(self):

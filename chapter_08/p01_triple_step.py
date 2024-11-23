@@ -1,43 +1,36 @@
-def triple_hop(x):
-    if x < 0:
-        return 0
-    if x == 0:
+import unittest
+
+def solution(n): # Time: O(n) | Space: O(1)
+    if n == 0:
         return 1
-    if x == 1:
+    if n == 1:
         return 1
-    return triple_hop(x - 1) + triple_hop(x - 2) + triple_hop(x - 3)
+    if n == 2:
+        return 2
 
+    a = solution(0)
+    b = solution(1)
+    c = solution(2)
+    result = 0
+    for _ in range(3, n+1):
+        result = c + b + a
+        a = b
+        b = c
+        c = result
+    
+    return result
 
-def method_2(x):
-    memo = [-1] * (x + 1)
-    return triple_hop_recursive(x, memo)
+class Test(unittest.TestCase):
+    tribonacci_numbers = [
+        1, 1, 2, 4, 7, 13, 24, 44, 81, 149, 274, 504, 927, 1705, 3136, 5768, 
+        10609, 19513, 35890, 66012, 121415, 223317, 410744, 755476, 1389537, 
+        2555757, 4700770, 8646064, 15902591, 29249425, 53798080, 98950096, 
+        181997601, 334745777, 615693474, 1132436852
+    ]
 
-
-def triple_hop_recursive(x, memo):
-    if x < 0:
-        return 0
-    memo[0] = 1
-    if x >= 1:
-        memo[1] = 1
-    if x >= 2:
-        memo[2] = memo[1] + memo[0]
-    if x > 2:
-        for i in range(3, x + 1):
-            memo[i] = memo[i - 1] + memo[i - 2] + memo[i - 3]
-    return memo[x]
-
+    def test(self):
+        for n in range(len(self.tribonacci_numbers)):
+            self.assertEqual(self.tribonacci_numbers[n], solution(n))
 
 if __name__ == "__main__":
-    print(triple_hop(1))
-    print(triple_hop(2))
-    print(triple_hop(3))
-    print(triple_hop(4))
-    print(triple_hop(5))
-    print(triple_hop(6))
-
-    print(method_2(1))
-    print(method_2(2))
-    print(method_2(3))
-    print(method_2(4))
-    print(method_2(5))
-    print(method_2(6))
+    unittest.main()

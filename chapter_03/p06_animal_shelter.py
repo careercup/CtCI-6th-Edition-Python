@@ -70,7 +70,10 @@ class AnimalShelter(LinkedList):
         current_node = self.head
         while current_node is not None:
             if isinstance(current_node.data, Cat):
-                previous_node.next_node = current_node.next_node
+                if previous_node is None:
+                    self.head = current_node.next_node
+                else:
+                    previous_node.next_node = current_node.next_node
                 return current_node.data
             previous_node = current_node
             current_node = current_node.next_node
@@ -81,7 +84,10 @@ class AnimalShelter(LinkedList):
         current_node = self.head
         while current_node is not None:
             if isinstance(current_node.data, Dog):
-                previous_node.next_node = current_node.next_node
+                if previous_node is None:
+                    self.head = current_node.next_node
+                else:
+                    previous_node.next_node = current_node.next_node
                 return current_node.data
             previous_node = current_node
             current_node = current_node.next_node

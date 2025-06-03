@@ -2,42 +2,71 @@
 import string
 import unittest
 from collections import Counter
+from typing import Callable
 
 
-def clean_phrase(phrase):
-    return [c for c in phrase.lower() if c in string.ascii_lowercase]
+def is_palindrome_permutation(phrase: str) -> bool:
+    """
+    Checks if a string can be rearranged to form a palindrome.
+    This method uses a frequency table (list) for character counts.
+    It is case-insensitive and ignores non-alphabetic characters.
 
-
-def is_palindrome_permutation(phrase):
-    """checks if a string is a permutation of a palindrome"""
-    table = [0 for _ in range(ord("z") - ord("a") + 1)]
-    countodd = 0
-    for c in phrase:
-        x = char_number(c)
-        if x != -1:
-            table[x] += 1
-            if table[x] % 2:
-                countodd += 1
+    Time complexity: O(N), where N is the length of the phrase.
+    Space complexity: O(1) (table size is fixed for the alphabet).
+    """
+    # Frequency table for 'a' through 'z', ignoring case.
+    table: list[int] = [0] * (ord("z") - ord("a") + 1)
+    odd_frequency_count: int = 0
+    for char_in_phrase in phrase:
+        char_idx = char_number(char_in_phrase)
+        if char_idx != -1:
+            table[char_idx] += 1
+            if table[char_idx] % 2 == 1:
+                odd_frequency_count += 1
             else:
-                countodd -= 1
+                odd_frequency_count -= 1
+    # A string can be a permutation of a palindrome if at most one character
+    # has an odd frequency.
+    return odd_frequency_count <= 1
 
-    return countodd <= 1
+
+def char_number(char_code: str) -> int:
+    """
+    Converts an alphabetic character to a 0-25 index (case-insensitive).
+    Returns -1 if the character is not alphabetic.
+    'a'/'A' -> 0, 'b'/'B' -> 1, ..., 'z'/'Z' -> 25.
+    """
+    val: int = ord(char_code)
+    a_lower: int = ord("a")
+    z_lower: int = ord("z")
+    a_upper: int = ord("A")
+    z_upper: int = ord("Z")
+
+    if a_lower <= val <= z_lower:
+        return val - a_lower
+    if a_upper <= val <= z_upper:
+        return val - a_upper
+    return -1 # Not an alphabetic character
 
 
-def char_number(c):
-    a = ord("a")
-    z = ord("z")
-    upper_a = ord("A")
-    upper_z = ord("Z")
-    val = ord(c)
+def is_palindrome_permutation_pythonic(phrase: str) -> bool:
+    """
+    Checks if a string can be rearranged to form a palindrome using collections.Counter.
+    This method is case-insensitive and considers only alphabetic characters.
 
-    if a <= val <= z:
-        return val - a
+    Time complexity: O(N), where N is the length of the phrase.
+    Space complexity: O(K), where K is the number of unique alphabetic characters.
+                     At most O(1) for a fixed alphabet size (e.g., 26 for English).
+    """
+    # Filter for alphabetic characters and convert to lowercase
+    processed_chars = (char.lower() for char in phrase if char.isalpha())
+    char_counts: Counter[str] = Counter(processed_chars)
 
-    if upper_a <= val <= upper_z:
-        return val - upper_a
-    return -1
+    # Count how many characters have an odd frequency
+    odd_frequency_count = sum(count % 2 for count in char_counts.values())
 
+
+    return odd_frequency_count <= 1
 
 def is_palindrome_bit_vector(phrase):
     """checks if a string is a permutation of a palindrome"""
@@ -70,8 +99,10 @@ def is_palindrome_permutation_pythonic(phrase):
     return sum(val % 2 for val in counter.values()) <= 1
 
 
+
 class Test(unittest.TestCase):
-    test_cases = [
+    """Tests for palindrome permutation functions."""
+    test_cases: list[tuple[str, bool]] = [
         ("aba", True),
         ("aab", True),
         ("abba", True),
@@ -85,8 +116,26 @@ class Test(unittest.TestCase):
         ("Random Words", False),
         ("Not a Palindrome", False),
         ("no x in nixon", True),
-        ("azAZ", True),
+        (
+            "azAZ",
+            True,
+        ),  # Original test, ensures case mapping works if non-alpha chars are ignored by char_number
+        (" ", True),  # Test with only spaces
+        ("  ", True),  # Test with only spaces
+        ("aa bb cc", True),  # Test with spaces between valid chars
+        ("Aa Bb Cc", True),  # Test with spaces and mixed case
+        ("Taco cat", True),  # Common example
+        ("Race car!", True),  # With punctuation
+        # Test with non-Latin alphabetic characters
+        ("АббА", True),  # Cyrillic, should be True for pythonic, True for table (as chars are ignored)
+        ("키러키", True),  # Korean, should be True for pythonic, True for table (as chars are ignored)
+        ("키키a", True),   # Mixed, pythonic True (a=1, 키=2), table True (a=1, 키 ignored)
     ]
+    testable_functions: list[Callable[[str], bool]] = [
+        is_palindrome_permutation,
+        is_palindrome_permutation_pythonic,
+    ]
+
     testable_functions = [
         is_palindrome_permutation,
         is_palindrome_bit_vector,
@@ -94,10 +143,16 @@ class Test(unittest.TestCase):
         is_palindrome_bit_vector2,
     ]
 
-    def test_pal_perm(self):
-        for f in self.testable_functions:
-            for [test_string, expected] in self.test_cases:
-                assert f(test_string) == expected
+
+    def test_palindrome_permutation(self) -> None:
+        """Runs all palindrome permutation check functions against defined test cases."""
+        for pal_perm_func in self.testable_functions:
+            for test_string, expected_result in self.test_cases:
+                actual_result = pal_perm_func(test_string)
+                assert actual_result == expected_result, (
+                    f"{pal_perm_func.__name__}('{test_string}') produced {actual_result}, "
+                    f"but expected {expected_result}"
+                )
 
 
 if __name__ == "__main__":

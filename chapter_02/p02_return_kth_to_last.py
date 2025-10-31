@@ -6,7 +6,7 @@ def kth_to_last(ll, k):
     count = 0
 
     while leader:
-        if count >= k:
+        if count >= k + 1:
             follower = follower.next
         count += 1
         leader = leader.next
@@ -24,7 +24,7 @@ def kth_last_recursive(ll, k):
             return None
         helper_node = helper(head.next, k)
         counter = counter + 1
-        if counter == k:
+        if counter == k + 1:
             return head
         return helper_node
 
@@ -33,8 +33,8 @@ def kth_last_recursive(ll, k):
 
 test_cases = (
     # list, k, expected
-    ((10, 20, 30, 40, 50), 1, 50),
-    ((10, 20, 30, 40, 50), 5, 10),
+    ((10, 20, 30, 40, 50), 0, 50),
+    ((10, 20, 30, 40, 50), 4, 10),
 )
 
 

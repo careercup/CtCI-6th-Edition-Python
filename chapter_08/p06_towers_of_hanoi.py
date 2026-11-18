@@ -39,7 +39,7 @@ class MultiStack:
         self.multistack = [Stack(self.stack_size) for _ in range(self.num_stacks)]
 
     def get_stack(self, stack_num):
-        if 0 > stack_num >= self.num_stacks:
+        if not 0 <= stack_num < self.num_stacks:
             raise IndexError("stack_num invalid")
         return self.multistack[stack_num]
 
@@ -99,3 +99,11 @@ if __name__ == "__main__":
         toh.solve()
         assert toh.get_stack(2) == deque(range(test_case, 0, -1))
         assert toh.get_stack(0) == toh.get_stack(1) == deque()
+        # Invalid stack indices must raise IndexError, not silently wrap around
+        for bad_index in (-1, -3, 3, 10):
+            try:
+                toh._stacks.get_stack(bad_index)
+            except IndexError:
+                pass
+            else:
+                raise AssertionError(f"get_stack({bad_index}) should raise IndexError")
